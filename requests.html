@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الطلبات - غريم</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1",
+              secondary: "#f8fafc",
+              accent: "#10b981",
+              danger: "#ef4444",
+              warning: "#f59e0b",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "Cairo", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-50 font-arabic min-h-screen">
+    <!-- Header -->
+    <header
+      class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50"
+    >
+      <div class="flex items-center justify-between p-4">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center"
+          >
+            <i class="fas fa-money-bill-wave text-white text-lg"></i>
+          </div>
+          <div>
+            <h1 class="text-xl font-bold text-gray-900">الطلبات</h1>
+            <p class="text-xs text-gray-500">طلب الأموال</p>
+          </div>
+        </div>
+        <button
+          class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+        >
+          <i class="fas fa-bell text-gray-600 text-lg"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="pb-20">
+      <!-- Money Request Feature -->
+      <div class="p-4">
+        <div
+          class="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl p-6 text-white text-center mb-6"
+        >
+          <div
+            class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <i class="fas fa-link text-3xl"></i>
+          </div>
+          <h2 class="text-xl font-bold mb-2">اطلب الأموال بسهولة</h2>
+          <p class="text-blue-100 text-sm mb-6">
+            شارك رابط دفع مع أصدقائك. بمجرد دفعهم لك، ستصل الأموال إلى حسابك
+            المصرفي مباشرة
+          </p>
+          <button
+            class="w-full bg-white text-blue-600 py-3 rounded-xl font-semibold"
+          >
+            إنشاء رابط دفع
+          </button>
+        </div>
+      </div>
+
+      <!-- Bank Connection -->
+      <div class="px-4 mb-6">
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+          <div class="flex items-center gap-4 mb-4">
+            <div
+              class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center"
+            >
+              <i class="fas fa-university text-accent text-xl"></i>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-900">ربط الحساب المصرفي</h3>
+              <p class="text-sm text-gray-500">
+                اربط حسابك لتلقي الأموال فوراً
+              </p>
+            </div>
+            <button
+              class="bg-accent text-white px-4 py-2 rounded-xl font-medium"
+            >
+              ربط
+            </button>
+          </div>
+          <div class="bg-accent/5 rounded-xl p-4">
+            <div class="flex items-center gap-2 text-sm text-accent">
+              <i class="fas fa-shield-alt"></i>
+              <span>آمن ومشفر بواسطة بنوك معتمدة</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Requests -->
+      <div class="px-4 mb-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-semibold text-gray-900">طلبات حديثة</h3>
+          <button class="text-primary text-sm font-medium">عرض الكل</button>
+        </div>
+
+        <!-- Request Item 1 -->
+        <div
+          class="bg-white rounded-xl p-4 mb-3 shadow-sm border border-gray-100"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center"
+            >
+              <i class="fas fa-check text-green-500 text-lg"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-1">
+                <h4 class="font-semibold text-gray-900">براين</h4>
+                <span class="text-sm font-semibold text-green-600"
+                  >+31.25 ر.س</span
+                >
+              </div>
+              <p class="text-sm text-gray-500">تم الدفع • رحلة المدينة</p>
+              <p class="text-xs text-gray-400">اليوم 2:30 م</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Request Item 2 -->
+        <div
+          class="bg-white rounded-xl p-4 mb-3 shadow-sm border border-gray-100"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center"
+            >
+              <i class="fas fa-clock text-yellow-500 text-lg"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-1">
+                <h4 class="font-semibold text-gray-900">توماس</h4>
+                <span class="text-sm font-semibold text-gray-600"
+                  >39.25 ر.س</span
+                >
+              </div>
+              <p class="text-sm text-gray-500">في الانتظار • رحلة المدينة</p>
+              <p class="text-xs text-gray-400">أمس 8:15 ص</p>
+            </div>
+            <button class="text-primary text-sm font-medium">تذكير</button>
+          </div>
+        </div>
+
+        <!-- Request Item 3 -->
+        <div
+          class="bg-white rounded-xl p-4 mb-3 shadow-sm border border-gray-100"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center"
+            >
+              <i class="fas fa-check text-green-500 text-lg"></i>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-1">
+                <h4 class="font-semibold text-gray-900">جوليا</h4>
+                <span class="text-sm font-semibold text-green-600"
+                  >+15.50 ر.س</span
+                >
+              </div>
+              <p class="text-sm text-gray-500">تم الدفع • رحلة التخييم</p>
+              <p class="text-xs text-gray-400">أمس 11:45 ص</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Methods -->
+      <div class="px-4 mb-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">
+          طرق الدفع المتاحة
+        </h3>
+
+        <div class="space-y-3">
+          <!-- Bank Transfer -->
+          <div class="bg-white rounded-xl p-4 border border-gray-200">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center"
+              >
+                <i class="fas fa-university text-blue-500 text-lg"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-gray-900">تحويل مصرفي</h4>
+                <p class="text-sm text-gray-500">تحويل مباشر للحساب</p>
+              </div>
+              <i class="fas fa-chevron-left text-gray-400"></i>
+            </div>
+          </div>
+
+          <!-- Apple Pay -->
+          <div class="bg-white rounded-xl p-4 border border-gray-200">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center"
+              >
+                <i class="fab fa-apple text-gray-600 text-lg"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-gray-900">Apple Pay</h4>
+                <p class="text-sm text-gray-500">دفع سريع وآمن</p>
+              </div>
+              <i class="fas fa-chevron-left text-gray-400"></i>
+            </div>
+          </div>
+
+          <!-- Google Pay -->
+          <div class="bg-white rounded-xl p-4 border border-gray-200">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center"
+              >
+                <i class="fab fa-google text-red-500 text-lg"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-gray-900">Google Pay</h4>
+                <p class="text-sm text-gray-500">دفع بلمسة واحدة</p>
+              </div>
+              <i class="fas fa-chevron-left text-gray-400"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="px-4">
+        <div class="grid grid-cols-2 gap-4">
+          <button
+            class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center"
+          >
+            <div
+              class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3"
+            >
+              <i class="fas fa-plus text-primary text-xl"></i>
+            </div>
+            <p class="font-medium text-gray-900">طلب جديد</p>
+            <p class="text-xs text-gray-500 mt-1">إنشاء طلب دفع</p>
+          </button>
+          <button
+            class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center"
+          >
+            <div
+              class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-3"
+            >
+              <i class="fas fa-history text-accent text-xl"></i>
+            </div>
+            <p class="font-medium text-gray-900">السجل</p>
+            <p class="text-xs text-gray-500 mt-1">عرض جميع الطلبات</p>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav
+      class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2"
+    >
+      <div class="flex items-center justify-around">
+        <a
+          href="index.html"
+          class="flex flex-col items-center gap-1 px-3 py-2 text-gray-400"
+        >
+          <i class="fas fa-home text-xl"></i>
+          <span class="text-xs">الرئيسية</span>
+        </a>
+        <button class="flex flex-col items-center gap-1 px-3 py-2 text-primary">
+          <i class="fas fa-money-bill-wave text-xl"></i>
+          <span class="text-xs font-medium">الطلبات</span>
+        </button>
+        <a
+          href="wallet.html"
+          class="flex flex-col items-center gap-1 px-3 py-2 text-gray-400"
+        >
+          <i class="fas fa-credit-card text-xl"></i>
+          <span class="text-xs">المحفظة</span>
+        </a>
+        <a
+          href="profile.html"
+          class="flex flex-col items-center gap-1 px-3 py-2 text-gray-400"
+        >
+          <i class="fas fa-user text-xl"></i>
+          <span class="text-xs">الملف الشخصي</span>
+        </a>
+      </div>
+    </nav>
+  </body>
+</html>

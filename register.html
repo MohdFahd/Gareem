@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="html-root">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-ar="إنشاء حساب - غريم" data-en="Register - Gharim">
+      إنشاء حساب - غريم
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1",
+              secondary: "#f8fafc",
+              accent: "#10b981",
+              danger: "#ef4444",
+              warning: "#f59e0b",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "Cairo", "system-ui", "sans-serif"],
+              english: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=Inter:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </head>
+  <body class="bg-gray-50 font-arabic min-h-screen">
+    <!-- Language Toggle -->
+    <div class="absolute top-4 left-4 z-50">
+      <button
+        id="langToggle"
+        class="bg-white/90 backdrop-blur-sm border border-gray-200 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-white transition-colors"
+      >
+        <i class="fas fa-language mr-1"></i>
+        <span data-ar="English" data-en="العربية">English</span>
+      </button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="min-h-screen flex items-center justify-center p-4">
+      <div class="w-full max-w-md">
+        <!-- Logo and Header -->
+        <div class="text-center mb-8">
+          <div
+            class="w-20 h-20 bg-gradient-to-br from-primary to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4"
+          >
+            <i class="fas fa-calculator text-white text-3xl"></i>
+          </div>
+          <h1
+            class="text-2xl font-bold text-gray-900 mb-2"
+            data-ar="إنشاء حساب جديد"
+            data-en="Create New Account"
+          >
+            إنشاء حساب جديد
+          </h1>
+          <p
+            class="text-gray-500"
+            data-ar="انضم إلى غريم وابدأ تقسيم المصاريف"
+            data-en="Join Gharim and start splitting expenses"
+          >
+            انضم إلى غريم وابدأ تقسيم المصاريف
+          </p>
+        </div>
+
+        <!-- Register Form -->
+        <div
+          class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6"
+        >
+          <form id="registerForm" class="space-y-4">
+            <!-- Full Name Input -->
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 mb-2"
+                data-ar="الاسم الكامل"
+                data-en="Full Name"
+              >
+                الاسم الكامل
+              </label>
+              <div class="relative">
+                <input
+                  type="text"
+                  id="fullName"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+                  data-ar-placeholder="أدخل اسمك الكامل"
+                  data-en-placeholder="Enter your full name"
+                  placeholder="أدخل اسمك الكامل"
+                />
+                <i
+                  class="fas fa-user absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                ></i>
+              </div>
+            </div>
+
+            <!-- Email Input -->
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 mb-2"
+                data-ar="البريد الإلكتروني"
+                data-en="Email"
+              >
+                البريد الإلكتروني
+              </label>
+              <div class="relative">
+                <input
+                  type="email"
+                  id="email"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+                  data-ar-placeholder="أدخل بريدك الإلكتروني"
+                  data-en-placeholder="Enter your email"
+                  placeholder="أدخل بريدك الإلكتروني"
+                />
+                <i
+                  class="fas fa-envelope absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                ></i>
+              </div>
+            </div>
+
+            <!-- Phone Input -->
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 mb-2"
+                data-ar="رقم الهاتف"
+                data-en="Phone Number"
+              >
+                رقم الهاتف
+              </label>
+              <div class="relative">
+                <input
+                  type="tel"
+                  id="phone"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+                  data-ar-placeholder="أدخل رقم هاتفك"
+                  data-en-placeholder="Enter your phone number"
+                  placeholder="أدخل رقم هاتفك"
+                />
+                <i
+                  class="fas fa-phone absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                ></i>
+              </div>
+            </div>
+
+            <!-- Password Input -->
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 mb-2"
+                data-ar="كلمة المرور"
+                data-en="Password"
+              >
+                كلمة المرور
+              </label>
+              <div class="relative">
+                <input
+                  type="password"
+                  id="password"
+                  required
+                  minlength="8"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+                  data-ar-placeholder="أدخل كلمة مرور قوية"
+                  data-en-placeholder="Enter a strong password"
+                  placeholder="أدخل كلمة مرور قوية"
+                />
+                <i
+                  class="fas fa-lock absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                ></i>
+                <button
+                  type="button"
+                  class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  onclick="togglePassword('password', 'toggleIcon1')"
+                >
+                  <i class="fas fa-eye" id="toggleIcon1"></i>
+                </button>
+              </div>
+              <p
+                class="text-xs text-gray-500 mt-1"
+                data-ar="يجب أن تحتوي على 8 أحرف على الأقل"
+                data-en="Must contain at least 8 characters"
+              >
+                يجب أن تحتوي على 8 أحرف على الأقل
+              </p>
+            </div>
+
+            <!-- Confirm Password Input -->
+            <div>
+              <label
+                class="block text-sm font-medium text-gray-700 mb-2"
+                data-ar="تأكيد كلمة المرور"
+                data-en="Confirm Password"
+              >
+                تأكيد كلمة المرور
+              </label>
+              <div class="relative">
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+                  data-ar-placeholder="أعد إدخال كلمة المرور"
+                  data-en-placeholder="Re-enter your password"
+                  placeholder="أعد إدخال كلمة المرور"
+                />
+                <i
+                  class="fas fa-lock absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                ></i>
+                <button
+                  type="button"
+                  class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  onclick="togglePassword('confirmPassword', 'toggleIcon2')"
+                >
+                  <i class="fas fa-eye" id="toggleIcon2"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Terms and Privacy -->
+            <div class="flex items-start">
+              <input
+                type="checkbox"
+                id="terms"
+                required
+                class="mt-1 rounded text-primary focus:ring-primary"
+              />
+              <label for="terms" class="mr-2 text-sm text-gray-600">
+                <span data-ar="أوافق على" data-en="I agree to the"
+                  >أوافق على</span
+                >
+                <a
+                  href="#"
+                  class="text-primary hover:text-indigo-700"
+                  data-ar="الشروط والأحكام"
+                  data-en="Terms & Conditions"
+                  >الشروط والأحكام</a
+                >
+                <span data-ar="و" data-en="and">و</span>
+                <a
+                  href="#"
+                  class="text-primary hover:text-indigo-700"
+                  data-ar="سياسة الخصوصية"
+                  data-en="Privacy Policy"
+                  >سياسة الخصوصية</a
+                >
+              </label>
+            </div>
+
+            <!-- Register Button -->
+            <button
+              type="submit"
+              class="w-full bg-gradient-to-r from-primary to-indigo-600 text-white py-3 rounded-xl font-semibold hover:from-indigo-600 hover:to-purple-700 transition-colors"
+              data-ar="إنشاء الحساب"
+              data-en="Create Account"
+            >
+              إنشاء الحساب
+            </button>
+          </form>
+
+          <!-- Divider -->
+          <div class="flex items-center my-6">
+            <div class="flex-1 border-t border-gray-300"></div>
+            <span class="px-4 text-sm text-gray-500" data-ar="أو" data-en="or"
+              >أو</span
+            >
+            <div class="flex-1 border-t border-gray-300"></div>
+          </div>
+
+          <!-- Google OAuth -->
+          <div
+            id="g_id_onload"
+            data-client_id="YOUR_GOOGLE_CLIENT_ID"
+            data-callback="handleCredentialResponse"
+            data-auto_prompt="false"
+          ></div>
+
+          <button
+            id="googleSignIn"
+            class="w-full bg-white border border-gray-300 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-50 transition-colors flex items-center justify-center gap-3"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24">
+              <path
+                fill="#4285f4"
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+              />
+              <path
+                fill="#34a853"
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+              />
+              <path
+                fill="#fbbc05"
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+              />
+              <path
+                fill="#ea4335"
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+              />
+            </svg>
+            <span data-ar="التسجيل بـ Google" data-en="Sign up with Google"
+              >التسجيل بـ Google</span
+            >
+          </button>
+        </div>
+
+        <!-- Login Link -->
+        <div class="text-center">
+          <p class="text-gray-600">
+            <span data-ar="لديك حساب بالفعل؟" data-en="Already have an account?"
+              >لديك حساب بالفعل؟</span
+            >
+            <a
+              href="login.html"
+              class="text-primary font-semibold hover:text-indigo-700 mr-1"
+              data-ar="تسجيل الدخول"
+              data-en="Sign in"
+            >
+              تسجيل الدخول
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Language switching functionality
+      let currentLang = "ar";
+
+      function switchLanguage() {
+        const htmlRoot = document.getElementById("html-root");
+        const elements = document.querySelectorAll("[data-ar][data-en]");
+        const inputs = document.querySelectorAll(
+          "[data-ar-placeholder][data-en-placeholder]"
+        );
+
+        if (currentLang === "ar") {
+          currentLang = "en";
+          htmlRoot.setAttribute("lang", "en");
+          htmlRoot.setAttribute("dir", "ltr");
+          htmlRoot.classList.remove("font-arabic");
+          htmlRoot.classList.add("font-english");
+          document.body.classList.remove("font-arabic");
+          document.body.classList.add("font-english");
+
+          elements.forEach((el) => {
+            el.textContent = el.getAttribute("data-en");
+          });
+
+          inputs.forEach((input) => {
+            input.placeholder = input.getAttribute("data-en-placeholder");
+          });
+        } else {
+          currentLang = "ar";
+          htmlRoot.setAttribute("lang", "ar");
+          htmlRoot.setAttribute("dir", "rtl");
+          htmlRoot.classList.remove("font-english");
+          htmlRoot.classList.add("font-arabic");
+          document.body.classList.remove("font-english");
+          document.body.classList.add("font-arabic");
+
+          elements.forEach((el) => {
+            el.textContent = el.getAttribute("data-ar");
+          });
+
+          inputs.forEach((input) => {
+            input.placeholder = input.getAttribute("data-ar-placeholder");
+          });
+        }
+      }
+
+      document
+        .getElementById("langToggle")
+        .addEventListener("click", switchLanguage);
+
+      // Password toggle functionality
+      function togglePassword(fieldId, iconId) {
+        const passwordInput = document.getElementById(fieldId);
+        const toggleIcon = document.getElementById(iconId);
+
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          toggleIcon.classList.remove("fa-eye");
+          toggleIcon.classList.add("fa-eye-slash");
+        } else {
+          passwordInput.type = "password";
+          toggleIcon.classList.remove("fa-eye-slash");
+          toggleIcon.classList.add("fa-eye");
+        }
+      }
+
+      // Form validation and submission
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const fullName = document.getElementById("fullName").value;
+          const email = document.getElementById("email").value;
+          const phone = document.getElementById("phone").value;
+          const password = document.getElementById("password").value;
+          const confirmPassword =
+            document.getElementById("confirmPassword").value;
+          const terms = document.getElementById("terms").checked;
+
+          // Validate passwords match
+          if (password !== confirmPassword) {
+            alert(
+              currentLang === "ar"
+                ? "كلمات المرور غير متطابقة"
+                : "Passwords do not match"
+            );
+            return;
+          }
+
+          // Validate terms acceptance
+          if (!terms) {
+            alert(
+              currentLang === "ar"
+                ? "يجب الموافقة على الشروط والأحكام"
+                : "You must agree to the terms and conditions"
+            );
+            return;
+          }
+
+          // Simulate registration process
+          try {
+            // In a real app, you would make an API call here
+            console.log("Registration attempt:", {
+              fullName,
+              email,
+              phone,
+              password,
+            });
+
+            // Simulate successful registration
+            alert(
+              currentLang === "ar"
+                ? "تم إنشاء الحساب بنجاح!"
+                : "Account created successfully!"
+            );
+            window.location.href = "login.html";
+          } catch (error) {
+            alert(
+              currentLang === "ar"
+                ? "خطأ في إنشاء الحساب"
+                : "Registration error"
+            );
+          }
+        });
+
+      // Google OAuth callback
+      function handleCredentialResponse(response) {
+        console.log("Encoded JWT ID token: " + response.credential);
+
+        // Decode the JWT token and handle the response
+        // In a real app, you would send this token to your backend
+        alert(
+          currentLang === "ar"
+            ? "تم إنشاء الحساب بنجاح عبر Google!"
+            : "Account created successfully with Google!"
+        );
+        window.location.href = "index.html";
+      }
+
+      // Initialize Google Sign-In button
+      window.onload = function () {
+        google.accounts.id.initialize({
+          client_id: "YOUR_GOOGLE_CLIENT_ID", // Replace with your actual client ID
+          callback: handleCredentialResponse,
+        });
+
+        google.accounts.id.renderButton(
+          document.getElementById("googleSignIn"),
+          {
+            theme: "outline",
+            size: "large",
+            width: "100%",
+          }
+        );
+      };
+    </script>
+  </body>
+</html>

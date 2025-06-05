@@ -1,0 +1,41 @@
+{
+  "name": "gharim-expense-splitting",
+  "version": "1.0.0",
+  "description": "A mobile-first Arabic/English expense splitting web application inspired by Tricount with modern UI improvements",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx live-server --port=3000",
+    "build": "echo 'No build process needed for static HTML app'",
+    "deploy": "gh-pages -d .",
+    "serve": "python -m http.server 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/gharim-expense-splitting.git"
+  },
+  "keywords": [
+    "expense-splitting",
+    "tricount",
+    "arabic",
+    "multilingual",
+    "mobile-first",
+    "tailwindcss",
+    "pwa",
+    "google-oauth"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/gharim-expense-splitting/issues"
+  },
+  "homepage": "https://YOUR_USERNAME.github.io/gharim-expense-splitting",
+  "devDependencies": {
+    "gh-pages": "^6.0.0",
+    "live-server": "^1.2.2",
+    "serve": "^14.2.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
