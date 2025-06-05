@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title
+      data-ar="غريم - تطبيق تقسيم المصاريف"
+      data-en="Gharim - Expense Splitting App"
+    >
+      غريم - تطبيق تقسيم المصاريف
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1",
+              secondary: "#f8fafc",
+              accent: "#10b981",
+              danger: "#ef4444",
+              warning: "#f59e0b",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "Cairo", "system-ui", "sans-serif"],
+              english: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=Inter:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="lang.js"></script>
+  </head>
+  <body class="bg-gray-50 font-arabic min-h-screen">
+    <!-- Header -->
+    <header
+      class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50"
+    >
+      <div class="flex items-center justify-between p-4">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 bg-gradient-to-br from-primary to-indigo-600 rounded-xl flex items-center justify-center"
+          >
+            <i class="fas fa-calculator text-white text-lg"></i>
+          </div>
+          <div>
+            <h1
+              class="text-xl font-bold text-gray-900"
+              data-ar="غريم"
+              data-en="Gharim"
+            >
+              غريم
+            </h1>
+            <p
+              class="text-xs text-gray-500"
+              data-ar="تقسيم المصاريف"
+              data-en="Expense Splitting"
+            >
+              تقسيم المصاريف
+            </p>
+          </div>
+        </div>
+        <a
+          href="profile.html"
+          class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+        >
+          <i class="fas fa-user-circle text-gray-600 text-xl"></i>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pb-20">
+      <!-- Welcome Card -->
+      <div class="p-4">
+        <div
+          class="bg-gradient-to-r from-primary to-indigo-600 rounded-2xl p-6 text-white mb-6"
+        >
+          <div class="flex items-center justify-between">
+            <div>
+              <h2
+                class="text-lg font-semibold mb-1"
+                data-ar="مرحباً بك!"
+                data-en="Welcome!"
+              >
+                مرحباً بك!
+              </h2>
+              <p
+                class="text-indigo-100 text-sm"
+                data-ar="ابدأ بإنشاء غريم جديد لتقسيم المصاريف"
+                data-en="Start by creating a new Gharim to split expenses"
+              >
+                ابدأ بإنشاء غريم جديد لتقسيم المصاريف
+              </p>
+            </div>
+            <div
+              class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-hand-sparkles text-xl"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tricounts List -->
+      <div class="px-4">
+        <div class="flex items-center justify-between mb-4">
+          <h3
+            class="text-lg font-semibold text-gray-900"
+            data-ar="قوائم المصاريف"
+            data-en="Expense Lists"
+          >
+            قوائم المصاريف
+          </h3>
+          <span class="text-sm text-gray-500">
+            <span>2</span>
+            <span data-ar="قوائم" data-en="lists">قوائم</span>
+          </span>
+        </div>
+
+        <!-- Tricount Card 1 -->
+        <a
+          href="tricount.html"
+          class="block bg-white rounded-2xl p-4 mb-4 shadow-sm border border-gray-100 transition-transform hover:scale-[1.02]"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="w-14 h-14 bg-gradient-to-br from-orange-400 to-red-500 rounded-xl flex items-center justify-center flex-shrink-0"
+            >
+              <i class="fas fa-city text-white text-xl"></i>
+            </div>
+            <div class="flex-1">
+              <h4
+                class="font-semibold text-gray-900 mb-1"
+                data-ar="رحلة المدينة"
+                data-en="City Trip"
+              >
+                رحلة المدينة
+              </h4>
+              <p class="text-sm text-gray-500 mb-2">
+                <span>4</span>
+                <span data-ar="أشخاص" data-en="people">أشخاص</span>
+                <span> • </span>
+                <span data-ar="آخر تحديث: اليوم" data-en="Last update: Today"
+                  >آخر تحديث: اليوم</span
+                >
+              </p>
+              <div class="flex items-center gap-4">
+                <div class="text-center">
+                  <p
+                    class="text-xs text-gray-500"
+                    data-ar="مصاريفك"
+                    data-en="Your expenses"
+                  >
+                    مصاريفك
+                  </p>
+                  <p class="font-semibold text-gray-900">
+                    162.00 <span data-ar="ر.س" data-en="SAR">ر.س</span>
+                  </p>
+                </div>
+                <div class="text-center">
+                  <p
+                    class="text-xs text-gray-500"
+                    data-ar="مستحق لك"
+                    data-en="Owed to you"
+                  >
+                    مستحق لك
+                  </p>
+                  <p class="font-semibold text-accent">
+                    45.75 <span data-ar="ر.س" data-en="SAR">ر.س</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <i class="fas fa-chevron-left text-gray-400"></i>
+          </div>
+        </a>
+
+        <!-- Tricount Card 2 -->
+        <a
+          href="tricount.html"
+          class="block bg-white rounded-2xl p-4 mb-4 shadow-sm border border-gray-100 transition-transform hover:scale-[1.02]"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl flex items-center justify-center flex-shrink-0"
+            >
+              <i class="fas fa-campground text-white text-xl"></i>
+            </div>
+            <div class="flex-1">
+              <h4
+                class="font-semibold text-gray-900 mb-1"
+                data-ar="رحلة التخييم"
+                data-en="Camping Trip"
+              >
+                رحلة التخييم
+              </h4>
+              <p class="text-sm text-gray-500 mb-2">
+                <span>6</span>
+                <span data-ar="أشخاص" data-en="people">أشخاص</span>
+                <span> • </span>
+                <span data-ar="آخر تحديث: أمس" data-en="Last update: Yesterday"
+                  >آخر تحديث: أمس</span
+                >
+              </p>
+              <div class="flex items-center gap-4">
+                <div class="text-center">
+                  <p
+                    class="text-xs text-gray-500"
+                    data-ar="مصاريفك"
+                    data-en="Your expenses"
+                  >
+                    مصاريفك
+                  </p>
+                  <p class="font-semibold text-gray-900">
+                    89.50 <span data-ar="ر.س" data-en="SAR">ر.س</span>
+                  </p>
+                </div>
+                <div class="text-center">
+                  <p
+                    class="text-xs text-gray-500"
+                    data-ar="عليك دفع"
+                    data-en="You owe"
+                  >
+                    عليك دفع
+                  </p>
+                  <p class="font-semibold text-danger">
+                    23.25 <span data-ar="ر.س" data-en="SAR">ر.س</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <i class="fas fa-chevron-left text-gray-400"></i>
+          </div>
+        </a>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="p-4">
+        <h3
+          class="text-lg font-semibold text-gray-900 mb-4"
+          data-ar="إجراءات سريعة"
+          data-en="Quick Actions"
+        >
+          إجراءات سريعة
+        </h3>
+        <div class="grid grid-cols-2 gap-4">
+          <a
+            href="new-tricount.html"
+            class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center transition-transform hover:scale-[1.02]"
+          >
+            <div
+              class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3"
+            >
+              <i class="fas fa-plus text-primary text-xl"></i>
+            </div>
+            <p
+              class="font-medium text-gray-900"
+              data-ar="غريم جديد"
+              data-en="New Tricount"
+            >
+              غريم جديد
+            </p>
+            <p
+              class="text-xs text-gray-500 mt-1"
+              data-ar="إنشاء قائمة مصاريف"
+              data-en="Create expense list"
+            >
+              إنشاء قائمة مصاريف
+            </p>
+          </a>
+          <a
+            href="add-expense.html"
+            class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center transition-transform hover:scale-[1.02]"
+          >
+            <div
+              class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-3"
+            >
+              <i class="fas fa-receipt text-accent text-xl"></i>
+            </div>
+            <p
+              class="font-medium text-gray-900"
+              data-ar="إضافة مصروف"
+              data-en="Add Expense"
+            >
+              إضافة مصروف
+            </p>
+            <p
+              class="text-xs text-gray-500 mt-1"
+              data-ar="تسجيل مصروف جديد"
+              data-en="Record new expense"
+            >
+              تسجيل مصروف جديد
+            </p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Auth Section -->
+      <div class="p-4">
+        <div
+          class="bg-gradient-to-r from-accent to-emerald-600 rounded-2xl p-6 text-white text-center"
+        >
+          <div class="mb-4">
+            <i class="fas fa-user-shield text-3xl mb-2"></i>
+            <h3
+              class="text-lg font-semibold mb-1"
+              data-ar="سجل دخولك"
+              data-en="Sign In"
+            >
+              سجل دخولك
+            </h3>
+            <p
+              class="text-emerald-100 text-sm"
+              data-ar="احفظ بياناتك وزامن غريمك عبر الأجهزة"
+              data-en="Save your data and sync across devices"
+            >
+              احفظ بياناتك وزامن غريمك عبر الأجهزة
+            </p>
+          </div>
+          <div class="flex gap-3">
+            <a
+              href="login.html"
+              class="flex-1 bg-white/20 backdrop-blur-sm text-white py-2 rounded-lg font-medium"
+              data-ar="تسجيل الدخول"
+              data-en="Login"
+            >
+              تسجيل الدخول
+            </a>
+            <a
+              href="register.html"
+              class="flex-1 bg-white text-emerald-600 py-2 rounded-lg font-medium"
+              data-ar="حساب جديد"
+              data-en="Register"
+            >
+              حساب جديد
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav
+      class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2"
+    >
+      <div class="flex items-center justify-around">
+        <button class="flex flex-col items-center gap-1 px-3 py-2 text-primary">
+          <i class="fas fa-home text-xl"></i>
+          <span class="text-xs font-medium" data-ar="الرئيسية" data-en="Home"
+            >الرئيسية</span
+          >
+        </button>
+        <a
+          href="requests.html"
+          class="flex flex-col items-center gap-1 px-3 py-2 text-gray-400"
+        >
+          <i class="fas fa-money-bill-wave text-xl"></i>
+          <span class="text-xs" data-ar="الطلبات" data-en="Requests"
+            >الطلبات</span
+          >
+        </a>
+        <a
+          href="wallet.html"
+          class="flex flex-col items-center gap-1 px-3 py-2 text-gray-400"
+        >
+          <i class="fas fa-credit-card text-xl"></i>
+          <span class="text-xs" data-ar="المحفظة" data-en="Wallet"
+            >المحفظة</span
+          >
+        </a>
+        <a
+          href="profile.html"
+          class="flex flex-col items-center gap-1 px-3 py-2 text-gray-400"
+        >
+          <i class="fas fa-user text-xl"></i>
+          <span class="text-xs" data-ar="الملف الشخصي" data-en="Profile"
+            >الملف الشخصي</span
+          >
+        </a>
+      </div>
+    </nav>
+
+    <!-- Floating Action Button -->
+    <a
+      href="new-tricount.html"
+      class="fixed bottom-20 left-4 w-14 h-14 bg-gradient-to-r from-primary to-indigo-600 rounded-full flex items-center justify-center shadow-lg"
+    >
+      <i class="fas fa-plus text-white text-xl"></i>
+    </a>
+  </body>
+</html>

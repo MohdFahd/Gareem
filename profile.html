@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الملف الشخصي - غريم</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1",
+              secondary: "#f8fafc",
+              accent: "#10b981",
+              danger: "#ef4444",
+              warning: "#f59e0b",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "Cairo", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-50 font-arabic min-h-screen">
+    <!-- Header -->
+    <header
+      class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50"
+    >
+      <div class="flex items-center justify-between p-4">
+        <div class="flex items-center gap-3">
+          <a
+            href="index.html"
+            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+          >
+            <i class="fas fa-arrow-right text-gray-600 text-lg"></i>
+          </a>
+          <h1 class="text-lg font-bold text-gray-900">الملف الشخصي</h1>
+        </div>
+        <button
+          class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+        >
+          <i class="fas fa-edit text-gray-600 text-lg"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Profile Content -->
+    <div class="pb-20">
+      <!-- User Info Section -->
+      <div class="p-4">
+        <div
+          class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center mb-6"
+        >
+          <div
+            class="w-24 h-24 bg-gradient-to-br from-primary to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <i class="fas fa-user text-white text-3xl"></i>
+          </div>
+          <h2 class="text-xl font-bold text-gray-900 mb-1">أليكس محمد</h2>
+          <p class="text-gray-500 mb-4">alex.m@example.com</p>
+          <div class="flex items-center justify-center gap-4 text-sm">
+            <div class="text-center">
+              <p class="font-semibold text-gray-900">8</p>
+              <p class="text-gray-500">قوائم نشطة</p>
+            </div>
+            <div class="w-px h-10 bg-gray-200"></div>
+            <div class="text-center">
+              <p class="font-semibold text-gray-900">147</p>
+              <p class="text-gray-500">إجمالي المصاريف</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Personal Information -->
+      <div class="px-4 mb-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">
+          المعلومات الشخصية
+        </h3>
+
+        <!-- Name -->
+        <div class="bg-white rounded-xl p-4 mb-3 border border-gray-200">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-user text-primary text-lg"></i>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">الاسم</p>
+                <p class="font-semibold text-gray-900">أليكس محمد</p>
+              </div>
+            </div>
+            <i class="fas fa-chevron-left text-gray-400"></i>
+          </div>
+        </div>
+
+        <!-- Username -->
+        <div class="bg-white rounded-xl p-4 mb-3 border border-gray-200">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-at text-accent text-lg"></i>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">اسم المستخدم</p>
+                <p class="font-semibold text-gray-900">alex_m</p>
+              </div>
+            </div>
+            <i class="fas fa-chevron-left text-gray-400"></i>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="bg-white rounded-xl p-4 mb-3 border border-gray-200">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-envelope text-blue-500 text-lg"></i>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">البريد الإلكتروني</p>
+                <p class="font-semibold text-gray-900">alex.m@example.com</p>
+              </div>
+            </div>
+            <i class="fas fa-chevron-left text-gray-400"></i>
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="bg-white rounded-xl p-4 mb-3 border border-gray-200">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-phone text-green-500 text-lg"></i>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">رقم الهاتف</p>
+                <p class="font-semibold text-gray-900">+966 50 123 4567</p>
+              </div>
+            </div>
+            <i class="fas fa-chevron-left text-gray-400"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bank Account Info -->
+      <div class="px-4 mb-6">
+        <div
+          class="bg-gradient-to-r from-accent to-emerald-600 rounded-2xl p-6 text-white"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold">حساب البنك المرتبط</h3>
+            <i class="fas fa-university text-2xl"></i>
+          </div>
+          <p class="text-emerald-100 text-sm mb-4">
+            اربط حسابك المصرفي لتلقي الأموال بشكل أسرع
+          </p>
+          <button
+            class="w-full bg-white/20 backdrop-blur-sm rounded-xl py-3 font-medium"
+          >
+            ربط الحساب المصرفي
+          </button>
+        </div>
+      </div>
+
+      <!-- Preferences -->
+      <div class="px-4 mb-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">التفضيلات</h3>
+
+        <!-- Notifications -->
+        <div class="bg-white rounded-xl p-4 mb-3 border border-gray-200">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-bell text-yellow-500 text-lg"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-900">الإشعارات</p>
+                <p class="text-sm text-gray-500">إدارة إشعارات التطبيق</p>
+              </div>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" checked class="sr-only peer" />
+              <div
+                class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:right-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"
+              ></div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Language -->
+        <div class="bg-white rounded-xl p-4 mb-3 border border-gray-200">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-language text-purple-500 text-lg"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-900">اللغة</p>
+                <p class="text-sm text-gray-500">العربية</p>
+              </div>
+            </div>
+            <i class="fas fa-chevron-left text-gray-400"></i>
+          </div>
+        </div>
+
+        <!-- Currency -->
+        <div class="bg-white rounded-xl p-4 mb-3 border border-gray-200">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-coins text-emerald-500 text-lg"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-900">العملة الافتراضية</p>
+                <p class="text-sm text-gray-500">الريال السعودي (ر.س)</p>
+              </div>
+            </div>
+            <i class="fas fa-chevron-left text-gray-400"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Support Section -->
+      <div class="px-4 mb-6">
+        <div
+          class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center"
+        >
+          <div
+            class="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <i class="fas fa-headset text-white text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">الدعم الفني</h3>
+          <p class="text-gray-500 text-sm mb-4">
+            نحن هنا لمساعدتك! تواصل معنا إذا كان لديك أي استفسار
+          </p>
+          <button
+            class="bg-primary text-white px-6 py-3 rounded-xl font-medium"
+          >
+            تواصل معنا
+          </button>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="px-4 space-y-3">
+        <button
+          class="w-full bg-white border border-gray-200 rounded-xl p-4 text-center font-medium text-gray-900"
+        >
+          مشاركة التطبيق
+        </button>
+        <button
+          class="w-full bg-white border border-gray-200 rounded-xl p-4 text-center font-medium text-gray-900"
+        >
+          تقييم التطبيق
+        </button>
+        <button
+          class="w-full bg-white border border-red-200 rounded-xl p-4 text-center font-medium text-red-500"
+        >
+          تسجيل الخروج
+        </button>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav
+      class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2"
+    >
+      <div class="flex items-center justify-around">
+        <a
+          href="index.html"
+          class="flex flex-col items-center gap-1 px-3 py-2 text-gray-400"
+        >
+          <i class="fas fa-home text-xl"></i>
+          <span class="text-xs">الرئيسية</span>
+        </a>
+        <a
+          href="requests.html"
+          class="flex flex-col items-center gap-1 px-3 py-2 text-gray-400"
+        >
+          <i class="fas fa-money-bill-wave text-xl"></i>
+          <span class="text-xs">الطلبات</span>
+        </a>
+        <a
+          href="wallet.html"
+          class="flex flex-col items-center gap-1 px-3 py-2 text-gray-400"
+        >
+          <i class="fas fa-credit-card text-xl"></i>
+          <span class="text-xs">المحفظة</span>
+        </a>
+        <button class="flex flex-col items-center gap-1 px-3 py-2 text-primary">
+          <i class="fas fa-user text-xl"></i>
+          <span class="text-xs font-medium">الملف الشخصي</span>
+        </button>
+      </div>
+    </nav>
+  </body>
+</html>
