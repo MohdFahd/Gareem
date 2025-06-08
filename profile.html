@@ -47,11 +47,106 @@
           </a>
           <h1 class="text-lg font-bold text-gray-900">الملف الشخصي</h1>
         </div>
-        <button
-          class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
-        >
-          <i class="fas fa-edit text-gray-600 text-lg"></i>
-        </button>
+        <div class="flex items-center gap-2">
+          <!-- Notifications -->
+          <div class="relative">
+            <button
+              id="notificationBtn"
+              onclick="toggleNotifications()"
+              class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center relative"
+            >
+              <i class="fas fa-bell text-gray-600 text-lg"></i>
+              <!-- Notification Badge -->
+              <span
+                class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center"
+                >2</span
+              >
+            </button>
+
+            <!-- Notifications Dropdown -->
+            <div
+              id="notificationsDropdown"
+              class="absolute top-12 left-0 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 hidden z-50 max-h-96 overflow-y-auto"
+            >
+              <!-- Header -->
+              <div class="p-4 border-b border-gray-100">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-semibold text-gray-900">
+                    إشعارات الملف الشخصي
+                  </h3>
+                  <button class="text-primary text-sm font-medium">
+                    تعيين الكل كمقروء
+                  </button>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">تحديثات الحساب والأمان</p>
+              </div>
+
+              <!-- Notifications List -->
+              <div class="max-h-80 overflow-y-auto">
+                <!-- Profile Updated -->
+                <div
+                  class="p-4 border-b border-gray-50 hover:bg-gray-50 cursor-pointer"
+                >
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"
+                    >
+                      <i class="fas fa-user-check text-green-600 text-sm"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <p class="font-medium text-gray-900 text-sm">
+                        تم تحديث الملف الشخصي
+                      </p>
+                      <p class="text-gray-600 text-xs mt-1">
+                        تم تحديث رقم الهاتف وعنوان البريد الإلكتروني بنجاح
+                      </p>
+                      <p class="text-gray-400 text-xs mt-1">منذ ساعة</p>
+                    </div>
+                    <span
+                      class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
+                    ></span>
+                  </div>
+                </div>
+
+                <!-- Security Alert -->
+                <div class="p-4 hover:bg-gray-50 cursor-pointer">
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0"
+                    >
+                      <i class="fas fa-shield-alt text-orange-600 text-sm"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <p class="font-medium text-gray-900 text-sm">
+                        تسجيل دخول جديد
+                      </p>
+                      <p class="text-gray-600 text-xs mt-1">
+                        تم تسجيل الدخول من جهاز iPhone الساعة 3:45 م
+                      </p>
+                      <p class="text-gray-400 text-xs mt-1">منذ 4 ساعات</p>
+                    </div>
+                    <span
+                      class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
+                    ></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Footer -->
+              <div class="p-4 border-t border-gray-100 text-center">
+                <button class="text-primary text-sm font-medium">
+                  عرض جميع الإشعارات
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button
+            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+          >
+            <i class="fas fa-edit text-gray-600 text-lg"></i>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -281,6 +376,11 @@
           تقييم التطبيق
         </button>
         <button
+          class="w-full bg-white border border-gray-200 rounded-xl p-4 text-center font-medium text-gray-900"
+        >
+          تحديث البرنامج
+        </button>
+        <button
           class="w-full bg-white border border-red-200 rounded-xl p-4 text-center font-medium text-red-500"
         >
           تسجيل الخروج
@@ -320,5 +420,28 @@
         </button>
       </div>
     </nav>
+
+    <script>
+      // Notifications functionality
+      function toggleNotifications() {
+        const dropdown = document.getElementById("notificationsDropdown");
+
+        if (dropdown.classList.contains("hidden")) {
+          dropdown.classList.remove("hidden");
+        } else {
+          dropdown.classList.add("hidden");
+        }
+      }
+
+      // Close notifications when clicking outside
+      document.addEventListener("click", function (event) {
+        const btn = document.getElementById("notificationBtn");
+        const dropdown = document.getElementById("notificationsDropdown");
+
+        if (!btn.contains(event.target) && !dropdown.contains(event.target)) {
+          dropdown.classList.add("hidden");
+        }
+      });
+    </script>
   </body>
 </html>

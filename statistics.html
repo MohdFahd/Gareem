@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>إحصائيات وتقارير - غريم</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1",
+              secondary: "#f8fafc",
+              accent: "#10b981",
+              danger: "#ef4444",
+              warning: "#f59e0b",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "Cairo", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body class="bg-gray-50 font-arabic min-h-screen">
+    <!-- Header -->
+    <header
+      class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50"
+    >
+      <div class="flex items-center justify-between p-4">
+        <div class="flex items-center gap-3">
+          <a
+            href="tricount.html"
+            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+          >
+            <i class="fas fa-arrow-right text-gray-600 text-lg"></i>
+          </a>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-gradient-to-br from-warning to-yellow-500 rounded-xl flex items-center justify-center"
+            >
+              <i class="fas fa-chart-bar text-white text-lg"></i>
+            </div>
+            <div>
+              <h1 class="text-lg font-bold text-gray-900">إحصائيات وتقارير</h1>
+              <p class="text-xs text-gray-500">رحلة المدينة</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="p-4 pb-20">
+      <!-- Report Configuration -->
+      <div class="space-y-6">
+        <!-- Report Type Selection -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+          <h2
+            class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-3"
+          >
+            <i class="fas fa-layer-group text-primary"></i>
+            نوع التقرير
+          </h2>
+          <div class="grid grid-cols-2 gap-3">
+            <button
+              id="group-report"
+              class="report-type-btn active p-4 rounded-xl border-2 border-primary bg-primary/10 text-primary font-medium transition-all"
+            >
+              <i class="fas fa-users mb-2 text-lg block"></i>
+              تقرير المجموعة
+            </button>
+            <button
+              id="individual-report"
+              class="report-type-btn p-4 rounded-xl border-2 border-gray-200 text-gray-600 font-medium transition-all hover:border-primary hover:text-primary"
+            >
+              <i class="fas fa-user mb-2 text-lg block"></i>
+              تقرير فردي
+            </button>
+          </div>
+        </div>
+
+        <!-- Category Selection -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+          <h2
+            class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-3"
+          >
+            <i class="fas fa-tags text-accent"></i>
+            الفئة
+          </h2>
+          <div class="space-y-3">
+            <label
+              class="flex items-center p-3 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-50"
+            >
+              <input
+                type="radio"
+                name="category"
+                value="group-fund"
+                class="sr-only"
+                checked
+              />
+              <div
+                class="w-5 h-5 rounded-full border-2 border-primary bg-primary flex items-center justify-center ml-3"
+              >
+                <div class="w-2 h-2 bg-white rounded-full"></div>
+              </div>
+              <div class="flex items-center gap-3">
+                <i class="fas fa-piggy-bank text-accent"></i>
+                <span class="font-medium text-gray-900">صندوق المجموعة</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Member and Group Selection -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+          <h2
+            class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-3"
+          >
+            <i class="fas fa-user-friends text-indigo-500"></i>
+            اختيار العضو والمجموعة
+          </h2>
+          <div class="space-y-4">
+            <!-- Group Selection -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >اختر المجموعة</label
+              >
+              <select
+                class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+              >
+                <option>رحلة المدينة</option>
+                <option>رحلة الشاطئ</option>
+                <option>عشاء العمل</option>
+              </select>
+            </div>
+            <!-- Member Selection -->
+            <div id="member-selection">
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >اختر العضو</label
+              >
+              <select
+                class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+              >
+                <option>جميع الأعضاء</option>
+                <option>أليكس</option>
+                <option>براين</option>
+                <option>جوليا</option>
+                <option>توماس</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Fetch Status -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+          <h2
+            class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-3"
+          >
+            <i class="fas fa-database text-blue-500"></i>
+            جلب البيانات
+          </h2>
+          <div
+            class="flex items-center justify-between p-4 bg-green-50 rounded-xl border border-green-200"
+          >
+            <div class="flex items-center gap-3">
+              <i class="fas fa-check-circle text-accent text-xl"></i>
+              <span class="font-medium text-gray-900"
+                >متصل بقاعدة البيانات</span
+              >
+            </div>
+            <button
+              class="bg-accent text-white px-4 py-2 rounded-lg text-sm font-medium"
+            >
+              تحديث البيانات
+            </button>
+          </div>
+        </div>
+
+        <!-- Charts Preview -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+          <h2
+            class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-3"
+          >
+            <i class="fas fa-chart-pie text-purple-500"></i>
+            الرسوم البيانية
+          </h2>
+          <div class="grid gap-4">
+            <!-- Chart Container -->
+            <div
+              class="bg-gray-50 rounded-xl p-4 h-64 flex items-center justify-center"
+            >
+              <canvas id="expenseChart" class="max-w-full max-h-full"></canvas>
+            </div>
+            <div class="flex gap-2 flex-wrap">
+              <button
+                class="chart-type-btn active bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium"
+              >
+                دائري
+              </button>
+              <button
+                class="chart-type-btn bg-gray-100 text-gray-600 px-4 py-2 rounded-lg text-sm font-medium"
+              >
+                عمودي
+              </button>
+              <button
+                class="chart-type-btn bg-gray-100 text-gray-600 px-4 py-2 rounded-lg text-sm font-medium"
+              >
+                خطي
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Report Format Selection -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+          <h2
+            class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-3"
+          >
+            <i class="fas fa-file-export text-orange-500"></i>
+            تنسيق التقرير
+          </h2>
+          <div class="grid grid-cols-2 gap-3">
+            <button
+              id="pdf-format"
+              class="format-btn active p-4 rounded-xl border-2 border-danger bg-danger/10 text-danger font-medium transition-all"
+            >
+              <i class="fas fa-file-pdf mb-2 text-lg block"></i>
+              PDF
+            </button>
+            <button
+              id="excel-format"
+              class="format-btn p-4 rounded-xl border-2 border-gray-200 text-gray-600 font-medium transition-all hover:border-accent hover:text-accent"
+            >
+              <i class="fas fa-file-excel mb-2 text-lg block"></i>
+              Excel
+            </button>
+          </div>
+        </div>
+
+        <!-- Generate Report Button -->
+        <button
+          id="generate-report"
+          class="w-full bg-gradient-to-r from-primary to-indigo-600 text-white font-semibold py-4 rounded-2xl flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transition-all"
+        >
+          <i class="fas fa-magic text-xl"></i>
+          إنشاء التقرير
+        </button>
+
+        <!-- Sharing Options (Initially Hidden) -->
+        <div
+          id="sharing-section"
+          class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hidden"
+        >
+          <h2
+            class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-3"
+          >
+            <i class="fas fa-share-alt text-blue-500"></i>
+            خيارات المشاركة
+          </h2>
+          <div class="space-y-3">
+            <button
+              class="w-full flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"
+            >
+              <div class="flex items-center gap-3">
+                <i class="fas fa-link text-blue-500"></i>
+                <span class="font-medium text-gray-900">نسخ الرابط</span>
+              </div>
+              <i class="fas fa-chevron-left text-gray-400"></i>
+            </button>
+            <button
+              class="w-full flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"
+            >
+              <div class="flex items-center gap-3">
+                <i class="fas fa-envelope text-red-500"></i>
+                <span class="font-medium text-gray-900"
+                  >مشاركة عبر البريد الإلكتروني</span
+                >
+              </div>
+              <i class="fas fa-chevron-left text-gray-400"></i>
+            </button>
+            <button
+              class="w-full flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"
+            >
+              <div class="flex items-center gap-3">
+                <i class="fab fa-whatsapp text-green-500"></i>
+                <span class="font-medium text-gray-900">مشاركة عبر واتساب</span>
+              </div>
+              <i class="fas fa-chevron-left text-gray-400"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Report type selection
+      document.querySelectorAll(".report-type-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          document.querySelectorAll(".report-type-btn").forEach((b) => {
+            b.classList.remove(
+              "active",
+              "border-primary",
+              "bg-primary/10",
+              "text-primary"
+            );
+            b.classList.add("border-gray-200", "text-gray-600");
+          });
+          this.classList.add(
+            "active",
+            "border-primary",
+            "bg-primary/10",
+            "text-primary"
+          );
+          this.classList.remove("border-gray-200", "text-gray-600");
+
+          // Show/hide member selection based on report type
+          const memberSelection = document.getElementById("member-selection");
+          if (this.id === "individual-report") {
+            memberSelection.style.display = "block";
+          } else {
+            memberSelection.style.display = "block"; // Keep visible for group reports too
+          }
+        });
+      });
+
+      // Format selection
+      document.querySelectorAll(".format-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          document.querySelectorAll(".format-btn").forEach((b) => {
+            b.classList.remove(
+              "active",
+              "border-danger",
+              "bg-danger/10",
+              "text-danger",
+              "border-accent",
+              "bg-accent/10",
+              "text-accent"
+            );
+            b.classList.add("border-gray-200", "text-gray-600");
+          });
+
+          if (this.id === "pdf-format") {
+            this.classList.add(
+              "active",
+              "border-danger",
+              "bg-danger/10",
+              "text-danger"
+            );
+          } else {
+            this.classList.add(
+              "active",
+              "border-accent",
+              "bg-accent/10",
+              "text-accent"
+            );
+          }
+          this.classList.remove("border-gray-200", "text-gray-600");
+        });
+      });
+
+      // Chart type selection
+      document.querySelectorAll(".chart-type-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          document.querySelectorAll(".chart-type-btn").forEach((b) => {
+            b.classList.remove("active", "bg-primary", "text-white");
+            b.classList.add("bg-gray-100", "text-gray-600");
+          });
+          this.classList.add("active", "bg-primary", "text-white");
+          this.classList.remove("bg-gray-100", "text-gray-600");
+
+          // Update chart based on selection
+          updateChart(this.textContent.trim());
+        });
+      });
+
+      // Generate report
+      document
+        .getElementById("generate-report")
+        .addEventListener("click", function () {
+          // Show loading state
+          this.innerHTML =
+            '<i class="fas fa-spinner fa-spin text-xl"></i> جاري إنشاء التقرير...';
+          this.disabled = true;
+
+          // Simulate report generation
+          setTimeout(() => {
+            this.innerHTML =
+              '<i class="fas fa-check text-xl"></i> تم إنشاء التقرير بنجاح';
+            this.classList.remove("from-primary", "to-indigo-600");
+            this.classList.add("from-accent", "to-green-600");
+
+            // Show sharing options
+            document
+              .getElementById("sharing-section")
+              .classList.remove("hidden");
+
+            // Reset after 2 seconds
+            setTimeout(() => {
+              this.innerHTML =
+                '<i class="fas fa-magic text-xl"></i> إنشاء التقرير';
+              this.disabled = false;
+              this.classList.remove("from-accent", "to-green-600");
+              this.classList.add("from-primary", "to-indigo-600");
+            }, 2000);
+          }, 3000);
+        });
+
+      // Initialize chart
+      function initChart() {
+        const ctx = document.getElementById("expenseChart").getContext("2d");
+        window.expenseChart = new Chart(ctx, {
+          type: "pie",
+          data: {
+            labels: ["فندق", "نزهة", "سيارة", "مطعم"],
+            datasets: [
+              {
+                data: [85, 13, 64, 38],
+                backgroundColor: ["#ef4444", "#10b981", "#3b82f6", "#f59e0b"],
+                borderWidth: 0,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: "bottom",
+                labels: {
+                  padding: 20,
+                  usePointStyle: true,
+                },
+              },
+            },
+          },
+        });
+      }
+
+      function updateChart(type) {
+        if (window.expenseChart) {
+          let chartType = "pie";
+          if (type === "عمودي") chartType = "bar";
+          if (type === "خطي") chartType = "line";
+
+          window.expenseChart.config.type = chartType;
+          window.expenseChart.update();
+        }
+      }
+
+      // Initialize chart when page loads
+      window.addEventListener("load", initChart);
+
+      // Sharing functionality
+      document.querySelectorAll("#sharing-section button").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const action = this.querySelector("span").textContent;
+
+          // Show success message
+          const originalContent = this.innerHTML;
+          this.innerHTML =
+            '<i class="fas fa-check text-green-500"></i><span class="font-medium text-green-600">تم بنجاح!</span>';
+
+          setTimeout(() => {
+            this.innerHTML = originalContent;
+          }, 2000);
+        });
+      });
+    </script>
+  </body>
+</html>

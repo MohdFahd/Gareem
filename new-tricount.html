@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>غريم جديد - غريم</title>
+    <title data-ar="غريم جديد - غريم" data-en="New tricount - Tricount">
+      غريم جديد - غريم
+    </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -18,19 +20,21 @@
             },
             fontFamily: {
               arabic: ["Tajawal", "Cairo", "system-ui", "sans-serif"],
+              english: ["Inter", "system-ui", "sans-serif"],
             },
           },
         },
       };
     </script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=Inter:wght@300;400;500;700&display=swap"
       rel="stylesheet"
     />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
+    <script src="lang.js"></script>
   </head>
   <body class="bg-gray-50 font-arabic min-h-screen">
     <!-- Header -->
@@ -45,27 +49,57 @@
           >
             <i class="fas fa-arrow-right text-gray-600 text-lg"></i>
           </a>
-          <h1 class="text-lg font-bold text-gray-900">غريم جديد</h1>
+          <h1
+            class="text-lg font-bold text-gray-900"
+            data-ar="غريم جديد"
+            data-en="New tricount"
+          >
+            غريم جديد
+          </h1>
         </div>
+        <button
+          id="create-tricount"
+          class="bg-primary text-white px-6 py-2 rounded-xl font-medium"
+          data-ar="إنشاء"
+          data-en="Create"
+        >
+          إنشاء
+        </button>
       </div>
     </header>
 
     <!-- Form Content -->
-    <div class="p-4">
-      <!-- Tricount Icon Selection -->
-      <div class="mb-8">
-        <div class="text-center mb-6">
-          <div
+    <div class="p-4 pb-20">
+      <!-- Title Section -->
+      <div class="mb-6">
+        <label
+          class="block text-lg font-semibold text-gray-900 mb-3"
+          data-ar="العنوان"
+          data-en="Title"
+          >العنوان</label
+        >
+
+        <div
+          class="bg-white border border-gray-200 rounded-xl p-4 flex items-center gap-4"
+        >
+          <button
             id="selected-icon"
-            class="w-20 h-20 bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 transition-all duration-300"
+            class="w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-xl flex items-center justify-center flex-shrink-0"
           >
-            <i class="fas fa-umbrella-beach text-white text-2xl"></i>
-          </div>
-          <button class="text-primary font-medium">تغيير الأيقونة</button>
+            <i class="fas fa-umbrella-beach text-white text-lg"></i>
+          </button>
+          <input
+            type="text"
+            id="tricount-title"
+            placeholder="مثال: رحلة الصيف"
+            data-ar-placeholder="مثال: رحلة الصيف"
+            data-en-placeholder="Example: Summer Trip"
+            class="flex-1 bg-transparent text-lg font-medium text-gray-900 focus:outline-none"
+          />
         </div>
 
-        <!-- Icon Grid -->
-        <div class="grid grid-cols-6 gap-3 mb-6">
+        <!-- Icon Grid (Hidden by default, can be toggled) -->
+        <div id="icon-grid" class="grid grid-cols-6 gap-3 mt-4 hidden">
           <button
             class="icon-option w-12 h-12 bg-gradient-to-br from-orange-400 to-red-500 rounded-xl flex items-center justify-center transition-all duration-300 border-2 border-primary"
             data-icon="fa-umbrella-beach"
@@ -153,49 +187,86 @@
         </div>
       </div>
 
-      <!-- Title Section -->
-      <div class="mb-8">
-        <label class="block text-lg font-semibold text-gray-900 mb-3"
-          >العنوان</label
-        >
-        <input
-          type="text"
-          id="tricount-title"
-          placeholder="مثال: رحلة الصيف"
-          class="w-full bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
-        />
-      </div>
-
       <!-- Options -->
-      <div class="mb-8">
-        <h3 class="text-lg font-semibold text-gray-900 mb-4">الخيارات</h3>
-        <div class="bg-white rounded-xl p-4 border border-gray-200">
-          <div class="flex items-center justify-between">
-            <span class="text-gray-600">العملة</span>
-            <select
-              class="bg-transparent text-gray-900 font-medium focus:outline-none"
+      <div class="mb-6">
+        <h3
+          class="text-lg font-semibold text-gray-900 mb-3"
+          data-ar="الخيارات"
+          data-en="Options"
+        >
+          الخيارات
+        </h3>
+        <div class="bg-white rounded-xl border border-gray-200 shadow-sm">
+          <div class="flex items-center justify-between p-4">
+            <span
+              class="text-gray-600 font-medium"
+              data-ar="العملة"
+              data-en="Currency"
+              >العملة</span
             >
-              <option>الريال السعودي</option>
-              <option>الدولار الأمريكي</option>
-              <option>اليورو</option>
-              <option>الدرهم الإماراتي</option>
-              <option>الجنيه المصري</option>
-            </select>
+            <div class="flex items-center gap-2">
+              <select
+                class="bg-transparent text-gray-900 font-medium focus:outline-none appearance-none"
+                id="currency-select"
+              >
+                <option
+                  value="SAR"
+                  data-ar="الريال السعودي"
+                  data-en="Saudi Riyal"
+                >
+                  الريال السعودي
+                </option>
+                <option
+                  value="USD"
+                  data-ar="الدولار الأمريكي"
+                  data-en="US Dollar"
+                >
+                  الدولار الأمريكي
+                </option>
+                <option value="EUR" data-ar="اليورو" data-en="Euro">
+                  اليورو
+                </option>
+                <option
+                  value="AED"
+                  data-ar="الدرهم الإماراتي"
+                  data-en="UAE Dirham"
+                >
+                  الدرهم الإماراتي
+                </option>
+                <option
+                  value="EGP"
+                  data-ar="الجنيه المصري"
+                  data-en="Egyptian Pound"
+                >
+                  الجنيه المصري
+                </option>
+              </select>
+              <i class="fas fa-chevron-down text-gray-400 text-sm"></i>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Participants -->
-      <div class="mb-8">
+      <div class="mb-6">
         <div class="flex items-center justify-between mb-4">
-          <h3 class="text-lg font-semibold text-gray-900">المشاركون</h3>
-          <span class="text-sm text-gray-500" id="participant-count"
-            >1 شخص</span
+          <h3
+            class="text-lg font-semibold text-gray-900"
+            data-ar="المشاركون"
+            data-en="Participants"
           >
+            المشاركون
+          </h3>
+          <span class="text-sm text-gray-500" id="participant-count">
+            <span>1</span>
+            <span data-ar="شخص" data-en="person">شخص</span>
+          </span>
         </div>
 
         <!-- Current User -->
-        <div class="bg-white rounded-xl p-4 mb-3 border border-gray-200">
+        <div
+          class="bg-white rounded-xl p-4 mb-3 border border-gray-200 shadow-sm"
+        >
           <div class="flex items-center gap-3">
             <div
               class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center"
@@ -206,12 +277,15 @@
               <input
                 type="text"
                 placeholder="اسمك"
-                value="أليكس"
+                data-ar-placeholder="اسمك"
+                data-en-placeholder="Your Name"
                 class="w-full bg-transparent text-gray-900 font-medium focus:outline-none"
               />
             </div>
             <span
               class="text-xs text-primary bg-primary/10 px-2 py-1 rounded-full"
+              data-ar="أنت"
+              data-en="You"
               >أنت</span
             >
           </div>
@@ -228,17 +302,126 @@
           class="w-full bg-primary/5 border-2 border-dashed border-primary/30 rounded-xl p-4 text-primary font-medium flex items-center justify-center gap-2 transition-all hover:bg-primary/10"
         >
           <i class="fas fa-plus"></i>
-          إضافة مشارك
+          <span data-ar="إضافة مشارك" data-en="Add Participant"
+            >إضافة مشارك</span
+          >
         </button>
       </div>
 
       <!-- Create Button -->
       <button
-        id="create-tricount"
-        class="w-full bg-gradient-to-r from-primary to-indigo-600 text-white py-4 rounded-xl font-semibold text-lg shadow-lg"
+        id="create-tricount-main"
+        class="w-full bg-blue-500 text-white py-4 rounded-2xl font-semibold text-lg shadow-lg hover:bg-blue-600 transition-colors"
+        data-ar="إنشاء الغريم"
+        data-en="Create Tricount"
       >
-        إنشاء غريم
+        إنشاء الغريم
       </button>
+    </div>
+
+    <!-- Success Modal -->
+    <div
+      id="success-modal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-white rounded-3xl w-full max-w-md mx-auto shadow-2xl overflow-hidden"
+      >
+        <!-- Header -->
+        <div class="flex items-center justify-end p-4 pb-2">
+          <button
+            id="close-modal"
+            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
+          >
+            <i class="fas fa-times text-gray-500 text-lg"></i>
+          </button>
+        </div>
+
+        <!-- Content -->
+        <div class="px-6 pb-6 text-center">
+          <!-- Success Icon -->
+          <div
+            class="w-24 h-24 bg-accent rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg"
+          >
+            <i class="fas fa-check text-white text-3xl"></i>
+          </div>
+
+          <!-- Title -->
+          <h2
+            class="text-2xl font-bold text-gray-900 mb-3"
+            data-ar="تم إنشاء الغريم بنجاح!"
+            data-en="Your tricount is ready to use!"
+          >
+            تم إنشاء الغريم بنجاح!
+          </h2>
+
+          <!-- Subtitle -->
+          <p
+            class="text-gray-500 text-base mb-8 leading-relaxed"
+            data-ar="ادع جميع المشاركين عن طريق إرسال رابط الدعوة أو إظهار رمز QR للدعوة."
+            data-en="Invite all participants by sending them a message with the invite link or show them an invite QR."
+          >
+            ادع جميع المشاركين عن طريق إرسال رابط الدعوة أو إظهار رمز QR للدعوة.
+          </p>
+
+          <!-- Participants to Invite -->
+          <div id="participants-to-invite" class="text-right mb-8">
+            <h3
+              class="text-xl font-bold text-gray-900 mb-4"
+              data-ar="المشاركون المدعوون"
+              data-en="Participants To Invite"
+            >
+              المشاركون المدعوون
+            </h3>
+            <div id="invite-list" class="space-y-3 mb-4">
+              <!-- Participants will be listed here -->
+            </div>
+            <p
+              class="text-sm text-gray-400 leading-relaxed"
+              data-ar="يمكن للمشاركين عرض وتعديل وحذف المصاريف، بالإضافة إلى إضافة مصاريفهم الخاصة."
+              data-en="Participants can view, edit, and delete expenses, as well as add their own."
+            >
+              يمكن للمشاركين عرض وتعديل وحذف المصاريف، بالإضافة إلى إضافة
+              مصاريفهم الخاصة.
+            </p>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="space-y-4">
+            <!-- WhatsApp Button -->
+            <button
+              class="w-full bg-green-500 text-white py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 hover:bg-green-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+            >
+              <i class="fab fa-whatsapp text-2xl"></i>
+              <span data-ar="واتساب" data-en="WhatsApp">واتساب</span>
+            </button>
+
+            <!-- Secondary Actions -->
+            <div class="flex gap-4">
+              <button
+                class="flex-1 bg-primary text-white py-4 rounded-2xl font-semibold flex items-center justify-center gap-2 hover:bg-primary/90 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-[1.02]"
+              >
+                <i class="fas fa-qrcode text-xl"></i>
+              </button>
+              <button
+                class="flex-1 bg-primary text-white py-4 rounded-2xl font-semibold flex items-center justify-center gap-2 hover:bg-primary/90 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-[1.02]"
+              >
+                <i class="fas fa-share text-xl"></i>
+              </button>
+            </div>
+
+            <!-- Invite Later Button -->
+            <button
+              id="invite-later"
+              class="w-full text-primary font-bold text-lg py-4 hover:text-primary/80 transition-colors rounded-2xl hover:bg-primary/5"
+            >
+              <span data-ar="الدعوة لاحقاً" data-en="Invite Later"
+                >الدعوة لاحقاً</span
+              >
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
@@ -262,10 +445,18 @@
           const icon = this.dataset.icon;
           const gradient = this.dataset.gradient;
 
-          selectedIcon.className = `w-20 h-20 bg-gradient-to-br ${gradient} rounded-2xl flex items-center justify-center mx-auto mb-4 transition-all duration-300`;
-          selectedIcon.innerHTML = `<i class="fas ${icon} text-white text-2xl"></i>`;
+          selectedIcon.className = `w-12 h-12 bg-gradient-to-br ${gradient} rounded-xl flex items-center justify-center flex-shrink-0`;
+          selectedIcon.innerHTML = `<i class="fas ${icon} text-white text-lg"></i>`;
         });
       });
+
+      // Toggle icon grid when clicking on the icon
+      document
+        .getElementById("selected-icon")
+        .addEventListener("click", function () {
+          const iconGrid = document.getElementById("icon-grid");
+          iconGrid.classList.toggle("hidden");
+        });
 
       // Add participant functionality
       document
@@ -275,13 +466,13 @@
           const participantsList = document.getElementById("participants-list");
 
           const participantHTML = `
-                <div class="bg-white rounded-xl p-4 mb-3 border border-gray-200 participant-item">
+                <div class="bg-white rounded-xl p-4 mb-3 border border-gray-200 shadow-sm participant-item">
                     <div class="flex items-center gap-3">
                         <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
                             <i class="fas fa-user text-gray-400 text-lg"></i>
                         </div>
                         <div class="flex-1">
-                            <input type="text" placeholder="اسم المشارك" class="w-full bg-transparent text-gray-900 font-medium focus:outline-none participant-name">
+                            <input type="text" placeholder="اسم المشارك" data-ar-placeholder="اسم المشارك" data-en-placeholder="Participant name" class="w-full bg-transparent text-gray-900 font-medium focus:outline-none participant-name">
                         </div>
                         <button class="remove-participant w-8 h-8 bg-red-100 rounded-full flex items-center justify-center text-red-500 hover:bg-red-200 transition-colors">
                             <i class="fas fa-times text-sm"></i>
@@ -305,43 +496,198 @@
 
       function updateParticipantCount() {
         const count = document.querySelectorAll(".participant-item").length + 1; // +1 for current user
-        document.getElementById("participant-count").textContent =
-          count + " أشخاص";
+        const countElement = document.getElementById("participant-count");
+        const currentLang = document.documentElement.lang;
+
+        if (currentLang === "ar") {
+          countElement.innerHTML = `<span>${count}</span> <span>أشخاص</span>`;
+        } else {
+          countElement.innerHTML = `<span>${count}</span> <span>people</span>`;
+        }
       }
 
-      // Create tricount functionality
+      function showSuccessModal(participants) {
+        const modal = document.getElementById("success-modal");
+        const inviteList = document.getElementById("invite-list");
+
+        // Clear previous list
+        inviteList.innerHTML = "";
+
+        // Add participants to invite (excluding the creator)
+        participants.forEach((participant) => {
+          const participantItem = document.createElement("div");
+          participantItem.className =
+            "bg-gray-50 rounded-2xl p-4 text-right border border-gray-100";
+          participantItem.innerHTML = `
+            <div class="font-bold text-gray-900 text-lg">${participant}</div>
+          `;
+          inviteList.appendChild(participantItem);
+        });
+
+        // Show modal
+        modal.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      }
+
+      function hideSuccessModal() {
+        const modal = document.getElementById("success-modal");
+        modal.classList.add("hidden");
+        document.body.style.overflow = "auto";
+      }
+
+      // Modal close functionality
       document
-        .getElementById("create-tricount")
+        .getElementById("close-modal")
+        .addEventListener("click", hideSuccessModal);
+      document
+        .getElementById("invite-later")
         .addEventListener("click", function () {
-          const title = document.getElementById("tricount-title").value;
+          hideSuccessModal();
+          // Redirect to tricount page
+          window.location.href = "tricount.html";
+        });
 
-          if (!title.trim()) {
-            alert("يرجى إدخال عنوان للغريم");
-            return;
+      // Close modal when clicking outside
+      document
+        .getElementById("success-modal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            hideSuccessModal();
           }
+        });
 
+      // Modal button functionality
+      document
+        .querySelector("#success-modal .bg-green-500")
+        .addEventListener("click", function () {
+          // WhatsApp sharing
+          const title = document.getElementById("tricount-title").value;
           const participants = [];
-          participants.push("أليكس"); // Current user
-
           document.querySelectorAll(".participant-name").forEach((input) => {
             if (input.value.trim()) {
               participants.push(input.value.trim());
             }
           });
 
-          if (participants.length < 2) {
-            alert("يجب إضافة شخص واحد على الأقل بالإضافة إليك");
+          const currentLang = document.documentElement.lang;
+          let message;
+          if (currentLang === "ar") {
+            message = `مرحباً! تمت دعوتك للانضمام إلى غريم "${title}" لتقسيم المصاريف. انقر على الرابط للانضمام: [رابط الدعوة]`;
+          } else {
+            message = `Hi! You've been invited to join the tricount "${title}" for splitting expenses. Click the link to join: [invite link]`;
+          }
+
+          const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
+            message
+          )}`;
+          window.open(whatsappUrl, "_blank");
+        });
+
+      // QR Code button
+      document
+        .querySelector("#success-modal .fas.fa-qrcode")
+        .parentElement.addEventListener("click", function () {
+          const currentLang = document.documentElement.lang;
+          if (currentLang === "ar") {
+            alert("سيتم إنشاء رمز QR للدعوة قريباً!");
+          } else {
+            alert("QR Code generation coming soon!");
+          }
+        });
+
+      // Share button
+      document
+        .querySelector("#success-modal .fas.fa-share")
+        .parentElement.addEventListener("click", function () {
+          const title = document.getElementById("tricount-title").value;
+          const currentLang = document.documentElement.lang;
+
+          if (navigator.share) {
+            const shareData = {
+              title:
+                currentLang === "ar" ? `غريم ${title}` : `Tricount ${title}`,
+              text:
+                currentLang === "ar"
+                  ? `انضم إلى غريم "${title}" لتقسيم المصاريف`
+                  : `Join the tricount "${title}" for splitting expenses`,
+              url: window.location.href + "?invite=true",
+            };
+
+            navigator.share(shareData).catch((err) => {
+              console.log("Error sharing:", err);
+            });
+          } else {
+            // Fallback for browsers that don't support Web Share API
+            const url = window.location.href + "?invite=true";
+            navigator.clipboard.writeText(url).then(() => {
+              if (currentLang === "ar") {
+                alert("تم نسخ رابط الدعوة إلى الحافظة!");
+              } else {
+                alert("Invite link copied to clipboard!");
+              }
+            });
+          }
+        });
+
+      // Create tricount functionality
+      document
+        .getElementById("create-tricount-main")
+        .addEventListener("click", function () {
+          const title = document.getElementById("tricount-title").value;
+          const currentLang = document.documentElement.lang;
+
+          if (!title.trim()) {
+            if (currentLang === "ar") {
+              alert("يرجى إدخال عنوان للغريم");
+            } else {
+              alert("Please enter a title for the tricount");
+            }
             return;
           }
 
-          // Here you would typically save the tricount
-          alert(
-            `تم إنشاء الغريم "${title}" بنجاح مع ${participants.length} مشاركين!`
-          );
+          const yourName = document.querySelector(
+            'input[placeholder="اسمك"], input[placeholder="Your Name"]'
+          ).value;
+          const creatorName =
+            yourName.trim() || (currentLang === "ar" ? "أليكس" : "Alex");
 
-          // Redirect to the new tricount (simulate)
-          window.location.href = "tricount.html";
+          // Get other participants (not including creator)
+          const otherParticipants = [];
+          document.querySelectorAll(".participant-name").forEach((input) => {
+            if (input.value.trim()) {
+              otherParticipants.push(input.value.trim());
+            }
+          });
+
+          if (otherParticipants.length === 0) {
+            // No participants to invite, go directly to tricount
+            if (currentLang === "ar") {
+              alert(`تم إنشاء الغريم "${title}" بنجاح!`);
+            } else {
+              alert(`Tricount "${title}" created successfully!`);
+            }
+            window.location.href = "tricount.html";
+          } else {
+            // Show success modal with participants to invite
+            showSuccessModal(otherParticipants);
+          }
         });
+
+      // Also add functionality to the header create button
+      document
+        .getElementById("create-tricount")
+        .addEventListener("click", function () {
+          // Trigger the same functionality as the main create button
+          document.getElementById("create-tricount-main").click();
+        });
+
+      // Initialize language support
+      if (typeof switchLanguage === "function") {
+        // Language switching is available from lang.js
+        document.addEventListener("DOMContentLoaded", function () {
+          updateParticipantCount();
+        });
+      }
     </script>
   </body>
 </html>

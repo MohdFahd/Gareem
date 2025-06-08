@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اقتراحات الاسترداد - غريم</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1",
+              secondary: "#f8fafc",
+              accent: "#10b981",
+              danger: "#ef4444",
+              warning: "#f59e0b",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "Cairo", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-50 font-arabic min-h-screen">
+    <!-- Header -->
+    <header
+      class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50"
+    >
+      <div class="flex items-center justify-between p-4">
+        <div class="flex items-center gap-3">
+          <a
+            href="tricount.html"
+            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+          >
+            <i class="fas fa-arrow-right text-gray-600 text-lg"></i>
+          </a>
+          <div>
+            <h1 class="text-lg font-bold text-gray-900">اقتراحات الاسترداد</h1>
+            <p class="text-xs text-gray-500">رحلة المدينة</p>
+          </div>
+        </div>
+        <button
+          class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+        >
+          <i class="fas fa-ellipsis-v text-gray-600 text-lg"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="p-4">
+      <!-- Owed Summary -->
+      <div class="text-center mb-8">
+        <div
+          class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4"
+        >
+          <i class="fas fa-money-bill-wave text-white text-2xl"></i>
+        </div>
+        <h2 class="text-xl font-bold text-gray-900 mb-2">مستحق لك</h2>
+        <p class="text-4xl font-bold text-accent mb-2">45.75 ر.س</p>
+        <p class="text-gray-500 text-sm">من إجمالي المصاريف</p>
+      </div>
+
+      <!-- Debt List -->
+      <div class="space-y-4">
+        <!-- Brian owes Alex -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+          <div class="flex items-center gap-4 mb-4">
+            <div
+              class="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center"
+            >
+              <span class="font-semibold text-blue-600">ب</span>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-900">
+                براين مدين لـ أليكس (أنا)
+              </h3>
+              <p class="text-2xl font-bold text-gray-900 mt-1">31.25 ر.س</p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <button
+              class="flex-1 bg-primary text-white py-3 px-4 rounded-xl font-medium hover:bg-primary/90 transition-colors"
+              onclick="requestPayment('براين', '31.25')"
+            >
+              طلب
+            </button>
+            <button
+              class="flex-1 bg-gray-100 text-gray-700 py-3 px-4 rounded-xl font-medium hover:bg-gray-200 transition-colors"
+              onclick="markAsPaid('براين', '31.25')"
+            >
+              تم الدفع
+            </button>
+          </div>
+        </div>
+
+        <!-- Thomas owes Alex -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+          <div class="flex items-center gap-4 mb-4">
+            <div
+              class="w-12 h-12 bg-purple-200 rounded-full flex items-center justify-center"
+            >
+              <span class="font-semibold text-purple-600">ت</span>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-semibold text-gray-900">
+                توماس مدين لـ أليكس (أنا)
+              </h3>
+              <p class="text-2xl font-bold text-gray-900 mt-1">14.50 ر.س</p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <button
+              class="flex-1 bg-primary text-white py-3 px-4 rounded-xl font-medium hover:bg-primary/90 transition-colors"
+              onclick="requestPayment('توماس', '14.50')"
+            >
+              طلب
+            </button>
+            <button
+              class="flex-1 bg-gray-100 text-gray-700 py-3 px-4 rounded-xl font-medium hover:bg-gray-200 transition-colors"
+              onclick="markAsPaid('توماس', '14.50')"
+            >
+              تم الدفع
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Settlement Info -->
+      <div class="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-200">
+        <h4 class="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+          <i class="fas fa-info-circle text-blue-500"></i>
+          معلومات التسوية
+        </h4>
+        <div class="space-y-2 text-sm text-gray-700">
+          <p>• براين سيدفع لك 31.25 ر.س</p>
+          <p>• توماس سيدفع لك 14.50 ر.س</p>
+          <p>• إجمالي المبلغ المستحق: 45.75 ر.س</p>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="mt-6 grid grid-cols-2 gap-3">
+        <button
+          class="bg-white border border-gray-200 text-gray-700 py-3 px-4 rounded-xl font-medium hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
+          onclick="requestAllPayments()"
+        >
+          <i class="fas fa-paper-plane text-primary"></i>
+          طلب من الجميع
+        </button>
+        <button
+          class="bg-white border border-gray-200 text-gray-700 py-3 px-4 rounded-xl font-medium hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
+          onclick="shareRepaymentDetails()"
+        >
+          <i class="fas fa-share text-accent"></i>
+          مشاركة التفاصيل
+        </button>
+      </div>
+    </div>
+
+    <!-- Success Modal (Hidden by default) -->
+    <div
+      id="successModal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
+    >
+      <div class="bg-white rounded-2xl p-6 mx-4 max-w-sm w-full">
+        <div class="text-center">
+          <div
+            class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <i class="fas fa-check text-green-500 text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">تم بنجاح!</h3>
+          <p id="modalMessage" class="text-gray-600 mb-4"></p>
+          <button
+            onclick="closeModal()"
+            class="w-full bg-primary text-white py-3 rounded-xl font-medium"
+          >
+            حسناً
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function requestPayment(person, amount) {
+        showModal(`تم إرسال طلب دفع إلى ${person} بمبلغ ${amount} ر.س`);
+      }
+
+      function markAsPaid(person, amount) {
+        showModal(`تم تسجيل دفع ${person} بمبلغ ${amount} ر.س`);
+        // Here you would typically update the UI to reflect the payment
+      }
+
+      function requestAllPayments() {
+        showModal("تم إرسال طلبات الدفع إلى جميع المدينين");
+      }
+
+      function shareRepaymentDetails() {
+        if (navigator.share) {
+          navigator.share({
+            title: "تفاصيل الاسترداد - رحلة المدينة",
+            text: "براين مدين بـ 31.25 ر.س، توماس مدين بـ 14.50 ر.س",
+          });
+        } else {
+          showModal("تم نسخ تفاصيل الاسترداد إلى الحافظة");
+        }
+      }
+
+      function showModal(message) {
+        document.getElementById("modalMessage").textContent = message;
+        document.getElementById("successModal").classList.remove("hidden");
+      }
+
+      function closeModal() {
+        document.getElementById("successModal").classList.add("hidden");
+      }
+
+      // Close modal when clicking outside
+      document
+        .getElementById("successModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeModal();
+          }
+        });
+    </script>
+  </body>
+</html>

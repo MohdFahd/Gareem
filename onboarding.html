@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="html-root">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-ar="مرحباً في غريم" data-en="Welcome to Ghareem">
+      مرحباً في غريم
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1",
+              secondary: "#f8fafc",
+              accent: "#10b981",
+              danger: "#ef4444",
+              warning: "#f59e0b",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "Cairo", "system-ui", "sans-serif"],
+              english: ["Inter", "system-ui", "sans-serif"],
+            },
+            animation: {
+              "fade-in": "fadeIn 0.5s ease-in-out",
+              "slide-up": "slideUp 0.6s ease-out",
+              "scale-in": "scaleIn 0.3s ease-out",
+              "slide-left": "slideLeft 0.4s ease-out",
+              "slide-right": "slideRight 0.4s ease-out",
+              float: "float 3s ease-in-out infinite",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+              slideUp: {
+                "0%": { transform: "translateY(20px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" },
+              },
+              scaleIn: {
+                "0%": { transform: "scale(0.95)", opacity: "0" },
+                "100%": { transform: "scale(1)", opacity: "1" },
+              },
+              slideLeft: {
+                "0%": { transform: "translateX(100%)", opacity: "0" },
+                "100%": { transform: "translateX(0)", opacity: "1" },
+              },
+              slideRight: {
+                "0%": { transform: "translateX(-100%)", opacity: "0" },
+                "100%": { transform: "translateX(0)", opacity: "1" },
+              },
+              float: {
+                "0%, 100%": { transform: "translateY(0px)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=Inter:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-gradient-to-br from-indigo-50 via-white to-purple-50 font-arabic min-h-screen"
+  >
+    <!-- Animated Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+      <div
+        class="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-purple-400 to-indigo-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"
+      ></div>
+      <div
+        class="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-pink-400 to-purple-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"
+        style="animation-delay: 2s"
+      ></div>
+      <div
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"
+        style="animation-delay: 4s"
+      ></div>
+    </div>
+
+    <!-- Language Toggle -->
+    <div class="absolute top-6 left-6 z-50 animate-fade-in">
+      <button
+        id="langToggle"
+        class="bg-white/80 backdrop-blur-md border border-white/30 rounded-2xl px-4 py-3 text-sm font-medium text-gray-700 hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+      >
+        <i class="fas fa-language mr-2 text-indigo-600"></i>
+        <span data-ar="English" data-en="العربية">English</span>
+      </button>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="absolute top-6 right-6 z-50 animate-fade-in">
+      <div class="flex items-center gap-2">
+        <div class="flex gap-2">
+          <div
+            id="dot-1"
+            class="w-3 h-3 rounded-full bg-indigo-600 transition-all duration-300"
+          ></div>
+          <div
+            id="dot-2"
+            class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-300"
+          ></div>
+          <div
+            id="dot-3"
+            class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-300"
+          ></div>
+        </div>
+        <span
+          id="page-indicator"
+          class="text-sm text-gray-600 mr-2"
+          data-ar="1 من 3"
+          data-en="1 of 3"
+          >1 من 3</span
+        >
+      </div>
+    </div>
+
+    <!-- Skip Button -->
+    <div class="absolute top-6 right-32 z-50 animate-fade-in">
+      <button
+        id="skipBtn"
+        class="bg-white/80 backdrop-blur-md border border-white/30 rounded-2xl px-4 py-3 text-sm font-medium text-gray-600 hover:bg-white/90 hover:text-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+        data-ar="تخطي"
+        data-en="Skip"
+      >
+        تخطي
+      </button>
+    </div>
+
+    <!-- Main Content -->
+    <div
+      class="min-h-screen flex items-center justify-center p-4 relative z-10"
+    >
+      <div class="w-full max-w-2xl">
+        <!-- Page 1: Introduction -->
+        <div id="page-1" class="onboarding-page animate-scale-in">
+          <div class="text-center mb-12">
+            <div
+              class="w-32 h-32 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl transform hover:scale-110 transition-transform duration-300 animate-float"
+            >
+              <i class="fas fa-star text-white text-6xl"></i>
+            </div>
+            <h1
+              class="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-6"
+              data-ar="🌟 مرحبًا في غريم!"
+              data-en="🌟 Welcome to Ghareem!"
+            >
+              🌟 مرحبًا في غريم!
+            </h1>
+            <div
+              class="text-lg text-gray-700 leading-relaxed space-y-4 max-w-lg mx-auto"
+            >
+              <p
+                data-ar="هل تجد صعوبة في تقسيم المصاريف بين الأصدقاء أو الزملاء؟"
+                data-en="Struggling to split costs among friends or colleagues?"
+              >
+                هل تجد صعوبة في تقسيم المصاريف بين الأصدقاء أو الزملاء؟
+              </p>
+              <p
+                data-ar="مع غريم، يصبح تقسيم النفقات أسهل وأسرع! سجل المصاريف ووزّعها بالتساوي أو وفقًا لأي قواعد مخصصة."
+                data-en="With Ghareem, splitting expenses becomes easy and fast! Track and distribute expenses equally or according to any custom rules."
+              >
+                مع غريم، يصبح تقسيم النفقات أسهل وأسرع! سجل المصاريف ووزّعها
+                بالتساوي أو وفقًا لأي قواعد مخصصة.
+              </p>
+            </div>
+            <div class="mt-8 space-y-4 text-right max-w-md mx-auto">
+              <div class="flex items-center gap-3">
+                <i class="fas fa-check-circle text-accent text-xl"></i>
+                <span
+                  class="text-gray-700"
+                  data-ar="🔹 سهولة الاستخدام"
+                  data-en="🔹 Easy to use"
+                  >🔹 سهولة الاستخدام</span
+                >
+              </div>
+              <div class="flex items-center gap-3">
+                <i class="fas fa-check-circle text-accent text-xl"></i>
+                <span
+                  class="text-gray-700"
+                  data-ar="🔹 تقارير واضحة ودقيقة"
+                  data-en="🔹 Clear and accurate reports"
+                  >🔹 تقارير واضحة ودقيقة</span
+                >
+              </div>
+              <div class="flex items-center gap-3">
+                <i class="fas fa-check-circle text-accent text-xl"></i>
+                <span
+                  class="text-gray-700"
+                  data-ar="🔹 تطبيق مثالي للأنشطة المشتركة مثل السفر، المناسبات، والسكن الجماعي"
+                  data-en="🔹 Perfect for shared activities like travel, events, and group living"
+                  >🔹 تطبيق مثالي للأنشطة المشتركة مثل السفر، المناسبات، والسكن
+                  الجماعي</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 2: Features -->
+        <div id="page-2" class="onboarding-page hidden">
+          <div class="text-center mb-12">
+            <div
+              class="w-32 h-32 bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl transform hover:scale-110 transition-transform duration-300 animate-float"
+            >
+              <i class="fas fa-calculator text-white text-6xl"></i>
+            </div>
+            <h1
+              class="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-6"
+              data-ar="✨ مميزات رائعة"
+              data-en="✨ Amazing Features"
+            >
+              ✨ مميزات رائعة
+            </h1>
+            <div
+              class="text-lg text-gray-700 leading-relaxed space-y-6 max-w-lg mx-auto"
+            >
+              <div
+                class="bg-white/70 backdrop-blur-xl rounded-3xl p-6 shadow-xl border border-white/30"
+              >
+                <div class="flex items-center gap-4 mb-4">
+                  <i class="fas fa-users text-indigo-600 text-2xl"></i>
+                  <h3
+                    class="font-bold text-xl"
+                    data-ar="إدارة المجموعات"
+                    data-en="Group Management"
+                  >
+                    إدارة المجموعات
+                  </h3>
+                </div>
+                <p
+                  data-ar="أنشئ مجموعات منفصلة لكل نشاط أو رحلة أو مناسبة واحتفظ بحسابات منظمة"
+                  data-en="Create separate groups for each activity, trip, or event and keep organized accounts"
+                >
+                  أنشئ مجموعات منفصلة لكل نشاط أو رحلة أو مناسبة واحتفظ بحسابات
+                  منظمة
+                </p>
+              </div>
+
+              <div
+                class="bg-white/70 backdrop-blur-xl rounded-3xl p-6 shadow-xl border border-white/30"
+              >
+                <div class="flex items-center gap-4 mb-4">
+                  <i class="fas fa-receipt text-green-600 text-2xl"></i>
+                  <h3
+                    class="font-bold text-xl"
+                    data-ar="تسجيل المصاريف"
+                    data-en="Expense Tracking"
+                  >
+                    تسجيل المصاريف
+                  </h3>
+                </div>
+                <p
+                  data-ar="سجل جميع المصاريف مع إمكانية إرفاق الصور والإيصالات للمرجعية"
+                  data-en="Record all expenses with the ability to attach photos and receipts for reference"
+                >
+                  سجل جميع المصاريف مع إمكانية إرفاق الصور والإيصالات للمرجعية
+                </p>
+              </div>
+
+              <div
+                class="bg-white/70 backdrop-blur-xl rounded-3xl p-6 shadow-xl border border-white/30"
+              >
+                <div class="flex items-center gap-4 mb-4">
+                  <i class="fas fa-chart-pie text-purple-600 text-2xl"></i>
+                  <h3
+                    class="font-bold text-xl"
+                    data-ar="تقارير مفصلة"
+                    data-en="Detailed Reports"
+                  >
+                    تقارير مفصلة
+                  </h3>
+                </div>
+                <p
+                  data-ar="احصل على تقارير شاملة عن المصاريف والمديونيات مع رسوم بيانية واضحة"
+                  data-en="Get comprehensive reports on expenses and debts with clear charts"
+                >
+                  احصل على تقارير شاملة عن المصاريف والمديونيات مع رسوم بيانية
+                  واضحة
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 3: Get Started -->
+        <div id="page-3" class="onboarding-page hidden">
+          <div class="text-center mb-12">
+            <div
+              class="w-32 h-32 bg-gradient-to-br from-pink-500 via-rose-500 to-red-500 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl transform hover:scale-110 transition-transform duration-300 animate-float"
+            >
+              <i class="fas fa-rocket text-white text-6xl"></i>
+            </div>
+            <h1
+              class="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-6"
+              data-ar="🚀 ابدأ الآن!"
+              data-en="🚀 Get Started!"
+            >
+              🚀 ابدأ الآن!
+            </h1>
+            <div
+              class="text-lg text-gray-700 leading-relaxed space-y-6 max-w-lg mx-auto"
+            >
+              <p
+                data-ar="أنت جاهز لبدء استخدام غريم! ابدأ بإنشاء أول مجموعة لك وادعُ أصدقاءك للانضمام."
+                data-en="You're ready to start using Ghareem! Begin by creating your first group and invite your friends to join."
+              >
+                أنت جاهز لبدء استخدام غريم! ابدأ بإنشاء أول مجموعة لك وادعُ
+                أصدقاءك للانضمام.
+              </p>
+
+              <div
+                class="bg-white/70 backdrop-blur-xl rounded-3xl p-6 shadow-xl border border-white/30"
+              >
+                <h3
+                  class="font-bold text-xl mb-4"
+                  data-ar="نصائح للبداية:"
+                  data-en="Getting Started Tips:"
+                >
+                  نصائح للبداية:
+                </h3>
+                <div class="space-y-3 text-right">
+                  <div class="flex items-start gap-3">
+                    <span class="text-indigo-600 font-bold">1.</span>
+                    <span
+                      data-ar="أنشئ مجموعة جديدة من الصفحة الرئيسية"
+                      data-en="Create a new group from the main page"
+                      >أنشئ مجموعة جديدة من الصفحة الرئيسية</span
+                    >
+                  </div>
+                  <div class="flex items-start gap-3">
+                    <span class="text-indigo-600 font-bold">2.</span>
+                    <span
+                      data-ar="ادعُ الأصدقاء عن طريق رابط الدعوة"
+                      data-en="Invite friends through the invitation link"
+                      >ادعُ الأصدقاء عن طريق رابط الدعوة</span
+                    >
+                  </div>
+                  <div class="flex items-start gap-3">
+                    <span class="text-indigo-600 font-bold">3.</span>
+                    <span
+                      data-ar="ابدأ في تسجيل المصاريف وتقسيمها"
+                      data-en="Start recording and splitting expenses"
+                      >ابدأ في تسجيل المصاريف وتقسيمها</span
+                    >
+                  </div>
+                  <div class="flex items-start gap-3">
+                    <span class="text-indigo-600 font-bold">4.</span>
+                    <span
+                      data-ar="راجع التقارير لمعرفة الأرصدة"
+                      data-en="Review reports to see balances"
+                      >راجع التقارير لمعرفة الأرصدة</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="flex items-center justify-between mt-12">
+          <!-- Back Button -->
+          <button
+            id="backBtn"
+            class="flex items-center gap-3 bg-white/70 backdrop-blur-xl border border-white/30 rounded-2xl px-6 py-4 text-gray-700 hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 opacity-50 cursor-not-allowed"
+            disabled
+          >
+            <i class="fas fa-arrow-right text-lg"></i>
+            <span class="font-medium" data-ar="السابق" data-en="Back"
+              >السابق</span
+            >
+          </button>
+
+          <!-- Next/Finish Button -->
+          <button
+            id="nextBtn"
+            class="flex items-center gap-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-2xl px-8 py-4 font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+          >
+            <span data-ar="التالي" data-en="Next">التالي</span>
+            <i class="fas fa-arrow-left text-lg"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Language switching functionality
+      let currentLang = "ar";
+      let currentPage = 1;
+      const totalPages = 3;
+
+      function switchLanguage() {
+        const htmlRoot = document.getElementById("html-root");
+        const elements = document.querySelectorAll("[data-ar][data-en]");
+
+        if (currentLang === "ar") {
+          currentLang = "en";
+          htmlRoot.setAttribute("lang", "en");
+          htmlRoot.setAttribute("dir", "ltr");
+          htmlRoot.classList.remove("font-arabic");
+          htmlRoot.classList.add("font-english");
+          document.body.classList.remove("font-arabic");
+          document.body.classList.add("font-english");
+
+          elements.forEach((el) => {
+            el.innerHTML = el.getAttribute("data-en");
+          });
+        } else {
+          currentLang = "ar";
+          htmlRoot.setAttribute("lang", "ar");
+          htmlRoot.setAttribute("dir", "rtl");
+          htmlRoot.classList.remove("font-english");
+          htmlRoot.classList.add("font-arabic");
+          document.body.classList.remove("font-english");
+          document.body.classList.add("font-arabic");
+
+          elements.forEach((el) => {
+            el.innerHTML = el.getAttribute("data-ar");
+          });
+        }
+      }
+
+      function updateProgressIndicator() {
+        // Update dots
+        for (let i = 1; i <= totalPages; i++) {
+          const dot = document.getElementById(`dot-${i}`);
+          if (i <= currentPage) {
+            dot.className =
+              "w-3 h-3 rounded-full bg-indigo-600 transition-all duration-300";
+          } else {
+            dot.className =
+              "w-3 h-3 rounded-full bg-gray-300 transition-all duration-300";
+          }
+        }
+
+        // Update page indicator
+        const pageIndicator = document.getElementById("page-indicator");
+        if (currentLang === "ar") {
+          pageIndicator.innerHTML = `${currentPage} من ${totalPages}`;
+        } else {
+          pageIndicator.innerHTML = `${currentPage} of ${totalPages}`;
+        }
+      }
+
+      function updateNavigationButtons() {
+        const backBtn = document.getElementById("backBtn");
+        const nextBtn = document.getElementById("nextBtn");
+
+        // Back button
+        if (currentPage === 1) {
+          backBtn.disabled = true;
+          backBtn.className =
+            "flex items-center gap-3 bg-white/70 backdrop-blur-xl border border-white/30 rounded-2xl px-6 py-4 text-gray-700 hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 opacity-50 cursor-not-allowed";
+        } else {
+          backBtn.disabled = false;
+          backBtn.className =
+            "flex items-center gap-3 bg-white/70 backdrop-blur-xl border border-white/30 rounded-2xl px-6 py-4 text-gray-700 hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105";
+        }
+
+        // Next button text
+        const nextBtnText = nextBtn.querySelector("span");
+        if (currentPage === totalPages) {
+          if (currentLang === "ar") {
+            nextBtnText.innerHTML = "ابدأ الآن";
+          } else {
+            nextBtnText.innerHTML = "Get Started";
+          }
+        } else {
+          if (currentLang === "ar") {
+            nextBtnText.innerHTML = "التالي";
+          } else {
+            nextBtnText.innerHTML = "Next";
+          }
+        }
+      }
+
+      function showPage(pageNumber) {
+        // Hide all pages
+        document.querySelectorAll(".onboarding-page").forEach((page) => {
+          page.classList.add("hidden");
+        });
+
+        // Show current page with animation
+        const currentPageElement = document.getElementById(
+          `page-${pageNumber}`
+        );
+        currentPageElement.classList.remove("hidden");
+
+        // Add slide animation
+        if (pageNumber > currentPage) {
+          currentPageElement.classList.add("animate-slide-left");
+        } else {
+          currentPageElement.classList.add("animate-slide-right");
+        }
+
+        // Remove animation class after animation completes
+        setTimeout(() => {
+          currentPageElement.classList.remove(
+            "animate-slide-left",
+            "animate-slide-right"
+          );
+        }, 400);
+
+        currentPage = pageNumber;
+        updateProgressIndicator();
+        updateNavigationButtons();
+      }
+
+      function nextPage() {
+        if (currentPage < totalPages) {
+          showPage(currentPage + 1);
+        } else {
+          // Finish onboarding
+          finishOnboarding();
+        }
+      }
+
+      function previousPage() {
+        if (currentPage > 1) {
+          showPage(currentPage - 1);
+        }
+      }
+
+      function skipOnboarding() {
+        finishOnboarding();
+      }
+
+      function finishOnboarding() {
+        // Set onboarding as completed in localStorage
+        localStorage.setItem("onboardingCompleted", "true");
+
+        // Show completion message
+        const message =
+          currentLang === "ar" ? "مرحباً بك في غريم!" : "Welcome to Ghareem!";
+        alert(message);
+
+        // Redirect to main app
+        window.location.href = "index.html";
+      }
+
+      // Event listeners
+      document
+        .getElementById("langToggle")
+        .addEventListener("click", switchLanguage);
+      document.getElementById("nextBtn").addEventListener("click", nextPage);
+      document
+        .getElementById("backBtn")
+        .addEventListener("click", previousPage);
+      document
+        .getElementById("skipBtn")
+        .addEventListener("click", skipOnboarding);
+
+      // Keyboard navigation
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight" && currentLang === "ar") {
+          nextPage();
+        } else if (event.key === "ArrowLeft" && currentLang === "ar") {
+          previousPage();
+        } else if (event.key === "ArrowLeft" && currentLang === "en") {
+          nextPage();
+        } else if (event.key === "ArrowRight" && currentLang === "en") {
+          previousPage();
+        } else if (event.key === "Escape") {
+          skipOnboarding();
+        }
+      });
+
+      // Initialize
+      updateProgressIndicator();
+      updateNavigationButtons();
+    </script>
+  </body>
+</html>

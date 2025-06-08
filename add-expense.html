@@ -45,7 +45,9 @@
           >
             <i class="fas fa-arrow-right text-gray-600 text-lg"></i>
           </a>
-          <h1 class="text-lg font-bold text-gray-900">إضافة مصروف</h1>
+          <h1 id="page-title" class="text-lg font-bold text-gray-900">
+            إضافة مصروف
+          </h1>
         </div>
         <button
           id="save-btn"
@@ -84,8 +86,8 @@
       </div>
     </div>
 
-    <!-- Form Content -->
-    <div class="px-4 pb-20">
+    <!-- Expense Form Content -->
+    <div id="expense-content" class="px-4 pb-20">
       <!-- Title Section -->
       <div class="mb-6">
         <label class="block text-lg font-semibold text-gray-900 mb-3"
@@ -304,6 +306,189 @@
       </div>
     </div>
 
+    <!-- Income Form Content -->
+    <div id="income-content" class="px-4 pb-20 hidden">
+      <!-- Title Section -->
+      <div class="mb-6">
+        <label class="block text-lg font-semibold text-gray-900 mb-3"
+          >العنوان</label
+        >
+        <div class="flex gap-3">
+          <input
+            type="text"
+            id="income-title-ar"
+            placeholder="مثال: راتب"
+            class="flex-1 bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
+          />
+          <button
+            class="w-14 h-14 bg-warning text-white rounded-xl flex items-center justify-center"
+          >
+            <i class="fas fa-tag text-xl"></i>
+          </button>
+          <button
+            class="w-14 h-14 bg-gray-200 text-gray-600 rounded-xl flex items-center justify-center"
+          >
+            <i class="fas fa-camera text-xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Amount Section -->
+      <div class="mb-6">
+        <label class="block text-lg font-semibold text-gray-900 mb-3"
+          >المبلغ</label
+        >
+        <div
+          class="flex items-center bg-white border border-gray-200 rounded-xl"
+        >
+          <select
+            class="bg-transparent px-4 py-4 text-lg border-0 focus:outline-none"
+          >
+            <option>ر.س</option>
+            <option>$</option>
+            <option>€</option>
+          </select>
+          <div class="w-px h-8 bg-gray-200"></div>
+          <input
+            type="number"
+            id="income-amount-ar"
+            placeholder="0.00"
+            step="0.01"
+            class="flex-1 bg-transparent px-4 py-4 text-lg focus:outline-none text-left"
+          />
+        </div>
+      </div>
+
+      <!-- Payment Info -->
+      <div class="flex gap-4 mb-6">
+        <div class="flex-1">
+          <label class="block text-lg font-semibold text-gray-900 mb-3"
+            >من</label
+          >
+          <select
+            class="w-full bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
+          >
+            <option>عزام (أنا)</option>
+            <option>محمد</option>
+            <option>سارة</option>
+            <option>أحمد</option>
+          </select>
+        </div>
+        <div class="flex-1">
+          <label class="block text-lg font-semibold text-gray-900 mb-3"
+            >متى</label
+          >
+          <input
+            type="date"
+            value="2025-06-08"
+            class="w-full bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
+          />
+        </div>
+      </div>
+
+      <!-- Transferred To Section -->
+      <div class="mb-6">
+        <label class="block text-lg font-semibold text-gray-900 mb-3"
+          >تحويل إلى صندوق المجموعة</label
+        >
+      </div>
+    </div>
+
+    <!-- Transfer Form Content -->
+    <div id="transfer-content" class="px-4 pb-20 hidden">
+      <!-- Title Section -->
+      <div class="mb-6">
+        <label class="block text-lg font-semibold text-gray-900 mb-3"
+          >العنوان</label
+        >
+        <div class="flex gap-3">
+          <input
+            type="text"
+            id="transfer-title-ar"
+            placeholder="مثال: تحويل أموال"
+            class="flex-1 bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
+          />
+          <button
+            class="w-14 h-14 bg-warning text-white rounded-xl flex items-center justify-center"
+          >
+            <i class="fas fa-tag text-xl"></i>
+          </button>
+          <button
+            class="w-14 h-14 bg-gray-200 text-gray-600 rounded-xl flex items-center justify-center"
+          >
+            <i class="fas fa-camera text-xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Amount Section -->
+      <div class="mb-6">
+        <label class="block text-lg font-semibold text-gray-900 mb-3"
+          >المبلغ</label
+        >
+        <div
+          class="flex items-center bg-white border border-gray-200 rounded-xl"
+        >
+          <select
+            class="bg-transparent px-4 py-4 text-lg border-0 focus:outline-none"
+          >
+            <option>ر.س</option>
+            <option>$</option>
+            <option>€</option>
+          </select>
+          <div class="w-px h-8 bg-gray-200"></div>
+          <input
+            type="number"
+            id="transfer-amount-ar"
+            placeholder="0.00"
+            step="0.01"
+            class="flex-1 bg-transparent px-4 py-4 text-lg focus:outline-none text-left"
+          />
+        </div>
+      </div>
+
+      <!-- Transfer Info -->
+      <div class="flex gap-4 mb-6">
+        <div class="flex-1">
+          <label class="block text-lg font-semibold text-gray-900 mb-3"
+            >من</label
+          >
+          <select
+            class="w-full bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
+          >
+            <option>عزام (أنا)</option>
+            <option>محمد</option>
+            <option>سارة</option>
+            <option>أحمد</option>
+          </select>
+        </div>
+        <div class="flex-1">
+          <label class="block text-lg font-semibold text-gray-900 mb-3"
+            >متى</label
+          >
+          <input
+            type="date"
+            value="2025-06-08"
+            class="w-full bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
+          />
+        </div>
+      </div>
+
+      <!-- Transferred To Section -->
+      <div class="mb-6">
+        <label class="block text-lg font-semibold text-gray-900 mb-3"
+          >تحويل إلى</label
+        >
+        <select
+          class="w-full bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
+        >
+          <option>محمد</option>
+          <option>عزام (أنا)</option>
+          <option>سارة</option>
+          <option>أحمد</option>
+        </select>
+      </div>
+    </div>
     <script>
       // Tab switching functionality
       const expenseTabs = {
@@ -312,6 +497,10 @@
         "transfer-tab": "تحويل",
       };
 
+      const pageTitle = document.getElementById("page-title");
+      const expenseContent = document.getElementById("expense-content");
+      const incomeContent = document.getElementById("income-content");
+      const transferContent = document.getElementById("transfer-content");
       Object.keys(expenseTabs).forEach((tabId) => {
         document.getElementById(tabId).addEventListener("click", function () {
           // Remove active class from all tabs
@@ -325,10 +514,29 @@
           // Activate clicked tab
           this.classList.add("bg-primary", "text-white");
           this.classList.remove("text-gray-600");
+
+          // Show/hide content based on selected tab
+          if (tabId === "expense-tab") {
+            pageTitle.textContent = "إضافة مصروف";
+            expenseContent.classList.remove("hidden");
+            transferContent.classList.add("hidden");
+            incomeContent.classList.add("hidden");
+          } else if (tabId === "income-tab") {
+            pageTitle.textContent = "إضافة دخل";
+            expenseContent.classList.add("hidden");
+            transferContent.classList.add("hidden");
+            incomeContent.classList.remove("hidden");
+          } else if (tabId === "transfer-tab") {
+            pageTitle.textContent = "إضافة تحويل";
+            transferContent.classList.remove("hidden");
+            expenseContent.classList.add("hidden");
+            incomeContent.classList.add("hidden");
+            // You can add transfer content here later
+          }
         });
       });
 
-      // Amount calculation
+      // Amount calculation for expenses
       const amountInput = document.getElementById("expense-amount");
       const totalAmountSpan = document.getElementById("total-amount");
       const perPersonSpan = document.getElementById("per-person");
@@ -374,16 +582,88 @@
       document
         .getElementById("save-btn")
         .addEventListener("click", function () {
-          const title = document.getElementById("expense-title").value;
-          const amount = document.getElementById("expense-amount").value;
+          const currentTab = document.querySelector(
+            ".bg-primary.text-white"
+          ).id;
 
-          if (!title || !amount) {
-            alert("يرجى ملء جميع الحقول المطلوبة");
-            return;
+          if (currentTab === "expense-tab") {
+            const title = document.getElementById("expense-title").value;
+            const amount = document.getElementById("expense-amount").value;
+
+            if (!title || !amount) {
+              alert("يرجى ملء جميع الحقول المطلوبة");
+              return;
+            }
+
+            alert("تم حفظ المصروف بنجاح!");
+          } else if (currentTab === "income-tab") {
+            const title = document.getElementById("income-title-ar").value;
+            const amount = document.getElementById("income-amount-ar").value;
+
+            if (!title || !amount) {
+              alert("يرجى ملء جميع الحقول المطلوبة");
+              return;
+            }
+
+            // Create income object
+            const incomeData = {
+              title: title,
+              amount: parseFloat(amount),
+              currency: document.querySelector("#income-content select").value,
+              from: document.querySelectorAll("#income-content select")[1]
+                .value,
+              date: document.querySelector('#income-content input[type="date"]')
+                .value,
+              transferredTo: document.querySelectorAll(
+                "#income-content select"
+              )[2].value,
+              timestamp: new Date().toISOString(),
+            };
+
+            // Save to localStorage
+            let incomes = JSON.parse(localStorage.getItem("incomes") || "[]");
+            incomes.push(incomeData);
+            localStorage.setItem("incomes", JSON.stringify(incomes));
+
+            alert("تم حفظ الدخل بنجاح!");
+          } else if (currentTab === "transfer-tab") {
+            const title = document.getElementById("transfer-title-ar").value;
+            const amount = document.getElementById("transfer-amount-ar").value;
+
+            if (!title || !amount) {
+              alert("يرجى ملء جميع الحقول المطلوبة");
+              return;
+            }
+
+            // Create transfer object
+            const transferData = {
+              title: title,
+              amount: parseFloat(amount),
+              currency: document.querySelector("#transfer-content select")
+                .value,
+              from: document.querySelectorAll("#transfer-content select")[1]
+                .value,
+              date: document.querySelector(
+                '#transfer-content input[type="date"]'
+              ).value,
+              transferredTo: document.querySelectorAll(
+                "#transfer-content select"
+              )[2].value,
+              reason: document.querySelectorAll("#transfer-content select")[3]
+                .value,
+              timestamp: new Date().toISOString(),
+            };
+
+            // Save to localStorage
+            let transfers = JSON.parse(
+              localStorage.getItem("transfers") || "[]"
+            );
+            transfers.push(transferData);
+            localStorage.setItem("transfers", JSON.stringify(transfers));
+
+            alert("تم حفظ التحويل بنجاح!");
           }
 
-          // Here you would typically save the expense
-          alert("تم حفظ المصروف بنجاح!");
           window.location.href = "tricount.html";
         });
     </script>

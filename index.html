@@ -68,12 +68,205 @@
             </p>
           </div>
         </div>
-        <a
-          href="profile.html"
-          class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
-        >
-          <i class="fas fa-user-circle text-gray-600 text-xl"></i>
-        </a>
+        <div class="flex items-center gap-2">
+          <!-- Notifications -->
+          <div class="relative">
+            <button
+              id="notificationBtn"
+              onclick="toggleNotifications()"
+              class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center relative"
+            >
+              <i class="fas fa-bell text-gray-600 text-lg"></i>
+              <!-- Notification Badge -->
+              <span
+                class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center"
+                >6</span
+              >
+            </button>
+
+            <!-- Notifications Dropdown -->
+            <div
+              id="notificationsDropdown"
+              class="absolute top-12 left-0 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 hidden z-50 max-h-96 overflow-y-auto"
+            >
+              <!-- Header -->
+              <div class="p-4 border-b border-gray-100">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-semibold text-gray-900">الإشعارات</h3>
+                  <button class="text-primary text-sm font-medium">
+                    تعيين الكل كمقروء
+                  </button>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">تحديثات تقسيم الفواتير</p>
+              </div>
+
+              <!-- Notifications List -->
+              <div class="max-h-80 overflow-y-auto">
+                <!-- New Group Added -->
+                <div
+                  class="p-4 border-b border-gray-50 hover:bg-gray-50 cursor-pointer"
+                >
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"
+                    >
+                      <i class="fas fa-users text-green-600 text-sm"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <p class="font-medium text-gray-900 text-sm">
+                        مجموعة جديدة تم إنشاؤها
+                      </p>
+                      <p class="text-gray-600 text-xs mt-1">
+                        تم إنشاء مجموعة جديدة لتقسيم الفواتير "رحلة جدة"
+                      </p>
+                      <p class="text-gray-400 text-xs mt-1">منذ 5 دقائق</p>
+                    </div>
+                    <span
+                      class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
+                    ></span>
+                  </div>
+                </div>
+
+                <!-- New Expense Added -->
+                <div
+                  class="p-4 border-b border-gray-50 hover:bg-gray-50 cursor-pointer"
+                >
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0"
+                    >
+                      <i class="fas fa-receipt text-red-600 text-sm"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <p class="font-medium text-gray-900 text-sm">
+                        مصروف جديد تم إضافته
+                      </p>
+                      <p class="text-gray-600 text-xs mt-1">
+                        أحمد أضاف مصروف "عشاء المطعم" بقيمة 127.50 ر.س
+                      </p>
+                      <p class="text-gray-400 text-xs mt-1">منذ 15 دقيقة</p>
+                    </div>
+                    <span
+                      class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
+                    ></span>
+                  </div>
+                </div>
+
+                <!-- New Participant Joined -->
+                <div
+                  class="p-4 border-b border-gray-50 hover:bg-gray-50 cursor-pointer"
+                >
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0"
+                    >
+                      <i class="fas fa-user-plus text-blue-600 text-sm"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <p class="font-medium text-gray-900 text-sm">
+                        عضو جديد انضم للمجموعة
+                      </p>
+                      <p class="text-gray-600 text-xs mt-1">
+                        سارة انضمت إلى مجموعة "رحلة المدينة"
+                      </p>
+                      <p class="text-gray-400 text-xs mt-1">منذ 30 دقيقة</p>
+                    </div>
+                    <span
+                      class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
+                    ></span>
+                  </div>
+                </div>
+
+                <!-- New Image/Receipt Uploaded -->
+                <div
+                  class="p-4 border-b border-gray-50 hover:bg-gray-50 cursor-pointer"
+                >
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0"
+                    >
+                      <i class="fas fa-image text-purple-600 text-sm"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <p class="font-medium text-gray-900 text-sm">
+                        إيصال جديد تم رفعه
+                      </p>
+                      <p class="text-gray-600 text-xs mt-1">
+                        خالد رفع صورة إيصال لمصروف "وقود الرحلة"
+                      </p>
+                      <p class="text-gray-400 text-xs mt-1">منذ ساعة</p>
+                    </div>
+                    <span
+                      class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
+                    ></span>
+                  </div>
+                </div>
+
+                <!-- Expense Updated -->
+                <div
+                  class="p-4 border-b border-gray-50 hover:bg-gray-50 cursor-pointer"
+                >
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0"
+                    >
+                      <i class="fas fa-edit text-orange-600 text-sm"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <p class="font-medium text-gray-900 text-sm">
+                        مصروف تم تحديثه
+                      </p>
+                      <p class="text-gray-600 text-xs mt-1">
+                        تم تحديث مصروف "فندق الإقامة" من 200 إلى 180 ر.س
+                      </p>
+                      <p class="text-gray-400 text-xs mt-1">منذ ساعتين</p>
+                    </div>
+                    <span
+                      class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
+                    ></span>
+                  </div>
+                </div>
+
+                <!-- Bill Split Finalized -->
+                <div class="p-4 hover:bg-gray-50 cursor-pointer">
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"
+                    >
+                      <i class="fas fa-check-circle text-green-600 text-sm"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <p class="font-medium text-gray-900 text-sm">
+                        تم تقسيم الفاتورة
+                      </p>
+                      <p class="text-gray-600 text-xs mt-1">
+                        تم تقسيم فاتورة "رحلة التخييم" - حصتك 89.50 ر.س
+                      </p>
+                      <p class="text-gray-400 text-xs mt-1">منذ 3 ساعات</p>
+                    </div>
+                    <span
+                      class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
+                    ></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Footer -->
+              <div class="p-4 border-t border-gray-100 text-center">
+                <button class="text-primary text-sm font-medium">
+                  عرض جميع الإشعارات
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <a
+            href="profile.html"
+            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+          >
+            <i class="fas fa-user-circle text-gray-600 text-xl"></i>
+          </a>
+        </div>
       </div>
     </header>
 
@@ -115,10 +308,10 @@
         <div class="flex items-center justify-between mb-4">
           <h3
             class="text-lg font-semibold text-gray-900"
-            data-ar="قوائم المصاريف"
+            data-ar="المجموعات"
             data-en="Expense Lists"
           >
-            قوائم المصاريف
+            المجموعات
           </h3>
           <span class="text-sm text-gray-500">
             <span>2</span>
@@ -244,7 +437,7 @@
       </div>
 
       <!-- Quick Actions -->
-      <div class="p-4">
+      <!-- <div class="p-4">
         <h3
           class="text-lg font-semibold text-gray-900 mb-4"
           data-ar="إجراءات سريعة"
@@ -271,10 +464,10 @@
             </p>
             <p
               class="text-xs text-gray-500 mt-1"
-              data-ar="إنشاء قائمة مصاريف"
+              data-ar="انشاء مجموعة جديدة"
               data-en="Create expense list"
             >
-              إنشاء قائمة مصاريف
+              انشاء مجموعة جديدة
             </p>
           </a>
           <a
@@ -302,7 +495,7 @@
             </p>
           </a>
         </div>
-      </div>
+      </div> -->
 
       <!-- Auth Section -->
       <div class="p-4">
@@ -389,12 +582,234 @@
       </div>
     </nav>
 
-    <!-- Floating Action Button -->
-    <a
-      href="new-tricount.html"
-      class="fixed bottom-20 left-4 w-14 h-14 bg-gradient-to-r from-primary to-indigo-600 rounded-full flex items-center justify-center shadow-lg"
-    >
-      <i class="fas fa-plus text-white text-xl"></i>
-    </a>
+    <!-- Floating Action Button with Dropdown -->
+    <div class="fixed bottom-20 left-4">
+      <!-- Dropdown Menu -->
+      <div
+        id="groupDropdown"
+        class="absolute bottom-16 left-0 w-56 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-100 hidden transform transition-all duration-300 ease-out opacity-0 scale-95"
+      >
+        <!-- Dropdown Header -->
+        <div class="px-4 py-3 border-b border-gray-100">
+          <h3
+            class="text-sm font-semibold text-gray-800"
+            data-ar="إنشاء أو انضمام"
+            data-en="Create or Join"
+          >
+            إنشاء أو انضمام
+          </h3>
+          <p
+            class="text-xs text-gray-500 mt-1"
+            data-ar="اختر كيف تريد البدء"
+            data-en="Choose how to get started"
+          >
+            اختر كيف تريد البدء
+          </p>
+        </div>
+
+        <!-- Dropdown Items -->
+        <div class="py-2">
+          <a
+            href="new-tricount.html"
+            class="group flex items-center px-4 py-4 text-gray-700 hover:bg-gradient-to-r hover:from-primary/5 hover:to-indigo-50 transition-all duration-200 hover:translate-x-1"
+          >
+            <div
+              class="w-10 h-10 bg-gradient-to-br from-primary/10 to-indigo-100 rounded-xl flex items-center justify-center ml-3 group-hover:scale-110 transition-transform duration-200"
+            >
+              <i class="fas fa-plus text-primary text-sm"></i>
+            </div>
+            <div class="flex-1">
+              <span
+                class="text-sm font-medium text-gray-800 group-hover:text-primary transition-colors duration-200"
+                data-ar="إنشاء مجموعة جديدة"
+                data-en="Create New Group"
+                >إنشاء مجموعة جديدة</span
+              >
+              <p
+                class="text-xs text-gray-500 mt-0.5"
+                data-ar="ابدأ غريم جديد من الصفر"
+                data-en="Start a new Gharim from scratch"
+              >
+                ابدأ غريم جديد من الصفر
+              </p>
+            </div>
+            <i
+              class="fas fa-chevron-left text-gray-400 text-sm group-hover:text-primary group-hover:translate-x-1 transition-all duration-200"
+            ></i>
+          </a>
+
+          <a
+            href="join-group.html"
+            class="group flex items-center px-4 py-4 text-gray-700 hover:bg-gradient-to-r hover:from-accent/5 hover:to-emerald-50 transition-all duration-200 hover:translate-x-1"
+          >
+            <div
+              class="w-10 h-10 bg-gradient-to-br from-accent/10 to-emerald-100 rounded-xl flex items-center justify-center ml-3 group-hover:scale-110 transition-transform duration-200"
+            >
+              <i class="fas fa-link text-accent text-sm"></i>
+            </div>
+            <div class="flex-1">
+              <span
+                class="text-sm font-medium text-gray-800 group-hover:text-accent transition-colors duration-200"
+                data-ar="الانضمام بالرابط"
+                data-en="Join by Link"
+                >الانضمام بالرابط</span
+              >
+              <p
+                class="text-xs text-gray-500 mt-0.5"
+                data-ar="انضم لمجموعة موجودة"
+                data-en="Join an existing group"
+              >
+                انضم لمجموعة موجودة
+              </p>
+            </div>
+            <i
+              class="fas fa-chevron-left text-gray-400 text-sm group-hover:text-accent group-hover:translate-x-1 transition-all duration-200"
+            ></i>
+          </a>
+        </div>
+
+        <!-- Dropdown Footer -->
+        <div
+          class="px-4 py-3 bg-gray-50/50 rounded-b-2xl border-t border-gray-100"
+        >
+          <p
+            class="text-xs text-gray-400 text-center"
+            data-ar="اختر الطريقة المناسبة لك"
+            data-en="Choose the right option for you"
+          >
+            اختر الطريقة المناسبة لك
+          </p>
+        </div>
+      </div>
+
+      <!-- Main Button -->
+      <button
+        id="groupButton"
+        onclick="toggleGroupDropdown()"
+        class="group w-14 h-14 bg-gradient-to-r from-primary to-indigo-600 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-primary/25 active:scale-95"
+      >
+        <i
+          id="groupIcon"
+          class="fas fa-plus text-white text-xl transition-all duration-300 group-hover:rotate-90"
+        ></i>
+      </button>
+
+      <!-- Subtle background overlay when dropdown is open -->
+      <div
+        id="dropdownOverlay"
+        class="fixed inset-0 bg-black/10 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-[-1]"
+      ></div>
+    </div>
+
+    <!-- Enhanced JavaScript for Dropdown -->
+    <script>
+      function toggleGroupDropdown() {
+        const dropdown = document.getElementById("groupDropdown");
+        const icon = document.getElementById("groupIcon");
+        const overlay = document.getElementById("dropdownOverlay");
+
+        if (dropdown.classList.contains("hidden")) {
+          // Show dropdown with animation
+          dropdown.classList.remove("hidden");
+          overlay.classList.remove("pointer-events-none");
+
+          // Trigger animation
+          setTimeout(() => {
+            dropdown.classList.remove("opacity-0", "scale-95");
+            dropdown.classList.add("opacity-100", "scale-100");
+            overlay.classList.remove("opacity-0");
+            overlay.classList.add("opacity-100");
+            icon.classList.add("rotate-45");
+          }, 10);
+        } else {
+          // Hide dropdown with animation
+          dropdown.classList.remove("opacity-100", "scale-100");
+          dropdown.classList.add("opacity-0", "scale-95");
+          overlay.classList.remove("opacity-100");
+          overlay.classList.add("opacity-0");
+          icon.classList.remove("rotate-45");
+
+          setTimeout(() => {
+            dropdown.classList.add("hidden");
+            overlay.classList.add("pointer-events-none");
+          }, 300);
+        }
+      }
+
+      // Close dropdown when clicking outside
+      document.addEventListener("click", function (event) {
+        const button = document.getElementById("groupButton");
+        const dropdown = document.getElementById("groupDropdown");
+        const icon = document.getElementById("groupIcon");
+        const overlay = document.getElementById("dropdownOverlay");
+
+        if (
+          !button.contains(event.target) &&
+          !dropdown.contains(event.target)
+        ) {
+          dropdown.classList.remove("opacity-100", "scale-100");
+          dropdown.classList.add("opacity-0", "scale-95");
+          overlay.classList.remove("opacity-100");
+          overlay.classList.add("opacity-0");
+          icon.classList.remove("rotate-45");
+
+          setTimeout(() => {
+            dropdown.classList.add("hidden");
+            overlay.classList.add("pointer-events-none");
+          }, 300);
+        }
+      });
+
+      // Add keyboard support
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          const dropdown = document.getElementById("groupDropdown");
+          const icon = document.getElementById("groupIcon");
+          const overlay = document.getElementById("dropdownOverlay");
+
+          if (!dropdown.classList.contains("hidden")) {
+            dropdown.classList.remove("opacity-100", "scale-100");
+            dropdown.classList.add("opacity-0", "scale-95");
+            overlay.classList.remove("opacity-100");
+            overlay.classList.add("opacity-0");
+            icon.classList.remove("rotate-45");
+
+            setTimeout(() => {
+              dropdown.classList.add("hidden");
+              overlay.classList.add("pointer-events-none");
+            }, 300);
+          }
+        }
+      });
+
+      // Notifications functionality
+      function toggleNotifications() {
+        const dropdown = document.getElementById("notificationsDropdown");
+
+        if (dropdown.classList.contains("hidden")) {
+          dropdown.classList.remove("hidden");
+        } else {
+          dropdown.classList.add("hidden");
+        }
+      }
+
+      // Close notifications when clicking outside
+      document.addEventListener("click", function (event) {
+        const btn = document.getElementById("notificationBtn");
+        const dropdown = document.getElementById("notificationsDropdown");
+
+        if (!btn.contains(event.target) && !dropdown.contains(event.target)) {
+          dropdown.classList.add("hidden");
+        }
+      });
+
+      // Check if user has completed onboarding
+      document.addEventListener("DOMContentLoaded", function () {
+        if (localStorage.getItem("onboardingCompleted") !== "true") {
+          // User hasn't completed onboarding, redirect them
+          window.location.href = "onboarding.html";
+        }
+      });
+    </script>
   </body>
 </html>

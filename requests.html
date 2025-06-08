@@ -49,11 +49,146 @@
             <p class="text-xs text-gray-500">طلب الأموال</p>
           </div>
         </div>
-        <button
-          class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
-        >
-          <i class="fas fa-bell text-gray-600 text-lg"></i>
-        </button>
+        <!-- Notifications -->
+        <div class="relative">
+          <button
+            id="notificationBtn"
+            onclick="toggleNotifications()"
+            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center relative"
+          >
+            <i class="fas fa-bell text-gray-600 text-lg"></i>
+            <!-- Notification Badge -->
+            <span
+              class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center"
+              >4</span
+            >
+          </button>
+
+          <!-- Notifications Dropdown -->
+          <div
+            id="notificationsDropdown"
+            class="absolute top-12 left-0 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 hidden z-50 max-h-96 overflow-y-auto"
+          >
+            <!-- Header -->
+            <div class="p-4 border-b border-gray-100">
+              <div class="flex items-center justify-between">
+                <h3 class="font-semibold text-gray-900">إشعارات الطلبات</h3>
+                <button class="text-primary text-sm font-medium">
+                  تعيين الكل كمقروء
+                </button>
+              </div>
+              <p class="text-xs text-gray-500 mt-1">حالة طلبات الأموال</p>
+            </div>
+
+            <!-- Notifications List -->
+            <div class="max-h-80 overflow-y-auto">
+              <!-- Payment Received -->
+              <div
+                class="p-4 border-b border-gray-50 hover:bg-gray-50 cursor-pointer"
+              >
+                <div class="flex items-start gap-3">
+                  <div
+                    class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"
+                  >
+                    <i class="fas fa-check-circle text-green-600 text-sm"></i>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="font-medium text-gray-900 text-sm">
+                      تم استلام دفعة
+                    </p>
+                    <p class="text-gray-600 text-xs mt-1">
+                      براين دفع لك 31.25 ر.س لرحلة المدينة
+                    </p>
+                    <p class="text-gray-400 text-xs mt-1">منذ 20 دقيقة</p>
+                  </div>
+                  <span
+                    class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
+                  ></span>
+                </div>
+              </div>
+
+              <!-- Payment Link Created -->
+              <div
+                class="p-4 border-b border-gray-50 hover:bg-gray-50 cursor-pointer"
+              >
+                <div class="flex items-start gap-3">
+                  <div
+                    class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0"
+                  >
+                    <i class="fas fa-link text-blue-600 text-sm"></i>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="font-medium text-gray-900 text-sm">
+                      رابط دفع تم إنشاؤه
+                    </p>
+                    <p class="text-gray-600 text-xs mt-1">
+                      تم إنشاء رابط دفع جديد لطلب 150.00 ر.س
+                    </p>
+                    <p class="text-gray-400 text-xs mt-1">منذ ساعة</p>
+                  </div>
+                  <span
+                    class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
+                  ></span>
+                </div>
+              </div>
+
+              <!-- Reminder Sent -->
+              <div
+                class="p-4 border-b border-gray-50 hover:bg-gray-50 cursor-pointer"
+              >
+                <div class="flex items-start gap-3">
+                  <div
+                    class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0"
+                  >
+                    <i class="fas fa-clock text-yellow-600 text-sm"></i>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="font-medium text-gray-900 text-sm">
+                      تذكير تم إرساله
+                    </p>
+                    <p class="text-gray-600 text-xs mt-1">
+                      تم إرسال تذكير لتوماس للدفع 39.25 ر.س
+                    </p>
+                    <p class="text-gray-400 text-xs mt-1">منذ ساعتين</p>
+                  </div>
+                  <span
+                    class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
+                  ></span>
+                </div>
+              </div>
+
+              <!-- Bank Account Connected -->
+              <div class="p-4 hover:bg-gray-50 cursor-pointer">
+                <div class="flex items-start gap-3">
+                  <div
+                    class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0"
+                  >
+                    <i class="fas fa-university text-purple-600 text-sm"></i>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="font-medium text-gray-900 text-sm">
+                      حساب مصرفي تم ربطه
+                    </p>
+                    <p class="text-gray-600 text-xs mt-1">
+                      تم ربط حسابك المصرفي بنجاح لاستقبال الأموال
+                    </p>
+                    <p class="text-gray-400 text-xs mt-1">منذ 3 ساعات</p>
+                  </div>
+                  <span
+                    class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
+                  ></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="p-4 border-t border-gray-100 text-center">
+              <button class="text-primary text-sm font-medium">
+                عرض جميع الطلبات
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -308,5 +443,28 @@
         </a>
       </div>
     </nav>
+
+    <script>
+      // Notifications functionality
+      function toggleNotifications() {
+        const dropdown = document.getElementById("notificationsDropdown");
+
+        if (dropdown.classList.contains("hidden")) {
+          dropdown.classList.remove("hidden");
+        } else {
+          dropdown.classList.add("hidden");
+        }
+      }
+
+      // Close notifications when clicking outside
+      document.addEventListener("click", function (event) {
+        const btn = document.getElementById("notificationBtn");
+        const dropdown = document.getElementById("notificationsDropdown");
+
+        if (!btn.contains(event.target) && !dropdown.contains(event.target)) {
+          dropdown.classList.add("hidden");
+        }
+      });
+    </script>
   </body>
 </html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>المجموعات - غريم</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1",
+              secondary: "#f8fafc",
+              accent: "#10b981",
+              danger: "#ef4444",
+              warning: "#f59e0b",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "Cairo", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-50 font-arabic min-h-screen">
+    <!-- Header -->
+    <header
+      class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50"
+    >
+      <div class="flex items-center justify-between p-4">
+        <div class="flex items-center gap-3">
+          <a
+            href="tricount.html"
+            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+          >
+            <i class="fas fa-arrow-right text-gray-600 text-lg"></i>
+          </a>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-xl flex items-center justify-center"
+            >
+              <i class="fas fa-users text-white text-lg"></i>
+            </div>
+            <div>
+              <h1 class="text-lg font-bold text-gray-900">المجموعات</h1>
+              <p class="text-xs text-gray-500">رحلة المدينة</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+          >
+            <i class="fas fa-ellipsis-v text-gray-600 text-lg"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Summary Cards -->
+    <div class="p-4 space-y-4">
+      <!-- Total Expenses Card -->
+      <div
+        class="bg-gradient-to-r from-red-500 to-pink-600 rounded-2xl p-6 text-white"
+      >
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-red-100 text-sm mb-1">إجمالي المصاريف</p>
+            <p class="text-3xl font-bold">162.00 ر.س</p>
+          </div>
+          <div
+            class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center"
+          >
+            <i class="fas fa-chart-line text-white text-2xl"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Total Deposits Card -->
+      <div
+        class="bg-gradient-to-r from-accent to-emerald-600 rounded-2xl p-6 text-white"
+      >
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-emerald-100 text-sm mb-1">إجمالي الودائع</p>
+            <p class="text-3xl font-bold">162.00 ر.س</p>
+          </div>
+          <div
+            class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center"
+          >
+            <i class="fas fa-piggy-bank text-white text-2xl"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="px-4 mb-4">
+      <div class="bg-white rounded-2xl p-1 shadow-sm border border-gray-100">
+        <div class="flex">
+          <button
+            id="expenses-tab"
+            class="flex-1 py-3 px-4 rounded-xl font-medium text-center transition-all bg-primary text-white"
+          >
+            مصاريف الأعضاء
+          </button>
+          <button
+            id="deposits-tab"
+            class="flex-1 py-3 px-4 rounded-xl font-medium text-center transition-all text-gray-600"
+          >
+            الودائع
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="px-4 pb-20">
+      <!-- Everyone's Expenses Tab Content -->
+      <div id="expenses-content">
+        <div class="space-y-4">
+          <!-- Expense by Person 1 -->
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-14 h-14 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0"
+              >
+                <span class="font-bold text-gray-600 text-lg">أ</span>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-gray-900 text-lg">أليكس</h4>
+                <p class="text-sm text-gray-500">أنا</p>
+                <div class="mt-2 space-y-1">
+                  <div class="flex justify-between text-sm">
+                    <span class="text-gray-600">فندق</span>
+                    <span class="font-medium">85.00 ر.س</span>
+                  </div>
+                </div>
+              </div>
+              <div class="text-left">
+                <p class="font-bold text-xl text-gray-900">85.00 ر.س</p>
+                <p class="text-sm text-gray-500">1 مصروف</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Expense by Person 2 -->
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-14 h-14 bg-blue-200 rounded-full flex items-center justify-center flex-shrink-0"
+              >
+                <span class="font-bold text-blue-600 text-lg">ب</span>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-gray-900 text-lg">براين</h4>
+                <div class="mt-2 space-y-1">
+                  <div class="flex justify-between text-sm">
+                    <span class="text-gray-600">نزهة</span>
+                    <span class="font-medium">13.00 ر.س</span>
+                  </div>
+                </div>
+              </div>
+              <div class="text-left">
+                <p class="font-bold text-xl text-gray-900">13.00 ر.س</p>
+                <p class="text-sm text-gray-500">1 مصروف</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Expense by Person 3 -->
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-14 h-14 bg-green-200 rounded-full flex items-center justify-center flex-shrink-0"
+              >
+                <span class="font-bold text-green-600 text-lg">ج</span>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-gray-900 text-lg">جوليا</h4>
+                <div class="mt-2 space-y-1">
+                  <div class="flex justify-between text-sm">
+                    <span class="text-gray-600">سيارة</span>
+                    <span class="font-medium">64.00 ر.س</span>
+                  </div>
+                </div>
+              </div>
+              <div class="text-left">
+                <p class="font-bold text-xl text-gray-900">64.00 ر.س</p>
+                <p class="text-sm text-gray-500">1 مصروف</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Expense by Person 4 -->
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-14 h-14 bg-purple-200 rounded-full flex items-center justify-center flex-shrink-0"
+              >
+                <span class="font-bold text-purple-600 text-lg">ت</span>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-gray-900 text-lg">توماس</h4>
+                <p class="text-sm text-gray-500">لا توجد مصاريف</p>
+              </div>
+              <div class="text-left">
+                <p class="font-bold text-xl text-gray-900">0.00 ر.س</p>
+                <p class="text-sm text-gray-500">0 مصروف</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary Stats -->
+        <!-- <div
+          class="mt-6 bg-white rounded-xl p-4 shadow-sm border border-gray-100"
+        >
+          <h4 class="font-semibold text-gray-900 mb-4">إحصائيات المصاريف</h4>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="text-center p-3 bg-gray-50 rounded-lg">
+              <p class="text-sm text-gray-500">عدد المصاريف</p>
+              <p class="text-xl font-bold text-gray-900">3</p>
+            </div>
+            <div class="text-center p-3 bg-gray-50 rounded-lg">
+              <p class="text-sm text-gray-500">متوسط المصروف</p>
+              <p class="text-xl font-bold text-gray-900">54.00 ر.س</p>
+            </div>
+          </div>
+        </div> -->
+      </div>
+
+      <!-- Deposits Tab Content (Hidden by default) -->
+      <div id="deposits-content" class="hidden">
+        <div class="space-y-4">
+          <!-- Deposit by Person 1 -->
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-14 h-14 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0"
+              >
+                <i class="fas fa-hand-holding-usd text-accent text-lg"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-gray-900 text-lg">أليكس</h4>
+                <p class="text-sm text-gray-500">وديعة أولية</p>
+                <p class="text-xs text-gray-400 mt-1">16 أكتوبر 2018</p>
+              </div>
+              <div class="text-left">
+                <p class="font-bold text-xl text-accent">+85.00 ر.س</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Deposit by Person 2 -->
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-14 h-14 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0"
+              >
+                <i class="fas fa-hand-holding-usd text-accent text-lg"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-gray-900 text-lg">براين</h4>
+                <p class="text-sm text-gray-500">وديعة أولية</p>
+                <p class="text-xs text-gray-400 mt-1">16 أكتوبر 2018</p>
+              </div>
+              <div class="text-left">
+                <p class="font-bold text-xl text-accent">+13.00 ر.س</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Deposit by Person 3 -->
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-14 h-14 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0"
+              >
+                <i class="fas fa-hand-holding-usd text-accent text-lg"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-gray-900 text-lg">جوليا</h4>
+                <p class="text-sm text-gray-500">وديعة أولية</p>
+                <p class="text-xs text-gray-400 mt-1">16 أكتوبر 2018</p>
+              </div>
+              <div class="text-left">
+                <p class="font-bold text-xl text-accent">+64.00 ر.س</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- No deposit message for Person 4 -->
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-14 h-14 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0"
+              >
+                <i class="fas fa-user text-gray-400 text-lg"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-semibold text-gray-900 text-lg">توماس</h4>
+                <p class="text-sm text-gray-500">لا توجد ودائع</p>
+              </div>
+              <div class="text-left">
+                <p class="font-bold text-xl text-gray-400">0.00 ر.س</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add Deposit Button -->
+        <div class="mt-6">
+          <button
+            class="w-full bg-accent text-white rounded-xl py-4 px-6 font-medium flex items-center justify-center gap-2 shadow-sm"
+          >
+            <i class="fas fa-plus"></i>
+            إضافة وديعة جديدة
+          </button>
+        </div>
+
+        <!-- Deposits Summary -->
+        <!-- <div
+          class="mt-4 bg-white rounded-xl p-4 shadow-sm border border-gray-100"
+        >
+          <h4 class="font-semibold text-gray-900 mb-4">ملخص الودائع</h4>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="text-center p-3 bg-emerald-50 rounded-lg">
+              <p class="text-sm text-emerald-600">عدد الودائع</p>
+              <p class="text-xl font-bold text-emerald-700">3</p>
+            </div>
+            <div class="text-center p-3 bg-emerald-50 rounded-lg">
+              <p class="text-sm text-emerald-600">متوسط الوديعة</p>
+              <p class="text-xl font-bold text-emerald-700">54.00 ر.س</p>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+    <script>
+      // Tab switching functionality
+      const tabs = {
+        "expenses-tab": "expenses-content",
+        "deposits-tab": "deposits-content",
+      };
+
+      Object.keys(tabs).forEach((tabId) => {
+        document.getElementById(tabId).addEventListener("click", function () {
+          // Remove active class from all tabs
+          Object.keys(tabs).forEach((id) => {
+            document
+              .getElementById(id)
+              .classList.remove("bg-primary", "text-white");
+            document.getElementById(id).classList.add("text-gray-600");
+          });
+
+          // Hide all content
+          Object.values(tabs).forEach((contentId) => {
+            document.getElementById(contentId).classList.add("hidden");
+          });
+
+          // Activate clicked tab
+          this.classList.add("bg-primary", "text-white");
+          this.classList.remove("text-gray-600");
+
+          // Show corresponding content
+          document.getElementById(tabs[tabId]).classList.remove("hidden");
+        });
+      });
+    </script>
+  </body>
+</html>

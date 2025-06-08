@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Income - Expense Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1",
+              secondary: "#f8fafc",
+              accent: "#10b981",
+              danger: "#ef4444",
+              warning: "#f59e0b",
+            },
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-50 font-sans min-h-screen">
+    <!-- Header -->
+    <header
+      class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50"
+    >
+      <div class="flex items-center justify-between p-4">
+        <div class="flex items-center gap-3">
+          <button
+            onclick="history.back()"
+            class="text-primary text-lg font-medium"
+          >
+            Cancel
+          </button>
+        </div>
+        <h1 class="text-lg font-semibold text-gray-900">Add Income</h1>
+        <div class="w-16"></div>
+        <!-- Spacer for center alignment -->
+      </div>
+    </header>
+
+    <!-- Income Type Tabs -->
+    <div class="p-4">
+      <div class="bg-gray-100 rounded-2xl p-1 shadow-sm mb-6">
+        <div class="flex">
+          <button
+            id="expense-tab"
+            class="flex-1 py-3 px-4 rounded-xl font-medium text-center transition-all text-gray-600"
+          >
+            Expense
+          </button>
+          <button
+            id="income-tab"
+            class="flex-1 py-3 px-4 rounded-xl font-medium text-center transition-all bg-white text-gray-900 shadow-sm"
+          >
+            Income
+          </button>
+          <button
+            id="transfer-tab"
+            class="flex-1 py-3 px-4 rounded-xl font-medium text-center transition-all text-gray-600"
+          >
+            Transfer
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Content -->
+
+    <!-- Add Button -->
+    <div
+      class="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-100"
+    >
+      <button
+        id="add-btn"
+        class="w-full bg-primary text-white py-4 rounded-2xl font-semibold text-lg transition-all hover:bg-primary/90 active:scale-[0.98]"
+      >
+        Add
+      </button>
+    </div>
+
+    <script>
+      // Tab switching functionality
+      const tabs = {
+        "expense-tab": () => (window.location.href = "add-expense.html"),
+        "income-tab": () => {}, // Current page
+        "transfer-tab": () => (window.location.href = "add-transfer.html"),
+      };
+
+      Object.keys(tabs).forEach((tabId) => {
+        document.getElementById(tabId).addEventListener("click", tabs[tabId]);
+      });
+
+      // Form validation and submission
+      document.getElementById("add-btn").addEventListener("click", function () {
+        const title = document.getElementById("income-title").value.trim();
+        const amount = document.getElementById("income-amount").value;
+
+        if (!title) {
+          alert("Please enter a title for your income");
+          return;
+        }
+
+        if (!amount || parseFloat(amount) <= 0) {
+          alert("Please enter a valid amount");
+          return;
+        }
+
+        // Create income object
+        const incomeData = {
+          title: title,
+          amount: parseFloat(amount),
+          currency: document.querySelector("select").value,
+          from: document.querySelectorAll("select")[1].value,
+          date: document.querySelector('input[type="date"]').value,
+          transferredTo: document.querySelectorAll("select")[2].value,
+          category: document.querySelectorAll("select")[3].value,
+          notes: document.getElementById("income-notes").value.trim(),
+          timestamp: new Date().toISOString(),
+        };
+
+        // Save to localStorage (or send to server)
+        let incomes = JSON.parse(localStorage.getItem("incomes") || "[]");
+        incomes.push(incomeData);
+        localStorage.setItem("incomes", JSON.stringify(incomes));
+
+        // Success feedback
+        const button = this;
+        const originalText = button.textContent;
+        button.textContent = "Added ✓";
+        button.classList.add("bg-accent");
+        button.classList.remove("bg-primary");
+
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.classList.remove("bg-accent");
+          button.classList.add("bg-primary");
+          window.history.back();
+        }, 1500);
+      });
+
+      // Real-time amount formatting
+      const amountInput = document.getElementById("income-amount");
+      amountInput.addEventListener("focus", function () {
+        this.classList.remove("text-gray-400");
+        this.classList.add("text-gray-900");
+      });
+
+      amountInput.addEventListener("blur", function () {
+        if (!this.value) {
+          this.classList.add("text-gray-400");
+          this.classList.remove("text-gray-900");
+        }
+      });
+
+      // Auto-focus on title input
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("income-title").focus();
+      });
+    </script>
+  </body>
+</html>
