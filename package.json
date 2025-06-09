@@ -6,8 +6,8 @@
   "scripts": {
     "start": "npx serve .",
     "dev": "npx live-server --port=3000",
-    "build": "echo 'No build process needed for static HTML app'",
-    "deploy": "gh-pages -d .",
+    "build": "node build.js",
+    "deploy": "npm run build && gh-pages -d dist",
     "serve": "python -m http.server 8000"
   },
   "repository": {
