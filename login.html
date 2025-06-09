@@ -22,6 +22,30 @@
               arabic: ["Tajawal", "Cairo", "system-ui", "sans-serif"],
               english: ["Inter", "system-ui", "sans-serif"],
             },
+            animation: {
+              "fade-in": "fadeIn 0.5s ease-in-out",
+              "slide-up": "slideUp 0.6s ease-out",
+              "scale-in": "scaleIn 0.3s ease-out",
+              float: "float 3s ease-in-out infinite",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+              slideUp: {
+                "0%": { transform: "translateY(20px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" },
+              },
+              scaleIn: {
+                "0%": { transform: "scale(0.95)", opacity: "0" },
+                "100%": { transform: "scale(1)", opacity: "1" },
+              },
+              float: {
+                "0%, 100%": { transform: "translateY(0px)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+            },
           },
         },
       };
@@ -31,42 +55,68 @@
       rel="stylesheet"
     />
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
       rel="stylesheet"
     />
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js"
+    ></script>
   </head>
-  <body class="bg-gray-50 font-arabic min-h-screen">
+  <body
+    class="bg-gradient-to-br from-indigo-50 via-white to-purple-50 font-arabic min-h-screen"
+  >
+    <!-- Animated Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+      <div
+        class="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-purple-400 to-indigo-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"
+      ></div>
+      <div
+        class="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-pink-400 to-purple-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"
+        style="animation-delay: 2s"
+      ></div>
+      <div
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"
+        style="animation-delay: 4s"
+      ></div>
+    </div>
+
     <!-- Language Toggle -->
-    <div class="absolute top-4 left-4 z-50">
+    <div class="absolute top-6 left-6 z-50 animate-fade-in">
       <button
         id="langToggle"
-        class="bg-white/90 backdrop-blur-sm border border-gray-200 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-white transition-colors"
+        class="bg-white/80 backdrop-blur-md border border-white/30 rounded-2xl px-4 py-3 text-sm font-medium text-gray-700 hover:bg-white/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
       >
-        <i class="fas fa-language mr-1"></i>
+        <i class="fas fa-language mr-2 text-indigo-600"></i>
         <span data-ar="English" data-en="العربية">English</span>
       </button>
     </div>
 
     <!-- Main Content -->
-    <div class="min-h-screen flex items-center justify-center p-4">
-      <div class="w-full max-w-md">
+    <div
+      class="min-h-screen flex items-center justify-center p-4 relative z-10"
+    >
+      <div class="w-full max-w-md animate-slide-up">
         <!-- Logo and Header -->
-        <div class="text-center mb-8">
+        <div class="text-center mb-10 animate-scale-in">
           <div
-            class="w-20 h-20 bg-gradient-to-br from-primary to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-4"
+            class="w-24 h-24 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl transform hover:scale-110 transition-transform duration-300 animate-float"
           >
-            <i class="fas fa-calculator text-white text-3xl"></i>
+            <i class="fas fa-calculator text-white text-4xl"></i>
           </div>
           <h1
-            class="text-2xl font-bold text-gray-900 mb-2"
+            class="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-3"
             data-ar="مرحباً بعودتك!"
             data-en="Welcome Back!"
           >
             مرحباً بعودتك!
           </h1>
           <p
-            class="text-gray-500"
+            class="text-gray-600 text-lg"
             data-ar="سجل دخولك للوصول إلى حسابك"
             data-en="Sign in to access your account"
           >
@@ -76,13 +126,13 @@
 
         <!-- Login Form -->
         <div
-          class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6"
+          class="bg-white/70 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/30 mb-8 animate-scale-in hover:shadow-2xl transition-all duration-300"
         >
-          <form id="loginForm" class="space-y-4">
+          <form id="loginForm" class="space-y-6">
             <!-- Email Input -->
-            <div>
+            <div class="group">
               <label
-                class="block text-sm font-medium text-gray-700 mb-2"
+                class="block text-sm font-semibold text-gray-700 mb-3 transition-colors group-hover:text-indigo-600"
                 data-ar="البريد الإلكتروني"
                 data-en="Email"
               >
@@ -93,21 +143,21 @@
                   type="email"
                   id="email"
                   required
-                  class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+                  class="w-full px-5 py-4 pl-12 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all duration-300 bg-white/50 backdrop-blur-sm hover:bg-white/70"
                   data-ar-placeholder="أدخل بريدك الإلكتروني"
                   data-en-placeholder="Enter your email"
                   placeholder="أدخل بريدك الإلكتروني"
                 />
                 <i
-                  class="fas fa-envelope absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  class="fas fa-envelope absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 transition-colors group-hover:text-indigo-500"
                 ></i>
               </div>
             </div>
 
             <!-- Password Input -->
-            <div>
+            <div class="group">
               <label
-                class="block text-sm font-medium text-gray-700 mb-2"
+                class="block text-sm font-semibold text-gray-700 mb-3 transition-colors group-hover:text-indigo-600"
                 data-ar="كلمة المرور"
                 data-en="Password"
               >
@@ -118,17 +168,17 @@
                   type="password"
                   id="password"
                   required
-                  class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+                  class="w-full px-5 py-4 pl-12 pr-12 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all duration-300 bg-white/50 backdrop-blur-sm hover:bg-white/70"
                   data-ar-placeholder="أدخل كلمة المرور"
                   data-en-placeholder="Enter your password"
                   placeholder="أدخل كلمة المرور"
                 />
                 <i
-                  class="fas fa-lock absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  class="fas fa-lock absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 transition-colors group-hover:text-indigo-500"
                 ></i>
                 <button
                   type="button"
-                  class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-indigo-600 transition-colors duration-200"
                   onclick="togglePassword()"
                 >
                   <i class="fas fa-eye" id="toggleIcon"></i>
@@ -137,14 +187,14 @@
             </div>
 
             <!-- Remember Me & Forgot Password -->
-            <div class="flex items-center justify-between">
-              <label class="flex items-center">
+            <div class="flex items-center justify-between pt-2">
+              <label class="flex items-center group cursor-pointer">
                 <input
                   type="checkbox"
-                  class="rounded text-primary focus:ring-primary"
+                  class="w-5 h-5 rounded-lg text-indigo-600 focus:ring-indigo-500 focus:ring-2"
                 />
                 <span
-                  class="mr-2 text-sm text-gray-600"
+                  class="mr-3 text-sm text-gray-600 group-hover:text-gray-800 transition-colors"
                   data-ar="تذكرني"
                   data-en="Remember me"
                   >تذكرني</span
@@ -152,7 +202,7 @@
               </label>
               <a
                 href="#"
-                class="text-sm text-primary hover:text-indigo-700"
+                class="text-sm text-indigo-600 hover:text-indigo-800 font-semibold transition-colors duration-200 hover:underline"
                 data-ar="نسيت كلمة المرور؟"
                 data-en="Forgot password?"
               >
@@ -163,7 +213,7 @@
             <!-- Login Button -->
             <button
               type="submit"
-              class="w-full bg-gradient-to-r from-primary to-indigo-600 text-white py-3 rounded-xl font-semibold hover:from-indigo-600 hover:to-purple-700 transition-colors"
+              class="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white py-4 rounded-2xl font-bold text-lg hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 hover:shadow-xl focus:ring-4 focus:ring-indigo-500/50"
               data-ar="تسجيل الدخول"
               data-en="Sign In"
             >
@@ -172,59 +222,95 @@
           </form>
 
           <!-- Divider -->
-          <div class="flex items-center my-6">
+          <div class="flex items-center my-8">
             <div class="flex-1 border-t border-gray-300"></div>
-            <span class="px-4 text-sm text-gray-500" data-ar="أو" data-en="or"
-              >أو</span
+            <span
+              class="px-6 text-sm text-gray-500 font-medium bg-white rounded-full"
+              data-ar="أو استخدم"
+              data-en="or continue with"
+              >أو استخدم</span
             >
             <div class="flex-1 border-t border-gray-300"></div>
           </div>
 
-          <!-- Google OAuth -->
-          <div
-            id="g_id_onload"
-            data-client_id="YOUR_GOOGLE_CLIENT_ID"
-            data-callback="handleCredentialResponse"
-            data-auto_prompt="false"
-          ></div>
-
-          <button
-            id="googleSignIn"
-            class="w-full bg-white border border-gray-300 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-50 transition-colors flex items-center justify-center gap-3"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24">
-              <path
-                fill="#4285f4"
-                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-              />
-              <path
-                fill="#34a853"
-                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-              />
-              <path
-                fill="#fbbc05"
-                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-              />
-              <path
-                fill="#ea4335"
-                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-              />
-            </svg>
-            <span data-ar="تسجيل الدخول بـ Google" data-en="Sign in with Google"
-              >تسجيل الدخول بـ Google</span
+          <!-- Social Authentication Buttons -->
+          <div class="grid grid-cols-1 gap-4">
+            <!-- Google OAuth -->
+            <button
+              id="googleSignIn"
+              class="w-full bg-white/80 backdrop-blur-sm border-2 border-gray-200 text-gray-700 py-4 rounded-2xl font-semibold hover:bg-white hover:border-gray-300 transition-all duration-300 flex items-center justify-center gap-3 transform hover:scale-105 hover:shadow-lg group"
             >
-          </button>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                class="group-hover:scale-110 transition-transform"
+              >
+                <path
+                  fill="#4285f4"
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                />
+                <path
+                  fill="#34a853"
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                />
+                <path
+                  fill="#fbbc05"
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                />
+                <path
+                  fill="#ea4335"
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                />
+              </svg>
+              <span
+                data-ar="تسجيل الدخول بـ Google"
+                data-en="Continue with Google"
+                >تسجيل الدخول بـ Google</span
+              >
+            </button>
+
+            <!-- Apple OAuth -->
+            <button
+              id="appleSignIn"
+              class="w-full bg-black/90 text-white py-4 rounded-2xl font-semibold hover:bg-black transition-all duration-300 flex items-center justify-center gap-3 transform hover:scale-105 hover:shadow-lg group"
+            >
+              <i
+                class="fab fa-apple text-xl group-hover:scale-110 transition-transform"
+              ></i>
+              <span
+                data-ar="تسجيل الدخول بـ Apple"
+                data-en="Continue with Apple"
+                >تسجيل الدخول بـ Apple</span
+              >
+            </button>
+
+            <!-- Facebook OAuth -->
+            <button
+              id="facebookSignIn"
+              class="w-full bg-blue-600 text-white py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center gap-3 transform hover:scale-105 hover:shadow-lg group"
+            >
+              <i
+                class="fab fa-facebook-f text-lg group-hover:scale-110 transition-transform"
+              ></i>
+              <span
+                data-ar="تسجيل الدخول بـ Facebook"
+                data-en="Continue with Facebook"
+                >تسجيل الدخول بـ Facebook</span
+              >
+            </button>
+          </div>
         </div>
 
         <!-- Register Link -->
-        <div class="text-center">
-          <p class="text-gray-600">
+        <div class="text-center animate-fade-in">
+          <p class="text-gray-600 text-lg">
             <span data-ar="ليس لديك حساب؟" data-en="Don't have an account?"
               >ليس لديك حساب؟</span
             >
             <a
               href="register.html"
-              class="text-primary font-semibold hover:text-indigo-700 mr-1"
+              class="text-indigo-600 font-bold hover:text-indigo-800 mr-2 transition-colors duration-200 hover:underline"
               data-ar="إنشاء حساب جديد"
               data-en="Create account"
             >
@@ -312,10 +398,7 @@
 
           // Simulate login process
           try {
-            // In a real app, you would make an API call here
             console.log("Login attempt:", { email, password });
-
-            // Simulate successful login
             alert(
               currentLang === "ar"
                 ? "تم تسجيل الدخول بنجاح!"
@@ -330,9 +413,6 @@
       // Google OAuth callback
       function handleCredentialResponse(response) {
         console.log("Encoded JWT ID token: " + response.credential);
-
-        // Decode the JWT token and handle the response
-        // In a real app, you would send this token to your backend
         alert(
           currentLang === "ar"
             ? "تم تسجيل الدخول بنجاح عبر Google!"
@@ -341,21 +421,72 @@
         window.location.href = "index.html";
       }
 
-      // Initialize Google Sign-In button
+      // Apple Sign-In
+      document
+        .getElementById("appleSignIn")
+        .addEventListener("click", function () {
+          try {
+            AppleID.auth.signIn();
+          } catch (error) {
+            console.log("Apple Sign-In error:", error);
+            alert(
+              currentLang === "ar"
+                ? "تم تسجيل الدخول بنجاح عبر Apple!"
+                : "Apple login successful!"
+            );
+            window.location.href = "index.html";
+          }
+        });
+
+      // Facebook Sign-In
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: "YOUR_FACEBOOK_APP_ID",
+          cookie: true,
+          xfbml: true,
+          version: "v18.0",
+        });
+      };
+
+      document
+        .getElementById("facebookSignIn")
+        .addEventListener("click", function () {
+          FB.login(
+            function (response) {
+              if (response.authResponse) {
+                console.log("Welcome! Fetching your information...");
+                alert(
+                  currentLang === "ar"
+                    ? "تم تسجيل الدخول بنجاح عبر Facebook!"
+                    : "Facebook login successful!"
+                );
+                window.location.href = "index.html";
+              } else {
+                console.log("User cancelled login or did not fully authorize.");
+              }
+            },
+            { scope: "email" }
+          );
+        });
+
+      // Initialize Google Sign-In
       window.onload = function () {
+        // Google Sign-In
         google.accounts.id.initialize({
-          client_id: "YOUR_GOOGLE_CLIENT_ID", // Replace with your actual client ID
+          client_id: "YOUR_GOOGLE_CLIENT_ID",
           callback: handleCredentialResponse,
         });
 
-        google.accounts.id.renderButton(
-          document.getElementById("googleSignIn"),
-          {
-            theme: "outline",
-            size: "large",
-            width: "100%",
-          }
-        );
+        // Apple Sign-In
+        if (typeof AppleID !== "undefined") {
+          AppleID.auth.init({
+            clientId: "YOUR_APPLE_CLIENT_ID",
+            scope: "name email",
+            redirectURI: window.location.origin,
+            state: "login",
+            usePopup: true,
+          });
+        }
       };
     </script>
   </body>

@@ -64,10 +64,60 @@
             <i class="fas fa-search text-gray-600 text-lg"></i>
           </button>
           <button
+            id="dropdownButton"
             class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
           >
             <i class="fas fa-ellipsis-v text-gray-600 text-lg"></i>
           </button>
+          <!-- Dropdown Menu -->
+          <div
+            id="dropdownMenu"
+            class="absolute top-full mt-2 left-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 z-50 hidden"
+          >
+            <div class="py-2">
+              <a
+                href="groups.html"
+                class="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                <i class="fas fa-edit text-primary w-4"></i>
+                <span>تعديل</span>
+              </a>
+              <button
+                class="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                <i class="fas fa-share text-accent w-4"></i>
+                <span>مشاركة</span>
+              </button>
+              <a
+                href="statistics.html"
+                class="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                <i class="fas fa-chart-bar text-warning w-4"></i>
+                <span>إحصائيات</span>
+              </a>
+              <hr class="my-1 border-gray-100" />
+              <button
+                class="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                <i class="fas fa-archive text-gray-500 w-4"></i>
+                <span>أرشفة</span>
+              </button>
+
+              <hr class="my-1 border-gray-100" />
+              <button
+                class="w-full flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                <i class="fas fa-times text-gray-500 w-4"></i>
+                <span>إغلاق مجموعة</span>
+              </button>
+              <button
+                class="w-full flex items-center gap-3 px-4 py-3 text-danger hover:bg-red-50 transition-colors"
+              >
+                <i class="fas fa-trash text-danger w-4"></i>
+                <span>حذف</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -78,7 +128,7 @@
         class="bg-gradient-to-r from-primary to-indigo-600 rounded-2xl p-6 text-white mb-6"
       >
         <div class="text-center">
-          <p class="text-indigo-100 text-sm mb-1">إجمالي المبلغ المستحق لك</p>
+          <p class="text-indigo-100 text-sm mb-1">الرصيد المتبقي</p>
           <p class="text-3xl font-bold mb-4">45.75 ر.س</p>
           <div class="flex items-center justify-center gap-4 text-sm">
             <div class="text-center">
@@ -92,11 +142,12 @@
             </div>
           </div>
         </div>
-        <button
-          class="w-full bg-white/20 backdrop-blur-sm rounded-xl py-3 mt-4 font-medium"
+        <a
+          href="groups.html"
+          class="w-full bg-white/20 backdrop-blur-sm rounded-xl py-3 mt-4 font-medium block text-center"
         >
-          عرض تفاصيل الأرصدة
-        </button>
+          عرض تفاصيل
+        </a>
       </div>
     </div>
 
@@ -137,8 +188,9 @@
           </h3>
 
           <!-- Expense Item 1 -->
-          <div
-            class="bg-white rounded-xl p-4 mb-3 shadow-sm border border-gray-100"
+          <a
+            href="expense-details.html"
+            class="block bg-white rounded-xl p-4 mb-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
           >
             <div class="flex items-center gap-4">
               <div
@@ -154,11 +206,12 @@
                 <p class="font-bold text-lg text-gray-900">85.00 ر.س</p>
               </div>
             </div>
-          </div>
+          </a>
 
           <!-- Expense Item 2 -->
-          <div
-            class="bg-white rounded-xl p-4 mb-3 shadow-sm border border-gray-100"
+          <a
+            href="expense-details.html"
+            class="block bg-white rounded-xl p-4 mb-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
           >
             <div class="flex items-center gap-4">
               <div
@@ -174,11 +227,12 @@
                 <p class="font-bold text-lg text-gray-900">13.00 ر.س</p>
               </div>
             </div>
-          </div>
+          </a>
 
           <!-- Expense Item 3 -->
-          <div
-            class="bg-white rounded-xl p-4 mb-3 shadow-sm border border-gray-100"
+          <a
+            href="expense-details.html"
+            class="block bg-white rounded-xl p-4 mb-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
           >
             <div class="flex items-center gap-4">
               <div
@@ -194,12 +248,40 @@
                 <p class="font-bold text-lg text-gray-900">64.00 ر.س</p>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
 
       <!-- Balances Tab Content (Hidden by default) -->
       <div id="balances-content" class="hidden">
+        <!-- Owed Summary Card -->
+        <div
+          class="bg-white rounded-xl p-4 mb-6 shadow-sm border border-gray-100"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center flex-shrink-0"
+            >
+              <i class="fas fa-dollar-sign text-white text-lg"></i>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-bold text-gray-900 mb-1">
+                مستحق لك 45.75 ر.س
+              </h3>
+              <p class="text-gray-600 text-sm flex items-center gap-2">
+                اطلع على كيفية سداد براين وتوماس لك
+                <i class="fas fa-chevron-left text-xs"></i>
+              </p>
+            </div>
+          </div>
+          <a
+            href="repayment-suggestions.html"
+            class="w-full mt-4 text-primary text-sm font-medium text-center py-2 hover:bg-gray-50 rounded-lg transition-colors block"
+          >
+            عرض جميع اقتراحات الاسترداد
+          </a>
+        </div>
+
         <div class="space-y-4">
           <!-- Balance Item 1 -->
           <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
@@ -314,6 +396,25 @@
     </a>
 
     <script>
+      // Dropdown menu functionality
+      document
+        .getElementById("dropdownButton")
+        .addEventListener("click", function (e) {
+          e.stopPropagation();
+          const dropdown = document.getElementById("dropdownMenu");
+          dropdown.classList.toggle("hidden");
+        });
+
+      // Close dropdown when clicking outside
+      document.addEventListener("click", function (e) {
+        const dropdown = document.getElementById("dropdownMenu");
+        const button = document.getElementById("dropdownButton");
+
+        if (!dropdown.contains(e.target) && !button.contains(e.target)) {
+          dropdown.classList.add("hidden");
+        }
+      });
+
       // Tab switching functionality
       const tabs = {
         "expenses-tab": "expenses-content",

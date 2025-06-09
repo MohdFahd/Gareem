@@ -30,9 +30,9 @@ class LanguageManager {
 
         // Tricount Management
         newTricount: "غريم جديد",
-        expenseLists: "قوائم المصاريف",
+        expenseLists: "المجموعات",
         addExpense: "إضافة مصروف",
-        createExpenseList: "إنشاء قائمة مصاريف",
+        createExpenseList: "انشاء مجموعة جديدة",
         recordNewExpense: "تسجيل مصروف جديد",
 
         // Currency and Amounts
