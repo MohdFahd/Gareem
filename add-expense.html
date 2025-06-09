@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>إضافة مصروف - غريم</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1",
+              secondary: "#f8fafc",
+              accent: "#10b981",
+              danger: "#ef4444",
+              warning: "#f59e0b",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "Cairo", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-50 font-arabic min-h-screen">
+    <!-- Header -->
+    <header
+      class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50"
+    >
+      <div class="flex items-center justify-between p-4">
+        <div class="flex items-center gap-3">
+          <a
+            href="tricount.html"
+            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+          >
+            <i class="fas fa-arrow-right text-gray-600 text-lg"></i>
+          </a>
+          <h1 id="page-title" class="text-lg font-bold text-gray-900">
+            إضافة مصروف
+          </h1>
+        </div>
+        <button
+          id="save-btn"
+          class="bg-primary text-white px-6 py-2 rounded-xl font-medium"
+        >
+          حفظ
+        </button>
+      </div>
+    </header>
+
+    <!-- Expense Type Tabs -->
+    <div class="p-4">
+      <div
+        class="bg-white rounded-2xl p-1 shadow-sm border border-gray-100 mb-6"
+      >
+        <div class="flex">
+          <button
+            id="expense-tab"
+            class="flex-1 py-3 px-4 rounded-xl font-medium text-center transition-all bg-primary text-white"
+          >
+            مصروف
+          </button>
+          <button
+            id="income-tab"
+            class="flex-1 py-3 px-4 rounded-xl font-medium text-center transition-all text-gray-600"
+          >
+            دخل
+          </button>
+          <button
+            id="transfer-tab"
+            class="flex-1 py-3 px-4 rounded-xl font-medium text-center transition-all text-gray-600"
+          >
+            تحويل
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Expense Form Content -->
+    <div id="expense-content" class="px-4 pb-20">
+      <!-- Title Section -->
+      <div class="mb-6">
+        <label class="block text-lg font-semibold text-gray-900 mb-3"
+          >العنوان</label
+        >
+        <div class="flex gap-3">
+          <input
+            type="text"
+            id="expense-title"
+            placeholder="مثال: مشروبات"
+            class="flex-1 bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
+          />
+          <button
+            class="w-14 h-14 bg-warning text-white rounded-xl flex items-center justify-center"
+          >
+            <i class="fas fa-tag text-xl"></i>
+          </button>
+          <button
+            class="w-14 h-14 bg-gray-200 text-gray-600 rounded-xl flex items-center justify-center"
+          >
+            <i class="fas fa-camera text-xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Amount Section -->
+      <div class="mb-6">
+        <label class="block text-lg font-semibold text-gray-900 mb-3"
+          >المبلغ</label
+        >
+        <div
+          class="flex items-center bg-white border border-gray-200 rounded-xl"
+        >
+          <select
+            class="bg-transparent px-4 py-4 text-lg border-0 focus:outline-none"
+          >
+            <option>ر.س</option>
+            <option>$</option>
+            <option>€</option>
+          </select>
+          <div class="w-px h-8 bg-gray-200"></div>
+          <input
+            type="number"
+            id="expense-amount"
+            placeholder="0.00"
+            step="0.01"
+            class="flex-1 bg-transparent px-4 py-4 text-lg focus:outline-none text-left"
+          />
+        </div>
+      </div>
+
+      <!-- Payment Info -->
+      <div class="flex gap-4 mb-6">
+        <div class="flex-1">
+          <label class="block text-lg font-semibold text-gray-900 mb-3"
+            >دفع بواسطة</label
+          >
+          <select
+            class="w-full bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
+          >
+            <option>أليكس (أنا)</option>
+            <option>براين</option>
+            <option>جوليا</option>
+            <option>توماس</option>
+          </select>
+        </div>
+        <div class="flex-1">
+          <label class="block text-lg font-semibold text-gray-900 mb-3"
+            >التاريخ</label
+          >
+          <input
+            type="date"
+            value="2025-06-05"
+            class="w-full bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
+          />
+        </div>
+      </div>
+
+      <!-- Split Options -->
+      <div class="mb-6">
+        <div class="flex items-center gap-3 mb-4">
+          <input
+            type="checkbox"
+            id="split-checkbox"
+            checked
+            class="w-5 h-5 text-primary rounded border-gray-300 focus:ring-primary"
+          />
+          <label
+            for="split-checkbox"
+            class="text-lg font-semibold text-gray-900"
+            >تقسيم</label
+          >
+          <select
+            class="mr-auto bg-white border border-gray-200 rounded-xl px-4 py-2 text-sm"
+          >
+            <option>بالتساوي</option>
+            <option>حسب المبلغ</option>
+            <option>حسب النسبة</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Participants -->
+      <div class="space-y-3">
+        <!-- Participant 1 -->
+        <div class="bg-white rounded-xl p-4 border border-gray-200">
+          <div class="flex items-center gap-4">
+            <input
+              type="checkbox"
+              checked
+              class="w-5 h-5 text-primary rounded border-gray-300 focus:ring-primary"
+            />
+            <div class="flex items-center gap-3 flex-1">
+              <div
+                class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center"
+              >
+                <span class="font-semibold text-gray-600">أ</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900">أليكس (أنا)</h4>
+              </div>
+            </div>
+            <div class="text-left">
+              <p class="font-semibold text-gray-900">0.00 ر.س</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Participant 2 -->
+        <div class="bg-white rounded-xl p-4 border border-gray-200">
+          <div class="flex items-center gap-4">
+            <input
+              type="checkbox"
+              checked
+              class="w-5 h-5 text-primary rounded border-gray-300 focus:ring-primary"
+            />
+            <div class="flex items-center gap-3 flex-1">
+              <div
+                class="w-10 h-10 bg-blue-200 rounded-full flex items-center justify-center"
+              >
+                <span class="font-semibold text-blue-600">ب</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900">براين</h4>
+              </div>
+            </div>
+            <div class="text-left">
+              <p class="font-semibold text-gray-900">0.00 ر.س</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Participant 3 -->
+        <div class="bg-white rounded-xl p-4 border border-gray-200">
+          <div class="flex items-center gap-4">
+            <input
+              type="checkbox"
+              checked
+              class="w-5 h-5 text-primary rounded border-gray-300 focus:ring-primary"
+            />
+            <div class="flex items-center gap-3 flex-1">
+              <div
+                class="w-10 h-10 bg-green-200 rounded-full flex items-center justify-center"
+              >
+                <span class="font-semibold text-green-600">ج</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900">جوليا</h4>
+              </div>
+            </div>
+            <div class="text-left">
+              <p class="font-semibold text-gray-900">0.00 ر.س</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Participant 4 -->
+        <div class="bg-white rounded-xl p-4 border border-gray-200">
+          <div class="flex items-center gap-4">
+            <input
+              type="checkbox"
+              checked
+              class="w-5 h-5 text-primary rounded border-gray-300 focus:ring-primary"
+            />
+            <div class="flex items-center gap-3 flex-1">
+              <div
+                class="w-10 h-10 bg-purple-200 rounded-full flex items-center justify-center"
+              >
+                <span class="font-semibold text-purple-600">ت</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900">توماس</h4>
+              </div>
+            </div>
+            <div class="text-left">
+              <p class="font-semibold text-gray-900">0.00 ر.س</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/20">
+        <div class="flex items-center justify-between text-sm">
+          <span>إجمالي المبلغ:</span>
+          <span id="total-amount" class="font-semibold">0.00 ر.س</span>
+        </div>
+        <div class="flex items-center justify-between text-sm mt-2">
+          <span>عدد المشتركين:</span>
+          <span id="participant-count" class="font-semibold">4 أشخاص</span>
+        </div>
+        <div class="flex items-center justify-between text-sm mt-2">
+          <span>نصيب كل شخص:</span>
+          <span id="per-person" class="font-semibold">0.00 ر.س</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Income Form Content -->
+    <div id="income-content" class="px-4 pb-20 hidden">
+      <!-- Title Section -->
+      <div class="mb-6">
+        <label class="block text-lg font-semibold text-gray-900 mb-3"
+          >العنوان</label
+        >
+        <div class="flex gap-3">
+          <input
+            type="text"
+            id="income-title-ar"
+            placeholder="مثال: راتب"
+            class="flex-1 bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
+          />
+          <button
+            class="w-14 h-14 bg-warning text-white rounded-xl flex items-center justify-center"
+          >
+            <i class="fas fa-tag text-xl"></i>
+          </button>
+          <button
+            class="w-14 h-14 bg-gray-200 text-gray-600 rounded-xl flex items-center justify-center"
+          >
+            <i class="fas fa-camera text-xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Amount Section -->
+      <div class="mb-6">
+        <label class="block text-lg font-semibold text-gray-900 mb-3"
+          >المبلغ</label
+        >
+        <div
+          class="flex items-center bg-white border border-gray-200 rounded-xl"
+        >
+          <select
+            class="bg-transparent px-4 py-4 text-lg border-0 focus:outline-none"
+          >
+            <option>ر.س</option>
+            <option>$</option>
+            <option>€</option>
+          </select>
+          <div class="w-px h-8 bg-gray-200"></div>
+          <input
+            type="number"
+            id="income-amount-ar"
+            placeholder="0.00"
+            step="0.01"
+            class="flex-1 bg-transparent px-4 py-4 text-lg focus:outline-none text-left"
+          />
+        </div>
+      </div>
+
+      <!-- Payment Info -->
+      <div class="flex gap-4 mb-6">
+        <div class="flex-1">
+          <label class="block text-lg font-semibold text-gray-900 mb-3"
+            >من</label
+          >
+          <select
+            class="w-full bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
+          >
+            <option>عزام (أنا)</option>
+            <option>محمد</option>
+            <option>سارة</option>
+            <option>أحمد</option>
+          </select>
+        </div>
+        <div class="flex-1">
+          <label class="block text-lg font-semibold text-gray-900 mb-3"
+            >متى</label
+          >
+          <input
+            type="date"
+            value="2025-06-08"
+            class="w-full bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
+          />
+        </div>
+      </div>
+
+      <!-- Transferred To Section -->
+      <div class="mb-6">
+        <label class="block text-lg font-semibold text-gray-900 mb-3"
+          >تحويل إلى صندوق المجموعة</label
+        >
+      </div>
+    </div>
+
+    <!-- Transfer Form Content -->
+    <div id="transfer-content" class="px-4 pb-20 hidden">
+      <!-- Title Section -->
+      <div class="mb-6">
+        <label class="block text-lg font-semibold text-gray-900 mb-3"
+          >العنوان</label
+        >
+        <div class="flex gap-3">
+          <input
+            type="text"
+            id="transfer-title-ar"
+            placeholder="مثال: تحويل أموال"
+            class="flex-1 bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
+          />
+          <button
+            class="w-14 h-14 bg-warning text-white rounded-xl flex items-center justify-center"
+          >
+            <i class="fas fa-tag text-xl"></i>
+          </button>
+          <button
+            class="w-14 h-14 bg-gray-200 text-gray-600 rounded-xl flex items-center justify-center"
+          >
+            <i class="fas fa-camera text-xl"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Amount Section -->
+      <div class="mb-6">
+        <label class="block text-lg font-semibold text-gray-900 mb-3"
+          >المبلغ</label
+        >
+        <div
+          class="flex items-center bg-white border border-gray-200 rounded-xl"
+        >
+          <select
+            class="bg-transparent px-4 py-4 text-lg border-0 focus:outline-none"
+          >
+            <option>ر.س</option>
+            <option>$</option>
+            <option>€</option>
+          </select>
+          <div class="w-px h-8 bg-gray-200"></div>
+          <input
+            type="number"
+            id="transfer-amount-ar"
+            placeholder="0.00"
+            step="0.01"
+            class="flex-1 bg-transparent px-4 py-4 text-lg focus:outline-none text-left"
+          />
+        </div>
+      </div>
+
+      <!-- Transfer Info -->
+      <div class="flex gap-4 mb-6">
+        <div class="flex-1">
+          <label class="block text-lg font-semibold text-gray-900 mb-3"
+            >من</label
+          >
+          <select
+            class="w-full bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
+          >
+            <option>عزام (أنا)</option>
+            <option>محمد</option>
+            <option>سارة</option>
+            <option>أحمد</option>
+          </select>
+        </div>
+        <div class="flex-1">
+          <label class="block text-lg font-semibold text-gray-900 mb-3"
+            >متى</label
+          >
+          <input
+            type="date"
+            value="2025-06-08"
+            class="w-full bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
+          />
+        </div>
+      </div>
+
+      <!-- Transferred To Section -->
+      <div class="mb-6">
+        <label class="block text-lg font-semibold text-gray-900 mb-3"
+          >تحويل إلى</label
+        >
+        <select
+          class="w-full bg-white border border-gray-200 rounded-xl px-4 py-4 text-lg focus:border-primary focus:outline-none"
+        >
+          <option>محمد</option>
+          <option>عزام (أنا)</option>
+          <option>سارة</option>
+          <option>أحمد</option>
+        </select>
+      </div>
+    </div>
+    <script>
+      // Tab switching functionality
+      const expenseTabs = {
+        "expense-tab": "مصروف",
+        "income-tab": "دخل",
+        "transfer-tab": "تحويل",
+      };
+
+      const pageTitle = document.getElementById("page-title");
+      const expenseContent = document.getElementById("expense-content");
+      const incomeContent = document.getElementById("income-content");
+      const transferContent = document.getElementById("transfer-content");
+      Object.keys(expenseTabs).forEach((tabId) => {
+        document.getElementById(tabId).addEventListener("click", function () {
+          // Remove active class from all tabs
+          Object.keys(expenseTabs).forEach((id) => {
+            document
+              .getElementById(id)
+              .classList.remove("bg-primary", "text-white");
+            document.getElementById(id).classList.add("text-gray-600");
+          });
+
+          // Activate clicked tab
+          this.classList.add("bg-primary", "text-white");
+          this.classList.remove("text-gray-600");
+
+          // Show/hide content based on selected tab
+          if (tabId === "expense-tab") {
+            pageTitle.textContent = "إضافة مصروف";
+            expenseContent.classList.remove("hidden");
+            transferContent.classList.add("hidden");
+            incomeContent.classList.add("hidden");
+          } else if (tabId === "income-tab") {
+            pageTitle.textContent = "إضافة دخل";
+            expenseContent.classList.add("hidden");
+            transferContent.classList.add("hidden");
+            incomeContent.classList.remove("hidden");
+          } else if (tabId === "transfer-tab") {
+            pageTitle.textContent = "إضافة تحويل";
+            transferContent.classList.remove("hidden");
+            expenseContent.classList.add("hidden");
+            incomeContent.classList.add("hidden");
+            // You can add transfer content here later
+          }
+        });
+      });
+
+      // Amount calculation for expenses
+      const amountInput = document.getElementById("expense-amount");
+      const totalAmountSpan = document.getElementById("total-amount");
+      const perPersonSpan = document.getElementById("per-person");
+      const participantCountSpan = document.getElementById("participant-count");
+
+      function updateCalculations() {
+        const amount = parseFloat(amountInput.value) || 0;
+        const checkedParticipants =
+          document.querySelectorAll('input[type="checkbox"]:checked').length -
+          1; // Subtract 1 for the split checkbox
+
+        totalAmountSpan.textContent = amount.toFixed(2) + " ر.س";
+        participantCountSpan.textContent = checkedParticipants + " أشخاص";
+
+        if (checkedParticipants > 0) {
+          const perPerson = amount / checkedParticipants;
+          perPersonSpan.textContent = perPerson.toFixed(2) + " ر.س";
+
+          // Update individual amounts
+          const participantAmounts = document.querySelectorAll(
+            ".bg-white.rounded-xl.p-4.border.border-gray-200 p"
+          );
+          participantAmounts.forEach((p) => {
+            if (p.textContent.includes("ر.س")) {
+              p.textContent = perPerson.toFixed(2) + " ر.س";
+            }
+          });
+        }
+      }
+
+      amountInput.addEventListener("input", updateCalculations);
+
+      // Checkbox handling
+      document
+        .querySelectorAll('input[type="checkbox"]')
+        .forEach((checkbox) => {
+          if (checkbox.id !== "split-checkbox") {
+            checkbox.addEventListener("change", updateCalculations);
+          }
+        });
+
+      // Save button functionality
+      document
+        .getElementById("save-btn")
+        .addEventListener("click", function () {
+          const currentTab = document.querySelector(
+            ".bg-primary.text-white"
+          ).id;
+
+          if (currentTab === "expense-tab") {
+            const title = document.getElementById("expense-title").value;
+            const amount = document.getElementById("expense-amount").value;
+
+            if (!title || !amount) {
+              alert("يرجى ملء جميع الحقول المطلوبة");
+              return;
+            }
+
+            alert("تم حفظ المصروف بنجاح!");
+          } else if (currentTab === "income-tab") {
+            const title = document.getElementById("income-title-ar").value;
+            const amount = document.getElementById("income-amount-ar").value;
+
+            if (!title || !amount) {
+              alert("يرجى ملء جميع الحقول المطلوبة");
+              return;
+            }
+
+            // Create income object
+            const incomeData = {
+              title: title,
+              amount: parseFloat(amount),
+              currency: document.querySelector("#income-content select").value,
+              from: document.querySelectorAll("#income-content select")[1]
+                .value,
+              date: document.querySelector('#income-content input[type="date"]')
+                .value,
+              transferredTo: document.querySelectorAll(
+                "#income-content select"
+              )[2].value,
+              timestamp: new Date().toISOString(),
+            };
+
+            // Save to localStorage
+            let incomes = JSON.parse(localStorage.getItem("incomes") || "[]");
+            incomes.push(incomeData);
+            localStorage.setItem("incomes", JSON.stringify(incomes));
+
+            alert("تم حفظ الدخل بنجاح!");
+          } else if (currentTab === "transfer-tab") {
+            const title = document.getElementById("transfer-title-ar").value;
+            const amount = document.getElementById("transfer-amount-ar").value;
+
+            if (!title || !amount) {
+              alert("يرجى ملء جميع الحقول المطلوبة");
+              return;
+            }
+
+            // Create transfer object
+            const transferData = {
+              title: title,
+              amount: parseFloat(amount),
+              currency: document.querySelector("#transfer-content select")
+                .value,
+              from: document.querySelectorAll("#transfer-content select")[1]
+                .value,
+              date: document.querySelector(
+                '#transfer-content input[type="date"]'
+              ).value,
+              transferredTo: document.querySelectorAll(
+                "#transfer-content select"
+              )[2].value,
+              reason: document.querySelectorAll("#transfer-content select")[3]
+                .value,
+              timestamp: new Date().toISOString(),
+            };
+
+            // Save to localStorage
+            let transfers = JSON.parse(
+              localStorage.getItem("transfers") || "[]"
+            );
+            transfers.push(transferData);
+            localStorage.setItem("transfers", JSON.stringify(transfers));
+
+            alert("تم حفظ التحويل بنجاح!");
+          }
+
+          window.location.href = "tricount.html";
+        });
+    </script>
+  </body>
+</html>

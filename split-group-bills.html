@@ -272,267 +272,270 @@
     </header>
 
     <!-- Main Content -->
-    <main class="pb-16">
-      <!-- Tab Bar Navigation -->
-      <div class="px-4 mb-6">
-        <div class="bg-gray-100 rounded-2xl p-1">
-          <div class="flex">
-            <button
-              id="tab-groups"
-              onclick="switchTab('groups')"
-              class="flex-1 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-200 bg-white text-primary shadow-sm"
+    <main class="pb-20">
+      <!-- Welcome Card -->
+      <div class="p-4">
+        <div
+          class="bg-gradient-to-r from-primary to-indigo-600 rounded-2xl p-6 text-white mb-6"
+        >
+          <div class="flex items-center justify-between">
+            <div>
+              <h2
+                class="text-lg font-semibold mb-1"
+                data-ar="مرحباً بك!"
+                data-en="Welcome!"
+              >
+                مرحباً بك!
+              </h2>
+              <p
+                class="text-indigo-100 text-sm"
+                data-ar="ابدأ بإنشاء غريم جديد لتقسيم المصاريف"
+                data-en="Start by creating a new Gharim to split expenses"
+              >
+                ابدأ بإنشاء غريم جديد لتقسيم المصاريف
+              </p>
+            </div>
+            <div
+              class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center"
             >
-              مجموعات
-            </button>
-            <button
-              id="tab-reports"
-              onclick="switchTab('reports')"
-              class="flex-1 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-200 text-gray-600"
-            >
-              تقارير
-            </button>
-            <button
-              id="tab-money"
-              onclick="switchTab('money')"
-              class="flex-1 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-200 text-gray-600"
-            >
-              مصاري
-            </button>
+              <i class="fas fa-hand-sparkles text-xl"></i>
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- Tab Content -->
-      <div id="tab-content">
-        <!-- Groups Tab Content (Default) -->
-        <div id="groups-content" class="px-4">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-semibold text-gray-900">
-              المجموعات النشطة
-            </h3>
-            <span class="text-sm text-gray-500">0 قوائم</span>
-          </div>
-
-          <!-- Empty State -->
-          <div class="text-center py-12">
-            <div
-              class="w-20 h-20 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center"
-            >
-              <i class="fas fa-users text-gray-400 text-2xl"></i>
-            </div>
-            <h4
-              class="text-lg font-semibold text-gray-900 mb-2"
-              data-ar="لا توجد مجموعات بعد"
-              data-en="No groups yet"
-            >
-              لا توجد مجموعات بعد
-            </h4>
-            <p
-              class="text-gray-500 text-sm mb-6 max-w-xs mx-auto"
-              data-ar="أنشئ مجموعة جديدة أو انضم لمجموعة موجودة لبدء تقسيم المصاريف"
-              data-en="Create a new group or join an existing one to start splitting expenses"
-            >
-              أنشئ مجموعة جديدة أو انضم لمجموعة موجودة لبدء تقسيم المصاريف
-            </p>
-          </div>
-        </div>
-
-        <!-- Reports Tab Content -->
-        <div id="reports-content" class="px-4 hidden">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-semibold text-gray-900">
-              التقارير المالية
-            </h3>
-            <button class="text-primary text-sm font-medium">تصدير</button>
-          </div>
-
-          <!-- Monthly Summary -->
+      <!-- Priority Section -->
+      <div class="p-4">
+        <a href="pending-requests-groups-bills.html">
           <div
-            class="bg-white rounded-2xl p-4 mb-4 shadow-sm border border-gray-100"
+            class="bg-white rounded-2xl p-4 mb-6 shadow-sm border border-gray-100"
           >
-            <h4 class="font-semibold text-gray-900 mb-3">ملخص الشهر الحالي</h4>
-            <div class="grid grid-cols-2 gap-4">
-              <div class="text-center p-3 bg-green-50 rounded-xl">
-                <p class="text-xs text-gray-500 mb-1">إجمالي المصاريف</p>
-                <p class="text-lg font-bold text-green-600">1,250.75 ر.س</p>
-              </div>
-              <div class="text-center p-3 bg-blue-50 rounded-xl">
-                <p class="text-xs text-gray-500 mb-1">حصتك</p>
-                <p class="text-lg font-bold text-blue-600">312.25 ر.س</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Categories Chart -->
-          <div
-            class="bg-white rounded-2xl p-4 mb-4 shadow-sm border border-gray-100"
-          >
-            <h4 class="font-semibold text-gray-900 mb-3">المصاريف حسب الفئة</h4>
-            <div class="space-y-3">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <div class="w-3 h-3 bg-orange-500 rounded-full"></div>
-                  <span class="text-sm text-gray-700">الطعام والشراب</span>
-                </div>
-                <span class="text-sm font-medium text-gray-900">45%</span>
-              </div>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
-                  <span class="text-sm text-gray-700">المواصلات</span>
-                </div>
-                <span class="text-sm font-medium text-gray-900">30%</span>
-              </div>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                  <span class="text-sm text-gray-700">الإقامة</span>
-                </div>
-                <span class="text-sm font-medium text-gray-900">25%</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Recent Transactions -->
-          <div
-            class="bg-white rounded-2xl p-4 mb-4 shadow-sm border border-gray-100"
-          >
-            <h4 class="font-semibold text-gray-900 mb-3">المعاملات الأخيرة</h4>
-            <div class="space-y-3">
-              <div class="flex items-center gap-3 p-2">
-                <div
-                  class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center"
-                >
-                  <i class="fas fa-utensils text-red-600 text-xs"></i>
-                </div>
-                <div class="flex-1">
-                  <p class="text-sm font-medium text-gray-900">عشاء المطعم</p>
-                  <p class="text-xs text-gray-500">منذ ساعتين</p>
-                </div>
-                <span class="text-sm font-medium text-gray-900"
-                  >127.50 ر.س</span
-                >
-              </div>
-              <div class="flex items-center gap-3 p-2">
-                <div
-                  class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center"
-                >
-                  <i class="fas fa-gas-pump text-blue-600 text-xs"></i>
-                </div>
-                <div class="flex-1">
-                  <p class="text-sm font-medium text-gray-900">وقود السيارة</p>
-                  <p class="text-xs text-gray-500">أمس</p>
-                </div>
-                <span class="text-sm font-medium text-gray-900">85.00 ر.س</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Money Tab Content -->
-        <div id="money-content" class="px-4 hidden">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-semibold text-gray-900">المحفظة المالية</h3>
-            <button class="text-primary text-sm font-medium">تحديث</button>
-          </div>
-
-          <!-- Balance Overview -->
-          <div
-            class="bg-gradient-to-r from-primary to-indigo-600 rounded-2xl p-4 mb-4 text-white"
-          >
-            <h4 class="text-sm opacity-90 mb-1">الرصيد الإجمالي</h4>
-            <p class="text-2xl font-bold mb-3">856.25 ر.س</p>
-            <div class="flex items-center gap-4 text-sm">
-              <div>
-                <span class="opacity-90">مستحق لك: </span>
-                <span class="font-medium">+245.50 ر.س</span>
-              </div>
-              <div>
-                <span class="opacity-90">عليك دفع: </span>
-                <span class="font-medium">-89.75 ر.س</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Payment Methods -->
-          <div
-            class="bg-white rounded-2xl p-4 mb-4 shadow-sm border border-gray-100"
-          >
-            <h4 class="font-semibold text-gray-900 mb-3">طرق الدفع</h4>
-            <div class="space-y-3">
-              <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
-                <div
-                  class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center"
-                >
-                  <i class="fas fa-university text-green-600"></i>
-                </div>
-                <div class="flex-1">
-                  <p class="font-medium text-gray-900">البنك الأهلي</p>
-                  <p class="text-sm text-gray-500">****1234</p>
-                </div>
-                <span
-                  class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full"
-                  >الافتراضي</span
-                >
-              </div>
-              <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
-                <div
-                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center"
-                >
-                  <i class="fas fa-credit-card text-blue-600"></i>
-                </div>
-                <div class="flex-1">
-                  <p class="font-medium text-gray-900">فيزا كارد</p>
-                  <p class="text-sm text-gray-500">****5678</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pending Settlements -->
-          <div
-            class="bg-white rounded-2xl p-4 mb-4 shadow-sm border border-gray-100"
-          >
-            <h4 class="font-semibold text-gray-900 mb-3">التسويات المعلقة</h4>
-            <div class="space-y-3">
-              <div
-                class="flex items-center gap-3 p-3 bg-amber-50 rounded-xl border border-amber-100"
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-2 h-6 bg-red-500 rounded-full"></div>
+              <h2 class="text-lg font-semibold text-gray-900">طلبات مهمة</h2>
+              <span
+                class="bg-red-100 text-red-600 text-xs px-2 py-1 rounded-full font-medium"
+                >جديد</span
               >
-                <div
-                  class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center"
-                >
-                  <i class="fas fa-clock text-amber-600 text-sm"></i>
-                </div>
-                <div class="flex-1">
-                  <p class="font-medium text-gray-900">أحمد العلي</p>
-                  <p class="text-sm text-gray-500">رحلة المدينة</p>
-                </div>
-                <div class="text-left">
-                  <p class="font-semibold text-amber-600">45.75 ر.س</p>
-                  <p class="text-xs text-gray-500">مطلوب منك</p>
-                </div>
-              </div>
+            </div>
+
+            <div class="space-y-3">
+              <!-- طلبات بحاجة لاعتماد -->
               <div
                 class="flex items-center gap-3 p-3 bg-green-50 rounded-xl border border-green-100"
               >
                 <div
-                  class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center"
+                  class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center"
                 >
-                  <i class="fas fa-arrow-down text-green-600 text-sm"></i>
+                  <span class="text-lg">✅</span>
                 </div>
                 <div class="flex-1">
-                  <p class="font-medium text-gray-900">سارة محمد</p>
-                  <p class="text-sm text-gray-500">رحلة التخييم</p>
+                  <p class="font-medium text-gray-900">طلبات بحاجة لاعتماد</p>
+                  <p class="text-sm text-gray-600">5 طلبات في انتظار موافقتك</p>
                 </div>
                 <div class="text-left">
-                  <p class="font-semibold text-green-600">23.25 ر.س</p>
-                  <p class="text-xs text-gray-500">مستحق لك</p>
+                  <span
+                    class="bg-green-600 text-white text-xs px-2 py-1 rounded-full font-medium"
+                    >5</span
+                  >
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </a>
       </div>
+      <!-- Tricounts List -->
+      <div class="px-4">
+        <div class="flex items-center justify-between mb-4">
+          <h3
+            class="text-lg font-semibold text-gray-900"
+            data-ar="المجموعات"
+            data-en="Expense Lists"
+          >
+            المجموعات
+          </h3>
+          <span class="text-sm text-gray-500">
+            <span>2</span>
+            <span data-ar="قوائم" data-en="lists">قوائم</span>
+          </span>
+        </div>
+
+        <!-- Tricount Card 1 -->
+        <a
+          href="tricount.html"
+          class="block bg-white rounded-2xl p-4 mb-4 shadow-sm border border-gray-100 transition-transform hover:scale-[1.02]"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="w-14 h-14 bg-gradient-to-br from-orange-400 to-red-500 rounded-xl flex items-center justify-center flex-shrink-0"
+            >
+              <i class="fas fa-city text-white text-xl"></i>
+            </div>
+            <div class="flex-1">
+              <h4
+                class="font-semibold text-gray-900 mb-1"
+                data-ar="رحلة المدينة"
+                data-en="City Trip"
+              >
+                رحلة المدينة
+              </h4>
+              <p class="text-sm text-gray-500 mb-2">
+                <span>4</span>
+                <span data-ar="أشخاص" data-en="people">أشخاص</span>
+                <span> • </span>
+                <span data-ar="آخر تحديث: اليوم" data-en="Last update: Today"
+                  >آخر تحديث: اليوم</span
+                >
+              </p>
+              <div class="flex items-center gap-4">
+                <div class="text-center">
+                  <p
+                    class="text-xs text-gray-500"
+                    data-ar="مصاريفك"
+                    data-en="Your expenses"
+                  >
+                    مصاريفك
+                  </p>
+                  <p class="font-semibold text-gray-900">
+                    162.00 <span data-ar="ر.س" data-en="SAR">ر.س</span>
+                  </p>
+                </div>
+                <div class="text-center">
+                  <p
+                    class="text-xs text-gray-500"
+                    data-ar="مستحق لك"
+                    data-en="Owed to you"
+                  >
+                    مستحق لك
+                  </p>
+                  <p class="font-semibold text-accent">
+                    45.75 <span data-ar="ر.س" data-en="SAR">ر.س</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <i class="fas fa-chevron-left text-gray-400"></i>
+          </div>
+        </a>
+
+        <!-- Tricount Card 2 -->
+        <a
+          href="tricount.html"
+          class="block bg-white rounded-2xl p-4 mb-4 shadow-sm border border-gray-100 transition-transform hover:scale-[1.02]"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl flex items-center justify-center flex-shrink-0"
+            >
+              <i class="fas fa-campground text-white text-xl"></i>
+            </div>
+            <div class="flex-1">
+              <h4
+                class="font-semibold text-gray-900 mb-1"
+                data-ar="رحلة التخييم"
+                data-en="Camping Trip"
+              >
+                رحلة التخييم
+              </h4>
+              <p class="text-sm text-gray-500 mb-2">
+                <span>6</span>
+                <span data-ar="أشخاص" data-en="people">أشخاص</span>
+                <span> • </span>
+                <span data-ar="آخر تحديث: أمس" data-en="Last update: Yesterday"
+                  >آخر تحديث: أمس</span
+                >
+              </p>
+              <div class="flex items-center gap-4">
+                <div class="text-center">
+                  <p
+                    class="text-xs text-gray-500"
+                    data-ar="مصاريفك"
+                    data-en="Your expenses"
+                  >
+                    مصاريفك
+                  </p>
+                  <p class="font-semibold text-gray-900">
+                    89.50 <span data-ar="ر.س" data-en="SAR">ر.س</span>
+                  </p>
+                </div>
+                <div class="text-center">
+                  <p
+                    class="text-xs text-gray-500"
+                    data-ar="عليك دفع"
+                    data-en="You owe"
+                  >
+                    عليك دفع
+                  </p>
+                  <p class="font-semibold text-danger">
+                    23.25 <span data-ar="ر.س" data-en="SAR">ر.س</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <i class="fas fa-chevron-left text-gray-400"></i>
+          </div>
+        </a>
+      </div>
+
+      <!-- Quick Actions -->
+      <!-- <div class="p-4">
+        <h3
+          class="text-lg font-semibold text-gray-900 mb-4"
+          data-ar="إجراءات سريعة"
+          data-en="Quick Actions"
+        >
+          إجراءات سريعة
+        </h3>
+        <div class="grid grid-cols-2 gap-4">
+          <a
+            href="new-tricount.html"
+            class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center transition-transform hover:scale-[1.02]"
+          >
+            <div
+              class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3"
+            >
+              <i class="fas fa-plus text-primary text-xl"></i>
+            </div>
+            <p
+              class="font-medium text-gray-900"
+              data-ar="غريم جديد"
+              data-en="New Tricount"
+            >
+              غريم جديد
+            </p>
+            <p
+              class="text-xs text-gray-500 mt-1"
+              data-ar="انشاء مجموعة جديدة"
+              data-en="Create expense list"
+            >
+              انشاء مجموعة جديدة
+            </p>
+          </a>
+          <a
+            href="add-expense.html"
+            class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-center transition-transform hover:scale-[1.02]"
+          >
+            <div
+              class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-3"
+            >
+              <i class="fas fa-receipt text-accent text-xl"></i>
+            </div>
+            <p
+              class="font-medium text-gray-900"
+              data-ar="إضافة مصروف"
+              data-en="Add Expense"
+            >
+              إضافة مصروف
+            </p>
+            <p
+              class="text-xs text-gray-500 mt-1"
+              data-ar="تسجيل مصروف جديد"
+              data-en="Record new expense"
+            >
+              تسجيل مصروف جديد
+            </p>
+          </a>
+        </div>
+      </div> -->
 
       <!-- Auth Section -->
       <div class="p-4">
@@ -583,15 +586,16 @@
       class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-3 py-2"
     >
       <div class="flex items-center justify-around">
-        <button
+        <a
           id="nav-home"
-          class="nav-item flex flex-col items-center gap-1 p-2 text-primary transition-all duration-200 relative active"
+          href="index.html"
+          class="nav-item flex flex-col items-center gap-1 p-2 text-gray-400 transition-all duration-200 relative"
           data-label="الرئيسية"
           data-label-en="Home"
         >
           <i class="fas fa-home text-xl"></i>
-          <span class="nav-text text-xs font-medium">الرئيسية</span>
-        </button>
+          <span class="nav-text text-xs hidden">الرئيسية</span>
+        </a>
         <a
           id="nav-expenses"
           href="expenses.html"
@@ -613,14 +617,14 @@
           <span class="nav-text text-xs hidden">الديون والقروض</span>
         </a>
         <a
-          id="nav-groups"
+          id="nav-split-group-bills"
           href="split-group-bills.html"
-          class="nav-item flex flex-col items-center gap-1 p-2 text-gray-400 transition-all duration-200 relative"
+          class="nav-item flex flex-col items-center gap-1 p-2 text-primary transition-all duration-200 relative active"
           data-label="تقسيم المجموعات"
           data-label-en="Group Splitting"
         >
           <i class="fas fa-users text-xl"></i>
-          <span class="nav-text text-xs hidden">تقسيم المجموعات</span>
+          <span class="nav-text text-xs font-medium">تقسيم المجموعات</span>
         </a>
         <button
           id="moreNavBtn"
@@ -967,7 +971,7 @@
 
       // Smart Navigation functionality
       let tooltipTimeout;
-      let activeNavItem = "nav-home"; // Track current active item
+      let activeNavItem = "nav-split-group-bills"; // Track current active item
 
       function setActiveNavItem(itemId) {
         // Remove active class and hide text from all items

@@ -8,7 +8,7 @@ class LanguageManager {
         // Navigation
         home: "الرئيسية",
         requests: "الطلبات",
-        wallet: "المحفظة",
+        wallet: "الموافقات",
         profile: "الملف الشخصي",
 
         // Common Actions
@@ -249,16 +249,6 @@ class LanguageManager {
     }
 
     // Create language toggle button if it doesn't exist
-    const langToggle = document.createElement("button");
-    langToggle.id = "langToggle";
-    langToggle.className =
-      "fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-white transition-colors";
-    langToggle.innerHTML = `
-      <i class="fas fa-language mr-1"></i>
-      <span data-ar="English" data-en="العربية">${
-        this.currentLang === "ar" ? "English" : "العربية"
-      }</span>
-    `;
 
     langToggle.addEventListener("click", () => this.switchLanguage());
     document.body.appendChild(langToggle);
