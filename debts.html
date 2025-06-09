@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-ar="غريم - إدارة الديون" data-en="Gharim - Debt Management">
+      غريم - إدارة الديون
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1",
+              secondary: "#f8fafc",
+              accent: "#10b981",
+              danger: "#ef4444",
+              warning: "#f59e0b",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "Cairo", "system-ui", "sans-serif"],
+              english: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=Inter:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="lang.js"></script>
+  </head>
+  <body class="bg-gray-50 font-arabic min-h-screen">
+    <!-- Simplified Header -->
+    <header
+      class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50"
+    >
+      <div class="flex items-center justify-between p-4">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 bg-gradient-to-br from-primary to-indigo-600 rounded-xl flex items-center justify-center"
+          >
+            <i class="fas fa-hand-holding-usd text-white"></i>
+          </div>
+          <div>
+            <h1 class="text-xl font-bold text-gray-900">إدارة الديون</h1>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center relative"
+          >
+            <i class="fas fa-bell text-gray-600"></i>
+            <span
+              class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center"
+              >2</span
+            >
+          </button>
+          <a
+            href="profile.html"
+            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+          >
+            <i class="fas fa-user-circle text-gray-600"></i>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="p-4 space-y-4 pb-20">
+      <!-- Simplified Stats Overview -->
+      <section class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <!-- Total Owed -->
+        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center"
+            >
+              <i class="fas fa-arrow-up text-red-600"></i>
+            </div>
+            <div>
+              <p class="text-lg font-bold text-gray-900">12,450</p>
+              <p class="text-xs text-gray-600">ديون عليك</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total Credits -->
+        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center"
+            >
+              <i class="fas fa-arrow-down text-green-600"></i>
+            </div>
+            <div>
+              <p class="text-lg font-bold text-gray-900">8,320</p>
+              <p class="text-xs text-gray-600">ديون لك</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Overdue -->
+        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center"
+            >
+              <i class="fas fa-clock text-orange-600"></i>
+            </div>
+            <div>
+              <p class="text-lg font-bold text-gray-900">3</p>
+              <p class="text-xs text-gray-600">متأخرة</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Net Balance -->
+        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center"
+            >
+              <i class="fas fa-balance-scale text-blue-600"></i>
+            </div>
+            <div>
+              <p class="text-lg font-bold text-gray-900">-4,130</p>
+              <p class="text-xs text-gray-600">الصافي</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Simplified Search & Actions -->
+      <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+        <div class="flex flex-col sm:flex-row gap-3">
+          <!-- Search -->
+          <div class="relative flex-1">
+            <i
+              class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm"
+            ></i>
+            <input
+              type="text"
+              placeholder="البحث في الديون..."
+              class="w-full bg-gray-50 border-none rounded-lg py-2.5 pr-10 pl-3 text-sm focus:ring-2 focus:ring-primary focus:bg-white"
+            />
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex gap-2">
+            <button
+              class="bg-gray-100 text-gray-700 px-4 py-2.5 rounded-lg text-sm font-medium"
+            >
+              <i class="fas fa-filter mr-1"></i>
+              فلتر
+            </button>
+            <a
+              href="debts-reports.html"
+              class="bg-primary text-white px-4 py-2.5 rounded-lg text-sm font-medium"
+            >
+              <i class="fas fa-chart-bar mr-1"></i>
+              التقارير
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Simplified Debts List -->
+      <section class="space-y-3">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+          <div class="p-4 border-b border-gray-100">
+            <h3 class="font-semibold text-gray-900">الديون النشطة</h3>
+          </div>
+
+          <div class="divide-y divide-gray-100">
+            <!-- Debt Item 1 -->
+            <div class="p-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <!-- Profile -->
+                  <div class="relative">
+                    <div
+                      class="w-12 h-12 bg-gradient-to-br from-red-400 to-red-600 rounded-xl flex items-center justify-center"
+                    >
+                      <span class="text-white font-bold">أ</span>
+                    </div>
+                    <div
+                      class="absolute -bottom-1 -left-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center"
+                    >
+                      <i class="fas fa-arrow-up text-white text-xs"></i>
+                    </div>
+                  </div>
+
+                  <!-- Details -->
+                  <div>
+                    <h4 class="font-semibold text-gray-900">أحمد محمد</h4>
+                    <p class="text-sm text-gray-600">عشاء مطعم البحر المتوسط</p>
+                    <div
+                      class="flex items-center gap-3 mt-1 text-xs text-gray-500"
+                    >
+                      <span>15 نوفمبر 2024</span>
+                      <span class="text-red-600">متأخر 5 أيام</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Amount & Actions -->
+                <div class="text-left">
+                  <div class="text-lg font-bold text-red-600 mb-2">
+                    -450.00 ر.س
+                  </div>
+                  <div class="flex gap-2">
+                    <button
+                      onclick="showSettleModal('debt1')"
+                      class="bg-accent text-white px-3 py-1.5 rounded-lg text-xs font-medium"
+                    >
+                      سداد
+                    </button>
+                    <div class="relative">
+                      <button
+                        onclick="toggleDropdown('dropdown1')"
+                        class="bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg text-xs"
+                      >
+                        <i class="fas fa-ellipsis-v"></i>
+                      </button>
+                      <!-- Dropdown Menu -->
+                      <div
+                        id="dropdown1"
+                        class="absolute left-0 top-full mt-1 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-50 hidden"
+                      >
+                        <div class="py-1">
+                          <button
+                            onclick="editDebt('debt1')"
+                            class="w-full text-right px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                          >
+                            <i class="fas fa-edit text-blue-600"></i>
+                            تعديل
+                          </button>
+                          <button
+                            onclick="shareDebt('debt1')"
+                            class="w-full text-right px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                          >
+                            <i class="fas fa-share text-green-600"></i>
+                            مشاركة
+                          </button>
+                          <button
+                            onclick="remindDebt('debt1')"
+                            class="w-full text-right px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                          >
+                            <i class="fas fa-bell text-yellow-600"></i>
+                            تذكير
+                          </button>
+                          <button
+                            onclick="deleteDebt('debt1')"
+                            class="w-full text-right px-3 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
+                          >
+                            <i class="fas fa-trash text-red-600"></i>
+                            حذف
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Progress Bar -->
+              <div class="mt-3">
+                <div class="flex justify-between text-xs text-gray-600 mb-1">
+                  <span>التقدم</span>
+                  <span>150 / 450</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-1.5">
+                  <div
+                    class="bg-orange-500 h-1.5 rounded-full"
+                    style="width: 33%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Debt Item 2 -->
+            <div class="p-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <!-- Profile -->
+                  <div class="relative">
+                    <div
+                      class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center"
+                    >
+                      <span class="text-white font-bold">س</span>
+                    </div>
+                    <div
+                      class="absolute -bottom-1 -left-1 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center"
+                    >
+                      <i class="fas fa-arrow-down text-white text-xs"></i>
+                    </div>
+                  </div>
+
+                  <!-- Details -->
+                  <div>
+                    <h4 class="font-semibold text-gray-900">سارة أحمد</h4>
+                    <p class="text-sm text-gray-600">قرض شخصي</p>
+                    <div
+                      class="flex items-center gap-3 mt-1 text-xs text-gray-500"
+                    >
+                      <span>20 نوفمبر 2024</span>
+                      <span class="text-green-600">متبقي 10 أيام</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Amount & Actions -->
+                <div class="text-left">
+                  <div class="text-lg font-bold text-green-600 mb-2">
+                    +2,500.00 ر.س
+                  </div>
+                  <div class="flex gap-2">
+                    <button
+                      class="bg-primary text-white px-3 py-1.5 rounded-lg text-xs font-medium"
+                    >
+                      تحصيل
+                    </button>
+                    <div class="relative">
+                      <button
+                        onclick="toggleDropdown('dropdown2')"
+                        class="bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg text-xs"
+                      >
+                        <i class="fas fa-ellipsis-v"></i>
+                      </button>
+                      <!-- Dropdown Menu -->
+                      <div
+                        id="dropdown2"
+                        class="absolute left-0 top-full mt-1 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-50 hidden"
+                      >
+                        <div class="py-1">
+                          <button
+                            onclick="editDebt('debt2')"
+                            class="w-full text-right px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                          >
+                            <i class="fas fa-edit text-blue-600"></i>
+                            تعديل
+                          </button>
+                          <button
+                            onclick="shareDebt('debt2')"
+                            class="w-full text-right px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                          >
+                            <i class="fas fa-share text-green-600"></i>
+                            مشاركة
+                          </button>
+                          <button
+                            onclick="remindDebt('debt2')"
+                            class="w-full text-right px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                          >
+                            <i class="fas fa-bell text-yellow-600"></i>
+                            تذكير
+                          </button>
+                          <button
+                            onclick="deleteDebt('debt2')"
+                            class="w-full text-right px-3 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
+                          >
+                            <i class="fas fa-trash text-red-600"></i>
+                            حذف
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Progress Bar -->
+              <div class="mt-3">
+                <div class="flex justify-between text-xs text-gray-600 mb-1">
+                  <span>التقدم</span>
+                  <span>1,000 / 2,500</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-1.5">
+                  <div
+                    class="bg-green-500 h-1.5 rounded-full"
+                    style="width: 40%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Load More -->
+            <div class="p-4 text-center">
+              <button class="text-primary font-medium">عرض المزيد</button>
+            </div>
+
+            <section class="p-4">
+              <div
+                class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 gap-3"
+              >
+                <h3 class="text-base sm:text-lg font-semibold text-gray-900">
+                  التذكيرات والإشعارات
+                </h3>
+                <button
+                  onclick="showReminderSettings()"
+                  class="bg-primary text-white px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium"
+                >
+                  إعدادات التذكير
+                </button>
+              </div>
+
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4">
+                <!-- Upcoming Reminders -->
+                <div
+                  class="bg-yellow-50 border border-yellow-200 rounded-xl p-3 sm:p-4"
+                >
+                  <div class="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                    <div
+                      class="w-8 h-8 sm:w-10 sm:h-10 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0"
+                    >
+                      <i class="fas fa-clock text-yellow-600 text-sm"></i>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <h4
+                        class="font-semibold text-gray-900 text-sm sm:text-base"
+                      >
+                        تذكيرات قادمة
+                      </h4>
+                      <p class="text-xs sm:text-sm text-gray-600">
+                        خلال 24 ساعة
+                      </p>
+                    </div>
+                  </div>
+                  <div class="space-y-1 sm:space-y-2">
+                    <div class="text-xs sm:text-sm">
+                      <span class="font-medium">أحمد محمد</span>
+                      <span class="text-gray-600"> - 450 ر.س</span>
+                    </div>
+                    <div class="text-xs sm:text-sm">
+                      <span class="font-medium">فاطمة علي</span>
+                      <span class="text-gray-600"> - 200 ر.س</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Overdue Alerts -->
+                <div
+                  class="bg-red-50 border border-red-200 rounded-xl p-3 sm:p-4"
+                >
+                  <div class="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                    <div
+                      class="w-8 h-8 sm:w-10 sm:h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0"
+                    >
+                      <i
+                        class="fas fa-exclamation-triangle text-red-600 text-sm"
+                      ></i>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <h4
+                        class="font-semibold text-gray-900 text-sm sm:text-base"
+                      >
+                        ديون متأخرة
+                      </h4>
+                      <p class="text-xs sm:text-sm text-gray-600">
+                        تحتاج متابعة
+                      </p>
+                    </div>
+                  </div>
+                  <div class="space-y-1 sm:space-y-2">
+                    <div class="text-xs sm:text-sm">
+                      <span class="font-medium">خالد محمود</span>
+                      <span class="text-gray-600"> - متأخر 7 أيام</span>
+                    </div>
+                    <div class="text-xs sm:text-sm">
+                      <span class="font-medium">نورا حسن</span>
+                      <span class="text-gray-600"> - متأخر 3 أيام</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Auto Reminders -->
+                <div
+                  class="bg-blue-50 border border-blue-200 rounded-xl p-3 sm:p-4"
+                >
+                  <div class="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                    <div
+                      class="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0"
+                    >
+                      <i class="fas fa-robot text-blue-600 text-sm"></i>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <h4
+                        class="font-semibold text-gray-900 text-sm sm:text-base"
+                      >
+                        تذكيرات تلقائية
+                      </h4>
+                      <p class="text-xs sm:text-sm text-gray-600">نشطة</p>
+                    </div>
+                  </div>
+                  <div class="space-y-2">
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs sm:text-sm text-gray-600">SMS</span>
+                      <div
+                        class="w-8 h-4 sm:w-10 sm:h-6 bg-green-500 rounded-full relative"
+                      >
+                        <div
+                          class="w-3 h-3 sm:w-4 sm:h-4 bg-white rounded-full absolute top-0.5 right-0.5 sm:top-1 sm:right-1"
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs sm:text-sm text-gray-600"
+                        >WhatsApp</span
+                      >
+                      <div
+                        class="w-8 h-4 sm:w-10 sm:h-6 bg-green-500 rounded-full relative"
+                      >
+                        <div
+                          class="w-3 h-3 sm:w-4 sm:h-4 bg-white rounded-full absolute top-0.5 right-0.5 sm:top-1 sm:right-1"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Simplified Add Debt Modal -->
+    <div
+      id="addDebtModal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto"
+      >
+        <div class="p-6 border-b border-gray-100">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-semibold text-gray-900">إضافة دين جديد</h3>
+            <button
+              onclick="closeModal('addDebtModal')"
+              class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-times text-gray-600"></i>
+            </button>
+          </div>
+        </div>
+
+        <form class="p-6 space-y-4">
+          <!-- Debt Type -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-3"
+              >نوع الدين</label
+            >
+            <div class="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                class="debt-type-btn p-4 border-2 border-red-200 bg-red-50 rounded-xl text-center active"
+              >
+                <i class="fas fa-arrow-up text-red-600 text-2xl mb-2"></i>
+                <div class="font-medium text-red-600">دين عليك</div>
+              </button>
+              <button
+                type="button"
+                class="debt-type-btn p-4 border-2 border-green-200 bg-gray-50 rounded-xl text-center"
+              >
+                <i class="fas fa-arrow-down text-green-600 text-2xl mb-2"></i>
+                <div class="font-medium text-green-600">دين لك</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Person Details -->
+          <div class="space-y-3">
+            <input
+              type="text"
+              placeholder="اسم الشخص"
+              class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+            <input
+              type="tel"
+              placeholder="رقم الهاتف"
+              class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+
+          <!-- Amount -->
+          <div class="grid grid-cols-2 gap-3">
+            <input
+              type="number"
+              placeholder="المبلغ"
+              class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+            <select
+              class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent"
+            >
+              <option value="SAR">ريال سعودي</option>
+              <option value="USD">دولار أمريكي</option>
+              <option value="EUR">يورو</option>
+            </select>
+          </div>
+
+          <!-- Description -->
+          <textarea
+            placeholder="وصف الدين"
+            class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent"
+            rows="3"
+          ></textarea>
+
+          <!-- Due Date -->
+          <input
+            type="date"
+            class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent"
+          />
+
+          <!-- Submit Buttons -->
+          <div class="flex gap-3 pt-4">
+            <button
+              type="submit"
+              class="flex-1 bg-primary text-white py-3 rounded-xl font-medium"
+            >
+              إضافة الدين
+            </button>
+            <button
+              type="button"
+              onclick="closeModal('addDebtModal')"
+              class="px-6 bg-gray-100 text-gray-700 py-3 rounded-xl font-medium"
+            >
+              إلغاء
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Settlement Modal -->
+    <div
+      id="settlementModal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+    >
+      <div class="bg-white rounded-2xl max-w-md w-full">
+        <div class="p-6 border-b border-gray-100">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-semibold text-gray-900">تسوية الدين</h3>
+            <button
+              onclick="closeModal('settlementModal')"
+              class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-times text-gray-600"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="p-6 space-y-4">
+          <!-- Debt Info -->
+          <div class="bg-gray-50 rounded-xl p-4">
+            <div class="flex items-center gap-3 mb-3">
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-red-400 to-red-600 rounded-xl flex items-center justify-center"
+              >
+                <span class="text-white font-bold">أ</span>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900">أحمد محمد</h4>
+                <p class="text-sm text-gray-600">عشاء مطعم البحر المتوسط</p>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-gray-600">المبلغ المتبقي:</span>
+              <span class="text-lg font-bold text-red-600">300.00 ر.س</span>
+            </div>
+          </div>
+
+          <!-- Settlement Options -->
+          <div class="space-y-3">
+            <label
+              class="flex items-center p-3 border border-gray-200 rounded-xl cursor-pointer"
+            >
+              <input
+                type="radio"
+                name="settlementType"
+                value="full"
+                class="w-4 h-4 text-primary"
+                checked
+              />
+              <span class="mr-3 font-medium">سداد كامل</span>
+              <span class="mr-auto text-gray-600">300.00 ر.س</span>
+            </label>
+            <label
+              class="flex items-center p-3 border border-gray-200 rounded-xl cursor-pointer"
+            >
+              <input
+                type="radio"
+                name="settlementType"
+                value="partial"
+                class="w-4 h-4 text-primary"
+              />
+              <span class="mr-3 font-medium">سداد جزئي</span>
+            </label>
+          </div>
+
+          <div id="partialAmountSection" class="hidden">
+            <input
+              type="number"
+              placeholder="المبلغ المراد سداده"
+              class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent"
+            />
+          </div>
+
+          <!-- Submit Buttons -->
+          <div class="flex gap-3 pt-4">
+            <button
+              type="submit"
+              class="flex-1 bg-accent text-white py-3 rounded-xl font-medium"
+            >
+              تأكيد السداد
+            </button>
+            <button
+              type="button"
+              onclick="closeModal('settlementModal')"
+              class="px-6 bg-gray-100 text-gray-700 py-3 rounded-xl font-medium"
+            >
+              إلغاء
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Add Button -->
+    <div class="fixed bottom-20 left-4">
+      <button
+        onclick="showAddDebtModal()"
+        class="w-14 h-14 bg-gradient-to-r from-primary to-indigo-600 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+      >
+        <i class="fas fa-plus text-white text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav
+      class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-2 py-2"
+    >
+      <div class="flex items-center justify-around">
+        <a
+          href="index.html"
+          class="flex flex-col items-center p-2 text-gray-400"
+        >
+          <i class="fas fa-home text-lg"></i>
+          <span class="text-xs mt-1">الرئيسية</span>
+        </a>
+        <a
+          href="expenses.html"
+          class="flex flex-col items-center p-2 text-gray-400"
+        >
+          <i class="fas fa-receipt text-lg"></i>
+          <span class="text-xs mt-1">المصاريف</span>
+        </a>
+        <div class="flex flex-col items-center p-2 text-primary">
+          <i class="fas fa-hand-holding-usd text-lg"></i>
+          <span class="text-xs mt-1 font-medium">الديون</span>
+        </div>
+        <a
+          href="split-group-bills.html"
+          class="flex flex-col items-center p-2 text-gray-400"
+        >
+          <i class="fas fa-users text-lg"></i>
+          <span class="text-xs mt-1">المجموعات</span>
+        </a>
+        <button class="flex flex-col items-center p-2 text-gray-400">
+          <i class="fas fa-ellipsis-h text-lg"></i>
+          <span class="text-xs mt-1">المزيد</span>
+        </button>
+      </div>
+    </nav>
+
+    <script>
+      // Basic functionality
+      function showAddDebtModal() {
+        document.getElementById("addDebtModal").classList.remove("hidden");
+      }
+
+      function showSettleModal(debtId) {
+        document.getElementById("settlementModal").classList.remove("hidden");
+      }
+
+      function closeModal(modalId) {
+        document.getElementById(modalId).classList.add("hidden");
+      }
+
+      // Dropdown functionality
+      function toggleDropdown(dropdownId) {
+        const dropdown = document.getElementById(dropdownId);
+        const isHidden = dropdown.classList.contains("hidden");
+
+        // Close all other dropdowns first
+        document.querySelectorAll('[id^="dropdown"]').forEach((dd) => {
+          dd.classList.add("hidden");
+        });
+
+        // Toggle the clicked dropdown
+        if (isHidden) {
+          dropdown.classList.remove("hidden");
+        }
+      }
+
+      // Action functions for dropdown options
+      function editDebt(debtId) {
+        console.log("تحرير الدين:", debtId);
+        // Close dropdown
+        document.querySelectorAll('[id^="dropdown"]').forEach((dd) => {
+          dd.classList.add("hidden");
+        });
+        // Add your edit logic here
+        alert("سيتم فتح نموذج تحرير الدين: " + debtId);
+      }
+
+      function shareDebt(debtId) {
+        console.log("مشاركة الدين:", debtId);
+        // Close dropdown
+        document.querySelectorAll('[id^="dropdown"]').forEach((dd) => {
+          dd.classList.add("hidden");
+        });
+        // Add your share logic here
+        if (navigator.share) {
+          navigator.share({
+            title: "مشاركة الدين",
+            text: "تفاصيل الدين من تطبيق غريم",
+            url: window.location.href,
+          });
+        } else {
+          // Fallback for browsers that don't support Web Share API
+          const shareText = "مشاركة تفاصيل الدين: " + debtId;
+          navigator.clipboard.writeText(shareText).then(() => {
+            alert("تم نسخ رابط المشاركة");
+          });
+        }
+      }
+
+      function remindDebt(debtId) {
+        console.log("تذكير بالدين:", debtId);
+        // Close dropdown
+        document.querySelectorAll('[id^="dropdown"]').forEach((dd) => {
+          dd.classList.add("hidden");
+        });
+        // Add your remind logic here
+        alert("سيتم إرسال تذكير للدين: " + debtId);
+      }
+
+      function deleteDebt(debtId) {
+        console.log("حذف الدين:", debtId);
+        // Close dropdown
+        document.querySelectorAll('[id^="dropdown"]').forEach((dd) => {
+          dd.classList.add("hidden");
+        });
+        // Add confirmation dialog
+        if (confirm("هل أنت متأكد من حذف هذا الدين؟")) {
+          // Add your delete logic here
+          alert("تم حذف الدين: " + debtId);
+          // You would typically remove the debt item from the DOM here
+        }
+      }
+
+      // Event listeners
+      document.addEventListener("DOMContentLoaded", function () {
+        // Debt type selection
+        document.querySelectorAll(".debt-type-btn").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            document.querySelectorAll(".debt-type-btn").forEach((b) => {
+              b.classList.remove("active");
+              b.classList.add("bg-gray-50");
+              b.classList.remove("bg-red-50", "bg-green-50");
+            });
+            this.classList.add("active");
+            if (this.textContent.includes("عليك")) {
+              this.classList.add("bg-red-50");
+              this.classList.remove("bg-gray-50");
+            } else {
+              this.classList.add("bg-green-50");
+              this.classList.remove("bg-gray-50");
+            }
+          });
+        });
+
+        // Settlement type radio buttons
+        document
+          .querySelectorAll('input[name="settlementType"]')
+          .forEach((radio) => {
+            radio.addEventListener("change", function () {
+              const partialSection = document.getElementById(
+                "partialAmountSection"
+              );
+              if (this.value === "partial") {
+                partialSection.classList.remove("hidden");
+              } else {
+                partialSection.classList.add("hidden");
+              }
+            });
+          });
+      });
+
+      // Close modals when clicking outside
+      document.addEventListener("click", function (e) {
+        if (e.target.classList.contains("fixed")) {
+          e.target.classList.add("hidden");
+        }
+
+        // Close dropdowns when clicking outside
+        if (
+          !e.target.closest(".relative") &&
+          !e.target.closest('[id^="dropdown"]')
+        ) {
+          document.querySelectorAll('[id^="dropdown"]').forEach((dd) => {
+            dd.classList.add("hidden");
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
