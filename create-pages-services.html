@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title
+      data-ar="إنشاء الصفحات والخدمات - غريم"
+      data-en="Create Pages & Services - Gharim"
+    >
+      إنشاء الصفحات والخدمات - غريم
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1",
+              secondary: "#f8fafc",
+              accent: "#10b981",
+              danger: "#ef4444",
+              warning: "#f59e0b",
+              info: "#3b82f6",
+            },
+            fontFamily: {
+              arabic: ["Tajawal", "Cairo", "system-ui", "sans-serif"],
+              english: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=Inter:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="lang.js"></script>
+  </head>
+  <body class="bg-gray-50 font-arabic min-h-screen">
+    <!-- Header -->
+    <header
+      class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50"
+    >
+      <div class="flex items-center justify-between p-4">
+        <div class="flex items-center gap-3">
+          <a
+            href="index.html"
+            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+          >
+            <i class="fas fa-arrow-right text-gray-600 text-lg"></i>
+          </a>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 bg-gradient-to-br from-primary to-indigo-600 rounded-xl flex items-center justify-center"
+            >
+              <i class="fas fa-plus-circle text-white text-lg"></i>
+            </div>
+            <div>
+              <h1
+                class="text-lg font-bold text-gray-900"
+                data-ar="إنشاء جديد"
+                data-en="Create New"
+              >
+                إنشاء جديد
+              </h1>
+              <p
+                class="text-xs text-gray-500"
+                data-ar="صفحات وخدمات جديدة"
+                data-en="New pages and services"
+              >
+                صفحات وخدمات جديدة
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <!-- Language Toggle -->
+          <button
+            id="langToggle"
+            onclick="toggleLanguage()"
+            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+          >
+            <i class="fas fa-language text-gray-600 text-lg"></i>
+          </button>
+          <!-- Help -->
+          <button
+            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center"
+          >
+            <i class="fas fa-question-circle text-gray-600 text-lg"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="p-4 pb-20">
+      <!-- Quick Actions Section -->
+      <div class="mb-6">
+        <h2
+          class="text-xl font-bold text-gray-900 mb-4"
+          data-ar="إجراءات سريعة"
+          data-en="Quick Actions"
+        >
+          إجراءات سريعة
+        </h2>
+        <div class="grid grid-cols-2 gap-4">
+          <!-- Create Empty Page -->
+          <button
+            onclick="showCreatePageModal()"
+            class="bg-gradient-to-br from-blue-500 to-blue-600 p-6 rounded-2xl text-white text-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+          >
+            <div
+              class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-3"
+            >
+              <i class="fas fa-file-alt text-white text-xl"></i>
+            </div>
+            <h3
+              class="font-semibold text-sm mb-1"
+              data-ar="صفحة فارغة"
+              data-en="Empty Page"
+            >
+              صفحة فارغة
+            </h3>
+            <p
+              class="text-xs opacity-80"
+              data-ar="إنشاء صفحة جديدة"
+              data-en="Create new page"
+            >
+              إنشاء صفحة جديدة
+            </p>
+          </button>
+
+          <!-- Create Service -->
+          <button
+            onclick="showCreateServiceModal()"
+            class="bg-gradient-to-br from-accent to-emerald-600 p-6 rounded-2xl text-white text-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+          >
+            <div
+              class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mx-auto mb-3"
+            >
+              <i class="fas fa-cogs text-white text-xl"></i>
+            </div>
+            <h3
+              class="font-semibold text-sm mb-1"
+              data-ar="خدمة جديدة"
+              data-en="New Service"
+            >
+              خدمة جديدة
+            </h3>
+            <p
+              class="text-xs opacity-80"
+              data-ar="إنشاء خدمة مخصصة"
+              data-en="Create custom service"
+            >
+              إنشاء خدمة مخصصة
+            </p>
+          </button>
+        </div>
+      </div>
+
+      <!-- Templates Section -->
+      <div class="mb-6">
+        <h2
+          class="text-xl font-bold text-gray-900 mb-4"
+          data-ar="القوالب الجاهزة"
+          data-en="Ready Templates"
+        >
+          القوالب الجاهزة
+        </h2>
+        <div class="space-y-3">
+          <!-- Landing Page Template -->
+          <div
+            class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+          >
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center"
+                >
+                  <i class="fas fa-home text-purple-600 text-lg"></i>
+                </div>
+                <div>
+                  <h3
+                    class="font-semibold text-gray-900"
+                    data-ar="صفحة هبوط"
+                    data-en="Landing Page"
+                  >
+                    صفحة هبوط
+                  </h3>
+                  <p
+                    class="text-sm text-gray-500"
+                    data-ar="صفحة ترحيبية بالمستخدمين"
+                    data-en="Welcome page for users"
+                  >
+                    صفحة ترحيبية بالمستخدمين
+                  </p>
+                </div>
+              </div>
+              <button
+                onclick="createFromTemplate('landing')"
+                class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-plus text-sm"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Dashboard Template -->
+          <div
+            class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+          >
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center"
+                >
+                  <i class="fas fa-chart-pie text-blue-600 text-lg"></i>
+                </div>
+                <div>
+                  <h3
+                    class="font-semibold text-gray-900"
+                    data-ar="لوحة تحكم"
+                    data-en="Dashboard"
+                  >
+                    لوحة تحكم
+                  </h3>
+                  <p
+                    class="text-sm text-gray-500"
+                    data-ar="لوحة تحكم تفاعلية مع الإحصائيات"
+                    data-en="Interactive dashboard with statistics"
+                  >
+                    لوحة تحكم تفاعلية مع الإحصائيات
+                  </p>
+                </div>
+              </div>
+              <button
+                onclick="createFromTemplate('dashboard')"
+                class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-plus text-sm"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Contact Form Template -->
+          <div
+            class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+          >
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center"
+                >
+                  <i class="fas fa-envelope text-green-600 text-lg"></i>
+                </div>
+                <div>
+                  <h3
+                    class="font-semibold text-gray-900"
+                    data-ar="نموذج اتصال"
+                    data-en="Contact Form"
+                  >
+                    نموذج اتصال
+                  </h3>
+                  <p
+                    class="text-sm text-gray-500"
+                    data-ar="نموذج للتواصل مع العملاء"
+                    data-en="Form for customer communication"
+                  >
+                    نموذج للتواصل مع العملاء
+                  </p>
+                </div>
+              </div>
+              <button
+                onclick="createFromTemplate('contact')"
+                class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-plus text-sm"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Services Section -->
+      <div class="mb-6">
+        <h2
+          class="text-xl font-bold text-gray-900 mb-4"
+          data-ar="الخدمات المتاحة"
+          data-en="Available Services"
+        >
+          الخدمات المتاحة
+        </h2>
+        <div class="grid grid-cols-1 gap-4">
+          <!-- API Service -->
+          <div
+            class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+          >
+            <div class="flex items-start justify-between">
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="fas fa-plug text-orange-600 text-lg"></i>
+                </div>
+                <div>
+                  <h3
+                    class="font-semibold text-gray-900 mb-1"
+                    data-ar="خدمة API"
+                    data-en="API Service"
+                  >
+                    خدمة API
+                  </h3>
+                  <p
+                    class="text-sm text-gray-500 mb-2"
+                    data-ar="إنشاء واجهة برمجة تطبيقات مخصصة"
+                    data-en="Create custom API interface"
+                  >
+                    إنشاء واجهة برمجة تطبيقات مخصصة
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    <span
+                      class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full"
+                    >
+                      REST
+                    </span>
+                    <span
+                      class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full"
+                    >
+                      GraphQL
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <button
+                onclick="createService('api')"
+                class="w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-plus text-sm"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Database Service -->
+          <div
+            class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+          >
+            <div class="flex items-start justify-between">
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="fas fa-database text-red-600 text-lg"></i>
+                </div>
+                <div>
+                  <h3
+                    class="font-semibold text-gray-900 mb-1"
+                    data-ar="خدمة قاعدة البيانات"
+                    data-en="Database Service"
+                  >
+                    خدمة قاعدة البيانات
+                  </h3>
+                  <p
+                    class="text-sm text-gray-500 mb-2"
+                    data-ar="إعداد وإدارة قواعد البيانات"
+                    data-en="Setup and manage databases"
+                  >
+                    إعداد وإدارة قواعد البيانات
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    <span
+                      class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full"
+                    >
+                      MySQL
+                    </span>
+                    <span
+                      class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full"
+                    >
+                      MongoDB
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <button
+                onclick="createService('database')"
+                class="w-10 h-10 bg-red-500 text-white rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-plus text-sm"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Authentication Service -->
+          <div
+            class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+          >
+            <div class="flex items-start justify-between">
+              <div class="flex items-start gap-3">
+                <div
+                  class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="fas fa-shield-alt text-indigo-600 text-lg"></i>
+                </div>
+                <div>
+                  <h3
+                    class="font-semibold text-gray-900 mb-1"
+                    data-ar="خدمة المصادقة"
+                    data-en="Authentication Service"
+                  >
+                    خدمة المصادقة
+                  </h3>
+                  <p
+                    class="text-sm text-gray-500 mb-2"
+                    data-ar="نظام أمان وتسجيل دخول متقدم"
+                    data-en="Advanced security and login system"
+                  >
+                    نظام أمان وتسجيل دخول متقدم
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    <span
+                      class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full"
+                    >
+                      OAuth
+                    </span>
+                    <span
+                      class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full"
+                    >
+                      JWT
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <button
+                onclick="createService('auth')"
+                class="w-10 h-10 bg-indigo-500 text-white rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-plus text-sm"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Activities -->
+      <div class="mb-6">
+        <h2
+          class="text-xl font-bold text-gray-900 mb-4"
+          data-ar="الأنشطة الحديثة"
+          data-en="Recent Activities"
+        >
+          الأنشطة الحديثة
+        </h2>
+        <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+          <div class="text-center py-8">
+            <div
+              class="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-history text-gray-400 text-xl"></i>
+            </div>
+            <p
+              class="text-gray-500 text-sm"
+              data-ar="لا توجد أنشطة حديثة"
+              data-en="No recent activities"
+            >
+              لا توجد أنشطة حديثة
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Page Modal -->
+    <div
+      id="createPageModal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden"
+    >
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div
+          class="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl transform transition-all"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <h3
+              class="text-lg font-bold text-gray-900"
+              data-ar="إنشاء صفحة جديدة"
+              data-en="Create New Page"
+            >
+              إنشاء صفحة جديدة
+            </h3>
+            <button
+              onclick="hideCreatePageModal()"
+              class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-times text-gray-600 text-sm"></i>
+            </button>
+          </div>
+          <form onsubmit="createNewPage(event)">
+            <div class="space-y-4">
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  data-ar="اسم الصفحة"
+                  data-en="Page Name"
+                >
+                  اسم الصفحة
+                </label>
+                <input
+                  type="text"
+                  id="pageName"
+                  class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="اكتب اسم الصفحة"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  data-ar="نوع الصفحة"
+                  data-en="Page Type"
+                >
+                  نوع الصفحة
+                </label>
+                <select
+                  id="pageType"
+                  class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+                >
+                  <option value="blank">صفحة فارغة</option>
+                  <option value="form">نموذج</option>
+                  <option value="list">قائمة</option>
+                  <option value="detail">تفاصيل</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  data-ar="الوصف"
+                  data-en="Description"
+                >
+                  الوصف
+                </label>
+                <textarea
+                  id="pageDescription"
+                  rows="3"
+                  class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="وصف مختصر للصفحة"
+                ></textarea>
+              </div>
+            </div>
+            <div class="flex gap-3 mt-6">
+              <button
+                type="button"
+                onclick="hideCreatePageModal()"
+                class="flex-1 py-3 px-4 bg-gray-100 text-gray-700 rounded-xl font-medium"
+              >
+                إلغاء
+              </button>
+              <button
+                type="submit"
+                class="flex-1 py-3 px-4 bg-primary text-white rounded-xl font-medium"
+              >
+                إنشاء
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Service Modal -->
+    <div
+      id="createServiceModal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden"
+    >
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div
+          class="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl transform transition-all"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <h3
+              class="text-lg font-bold text-gray-900"
+              data-ar="إنشاء خدمة جديدة"
+              data-en="Create New Service"
+            >
+              إنشاء خدمة جديدة
+            </h3>
+            <button
+              onclick="hideCreateServiceModal()"
+              class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-times text-gray-600 text-sm"></i>
+            </button>
+          </div>
+          <form onsubmit="createNewService(event)">
+            <div class="space-y-4">
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  data-ar="اسم الخدمة"
+                  data-en="Service Name"
+                >
+                  اسم الخدمة
+                </label>
+                <input
+                  type="text"
+                  id="serviceName"
+                  class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="اكتب اسم الخدمة"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  data-ar="نوع الخدمة"
+                  data-en="Service Type"
+                >
+                  نوع الخدمة
+                </label>
+                <select
+                  id="serviceType"
+                  class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+                >
+                  <option value="api">API</option>
+                  <option value="database">قاعدة بيانات</option>
+                  <option value="auth">مصادقة</option>
+                  <option value="storage">تخزين</option>
+                  <option value="notification">إشعارات</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  data-ar="المنفذ"
+                  data-en="Port"
+                >
+                  المنفذ
+                </label>
+                <input
+                  type="number"
+                  id="servicePort"
+                  class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="8080"
+                  min="1000"
+                  max="9999"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                  data-ar="الوصف"
+                  data-en="Description"
+                >
+                  الوصف
+                </label>
+                <textarea
+                  id="serviceDescription"
+                  rows="3"
+                  class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="وصف مختصر للخدمة"
+                ></textarea>
+              </div>
+            </div>
+            <div class="flex gap-3 mt-6">
+              <button
+                type="button"
+                onclick="hideCreateServiceModal()"
+                class="flex-1 py-3 px-4 bg-gray-100 text-gray-700 rounded-xl font-medium"
+              >
+                إلغاء
+              </button>
+              <button
+                type="submit"
+                class="flex-1 py-3 px-4 bg-accent text-white rounded-xl font-medium"
+              >
+                إنشاء
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div
+      id="successToast"
+      class="fixed top-4 right-4 bg-accent text-white px-6 py-4 rounded-xl shadow-lg transform translate-x-full transition-transform z-50"
+    >
+      <div class="flex items-center gap-3">
+        <i class="fas fa-check-circle"></i>
+        <span id="successMessage">تم الإنشاء بنجاح!</span>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav
+      class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-4 py-2"
+    >
+      <div class="flex items-center justify-around">
+        <a
+          href="index.html"
+          class="flex flex-col items-center gap-1 py-2 px-3 text-gray-500"
+        >
+          <i class="fas fa-home text-lg"></i>
+          <span class="text-xs">الرئيسية</span>
+        </a>
+        <a
+          href="groups.html"
+          class="flex flex-col items-center gap-1 py-2 px-3 text-gray-500"
+        >
+          <i class="fas fa-users text-lg"></i>
+          <span class="text-xs">المجموعات</span>
+        </a>
+        <a
+          href="create-pages-services.html"
+          class="flex flex-col items-center gap-1 py-2 px-3 text-primary"
+        >
+          <i class="fas fa-plus-circle text-lg"></i>
+          <span class="text-xs">إنشاء</span>
+        </a>
+        <a
+          href="statistics.html"
+          class="flex flex-col items-center gap-1 py-2 px-3 text-gray-500"
+        >
+          <i class="fas fa-chart-bar text-lg"></i>
+          <span class="text-xs">الإحصائيات</span>
+        </a>
+        <a
+          href="profile.html"
+          class="flex flex-col items-center gap-1 py-2 px-3 text-gray-500"
+        >
+          <i class="fas fa-user text-lg"></i>
+          <span class="text-xs">الملف الشخصي</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- JavaScript -->
+    <script>
+      // Modal Functions
+      function showCreatePageModal() {
+        document.getElementById("createPageModal").classList.remove("hidden");
+      }
+
+      function hideCreatePageModal() {
+        document.getElementById("createPageModal").classList.add("hidden");
+      }
+
+      function showCreateServiceModal() {
+        document
+          .getElementById("createServiceModal")
+          .classList.remove("hidden");
+      }
+
+      function hideCreateServiceModal() {
+        document.getElementById("createServiceModal").classList.add("hidden");
+      }
+
+      // Create Functions
+      function createNewPage(event) {
+        event.preventDefault();
+        const pageName = document.getElementById("pageName").value;
+        const pageType = document.getElementById("pageType").value;
+        const pageDescription =
+          document.getElementById("pageDescription").value;
+
+        // Simulate page creation
+        showSuccessToast(`تم إنشاء الصفحة "${pageName}" بنجاح!`);
+        hideCreatePageModal();
+
+        // Reset form
+        document.getElementById("pageName").value = "";
+        document.getElementById("pageDescription").value = "";
+      }
+
+      function createNewService(event) {
+        event.preventDefault();
+        const serviceName = document.getElementById("serviceName").value;
+        const serviceType = document.getElementById("serviceType").value;
+        const servicePort = document.getElementById("servicePort").value;
+        const serviceDescription =
+          document.getElementById("serviceDescription").value;
+
+        // Simulate service creation
+        showSuccessToast(`تم إنشاء الخدمة "${serviceName}" بنجاح!`);
+        hideCreateServiceModal();
+
+        // Reset form
+        document.getElementById("serviceName").value = "";
+        document.getElementById("servicePort").value = "";
+        document.getElementById("serviceDescription").value = "";
+      }
+
+      function createFromTemplate(templateType) {
+        const templates = {
+          landing: "صفحة هبوط",
+          dashboard: "لوحة تحكم",
+          contact: "نموذج اتصال",
+        };
+        showSuccessToast(`تم إنشاء ${templates[templateType]} بنجاح!`);
+      }
+
+      function createService(serviceType) {
+        const services = {
+          api: "خدمة API",
+          database: "خدمة قاعدة البيانات",
+          auth: "خدمة المصادقة",
+        };
+        showSuccessToast(`تم إنشاء ${services[serviceType]} بنجاح!`);
+      }
+
+      // Toast Function
+      function showSuccessToast(message) {
+        const toast = document.getElementById("successToast");
+        const messageElement = document.getElementById("successMessage");
+        messageElement.textContent = message;
+
+        toast.classList.remove("translate-x-full");
+        setTimeout(() => {
+          toast.classList.add("translate-x-full");
+        }, 3000);
+      }
+
+      // Language Toggle (if lang.js is available)
+      function toggleLanguage() {
+        if (typeof window.toggleLanguage !== "undefined") {
+          window.toggleLanguage();
+        } else {
+          // Fallback language toggle
+          const html = document.documentElement;
+          const currentLang = html.getAttribute("lang");
+          if (currentLang === "ar") {
+            html.setAttribute("lang", "en");
+            html.setAttribute("dir", "ltr");
+          } else {
+            html.setAttribute("lang", "ar");
+            html.setAttribute("dir", "rtl");
+          }
+        }
+      }
+
+      // Close modals when clicking outside
+      document.addEventListener("click", function (event) {
+        const pageModal = document.getElementById("createPageModal");
+        const serviceModal = document.getElementById("createServiceModal");
+
+        if (event.target === pageModal) {
+          hideCreatePageModal();
+        }
+        if (event.target === serviceModal) {
+          hideCreateServiceModal();
+        }
+      });
+
+      // Initialize page
+      document.addEventListener("DOMContentLoaded", function () {
+        // Any initialization code can go here
+        console.log("Create Pages & Services page loaded");
+      });
+    </script>
+  </body>
+</html>
