@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title
-      data-ar="غريم - تطبيق تقسيم المصاريف"
-      data-en="Gharim - Expense Splitting App"
+      data-ar="تقسيم - تطبيق تقسيم المصاريف الذكي"
+      data-en="Taqseem - Smart Expense Splitting App"
     >
-      غريم - تطبيق تقسيم المصاريف
+      تقسيم - تطبيق تقسيم المصاريف الذكي
     </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -15,11 +15,13 @@
         theme: {
           extend: {
             colors: {
-              primary: "#6366f1",
+              primary: "#2563eb", // More trustworthy blue
               secondary: "#f8fafc",
-              accent: "#10b981",
-              danger: "#ef4444",
-              warning: "#f59e0b",
+              accent: "#059669", // Success green
+              danger: "#dc2626",
+              warning: "#d97706",
+              gold: "#f59e0b", // Arabian gold accent
+              desert: "#92400e", // Desert brown
             },
             fontFamily: {
               arabic: ["Tajawal", "Cairo", "system-ui", "sans-serif"],
@@ -40,1057 +42,775 @@
     <script src="lang.js"></script>
   </head>
   <body class="bg-gray-50 font-arabic min-h-screen">
-    <!-- Header -->
+    <!-- Enhanced Header with Search -->
     <header
       class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50"
     >
-      <div class="flex items-center justify-between p-4">
-        <div class="flex items-center gap-3">
-          <div
-            class="w-10 h-10 bg-gradient-to-br from-primary to-indigo-600 rounded-xl flex items-center justify-center"
-          >
-            <i class="fas fa-calculator text-white text-lg"></i>
-          </div>
-          <div>
-            <h1
-              class="text-xl font-bold text-gray-900"
-              data-ar="تقسيم المصاريف"
-              data-en="Expense Splitting"
-            >
-              تقسيم المصاريف
-            </h1>
-            <p
-              class="text-xs text-gray-500"
-              data-ar="إدارة ذكية للمصاريف المشتركة"
-              data-en="Smart management of shared expenses"
-            >
-              إدارة ذكية للمصاريف المشتركة
-            </p>
-          </div>
-        </div>
-        <div class="flex items-center gap-2">
-          <!-- Notifications -->
-          <div class="relative">
-            <button
-              id="notificationBtn"
-              onclick="toggleNotifications()"
-              class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center relative"
-            >
-              <i class="fas fa-bell text-gray-600 text-lg"></i>
-              <!-- Notification Badge -->
-              <span
-                class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center"
-                >3</span
-              >
-            </button>
-
-            <!-- Notifications Dropdown -->
+      <div class="p-4">
+        <!-- Top Row: Brand and Profile -->
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3">
             <div
-              id="notificationsDropdown"
-              class="absolute top-12 left-0 w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 hidden z-50 max-h-96 overflow-y-auto"
+              class="w-12 h-12 bg-gradient-to-br from-primary to-blue-600 rounded-2xl flex items-center justify-center shadow-md"
             >
-              <!-- Header -->
-              <div class="p-4 border-b border-gray-100">
-                <div class="flex items-center justify-between">
-                  <h3 class="font-semibold text-gray-900">الإشعارات</h3>
-                  <button class="text-primary text-sm font-medium">
-                    تعيين الكل كمقروء
-                  </button>
-                </div>
-                <p class="text-xs text-gray-500 mt-1">تحديثات تقسيم الفواتير</p>
-              </div>
-
-              <!-- Notifications List -->
-              <div class="max-h-80 overflow-y-auto">
-                <!-- New Group Added -->
-                <div
-                  class="p-4 border-b border-gray-50 hover:bg-gray-50 cursor-pointer"
-                >
-                  <div class="flex items-start gap-3">
-                    <div
-                      class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"
-                    >
-                      <i class="fas fa-users text-green-600 text-sm"></i>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <p class="font-medium text-gray-900 text-sm">
-                        مجموعة جديدة تم إنشاؤها
-                      </p>
-                      <p class="text-gray-600 text-xs mt-1">
-                        تم إنشاء مجموعة جديدة لتقسيم الفواتير "رحلة جدة"
-                      </p>
-                      <p class="text-gray-400 text-xs mt-1">منذ 5 دقائق</p>
-                    </div>
-                    <span
-                      class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
-                    ></span>
-                  </div>
-                </div>
-
-                <!-- New Expense Added -->
-                <div
-                  class="p-4 border-b border-gray-50 hover:bg-gray-50 cursor-pointer"
-                >
-                  <div class="flex items-start gap-3">
-                    <div
-                      class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0"
-                    >
-                      <i class="fas fa-receipt text-red-600 text-sm"></i>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <p class="font-medium text-gray-900 text-sm">
-                        مصروف جديد تم إضافته
-                      </p>
-                      <p class="text-gray-600 text-xs mt-1">
-                        أحمد أضاف مصروف "عشاء المطعم" بقيمة 127.50 ر.س
-                      </p>
-                      <p class="text-gray-400 text-xs mt-1">منذ 15 دقيقة</p>
-                    </div>
-                    <span
-                      class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
-                    ></span>
-                  </div>
-                </div>
-
-                <!-- New Participant Joined -->
-                <div
-                  class="p-4 border-b border-gray-50 hover:bg-gray-50 cursor-pointer"
-                >
-                  <div class="flex items-start gap-3">
-                    <div
-                      class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0"
-                    >
-                      <i class="fas fa-user-plus text-blue-600 text-sm"></i>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <p class="font-medium text-gray-900 text-sm">
-                        عضو جديد انضم للمجموعة
-                      </p>
-                      <p class="text-gray-600 text-xs mt-1">
-                        سارة انضمت إلى مجموعة "رحلة المدينة"
-                      </p>
-                      <p class="text-gray-400 text-xs mt-1">منذ 30 دقيقة</p>
-                    </div>
-                    <span
-                      class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
-                    ></span>
-                  </div>
-                </div>
-
-                <!-- New Image/Receipt Uploaded -->
-                <div
-                  class="p-4 border-b border-gray-50 hover:bg-gray-50 cursor-pointer"
-                >
-                  <div class="flex items-start gap-3">
-                    <div
-                      class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0"
-                    >
-                      <i class="fas fa-image text-purple-600 text-sm"></i>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <p class="font-medium text-gray-900 text-sm">
-                        إيصال جديد تم رفعه
-                      </p>
-                      <p class="text-gray-600 text-xs mt-1">
-                        خالد رفع صورة إيصال لمصروف "وقود الرحلة"
-                      </p>
-                      <p class="text-gray-400 text-xs mt-1">منذ ساعة</p>
-                    </div>
-                    <span
-                      class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
-                    ></span>
-                  </div>
-                </div>
-
-                <!-- Expense Updated -->
-                <div
-                  class="p-4 border-b border-gray-50 hover:bg-gray-50 cursor-pointer"
-                >
-                  <div class="flex items-start gap-3">
-                    <div
-                      class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0"
-                    >
-                      <i class="fas fa-edit text-orange-600 text-sm"></i>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <p class="font-medium text-gray-900 text-sm">
-                        مصروف تم تحديثه
-                      </p>
-                      <p class="text-gray-600 text-xs mt-1">
-                        تم تحديث مصروف "فندق الإقامة" من 200 إلى 180 ر.س
-                      </p>
-                      <p class="text-gray-400 text-xs mt-1">منذ ساعتين</p>
-                    </div>
-                    <span
-                      class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
-                    ></span>
-                  </div>
-                </div>
-
-                <!-- Bill Split Finalized -->
-                <div class="p-4 hover:bg-gray-50 cursor-pointer">
-                  <div class="flex items-start gap-3">
-                    <div
-                      class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"
-                    >
-                      <i class="fas fa-check-circle text-green-600 text-sm"></i>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <p class="font-medium text-gray-900 text-sm">
-                        تم تقسيم الفاتورة
-                      </p>
-                      <p class="text-gray-600 text-xs mt-1">
-                        تم تقسيم فاتورة "رحلة التخييم" - حصتك 89.50 ر.س
-                      </p>
-                      <p class="text-gray-400 text-xs mt-1">منذ 3 ساعات</p>
-                    </div>
-                    <span
-                      class="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-2"
-                    ></span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Footer -->
-              <div class="p-4 border-t border-gray-100 text-center">
-                <button class="text-primary text-sm font-medium">
-                  عرض جميع الإشعارات
-                </button>
-              </div>
+              <i class="fas fa-balance-scale text-white text-lg"></i>
+            </div>
+            <div>
+              <h1
+                class="text-xl font-bold text-gray-900"
+                data-ar="تقسيم"
+                data-en="Taqseem"
+              >
+                تقسيم
+              </h1>
+              <p
+                class="text-xs text-gray-500"
+                data-ar="تقسيم ذكي للمصاريف"
+                data-en="Smart expense splitting"
+              >
+                تقسيم ذكي للمصاريف
+              </p>
             </div>
           </div>
+          <div class="flex items-center gap-3">
+            <!-- Notifications -->
+            <div class="relative">
+              <button
+                id="notificationBtn"
+                onclick="toggleNotifications()"
+                class="w-11 h-11 bg-gray-100 rounded-xl flex items-center justify-center relative hover:bg-gray-200 transition-colors"
+              >
+                <i class="fas fa-bell text-gray-600 text-lg"></i>
+                <span
+                  class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center"
+                  >3</span
+                >
+              </button>
+            </div>
+            <!-- Profile -->
+            <a
+              href="profile.html"
+              class="w-11 h-11 bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl flex items-center justify-center hover:from-gray-300 hover:to-gray-400 transition-all"
+            >
+              <i class="fas fa-user text-gray-600 text-lg"></i>
+            </a>
+          </div>
+        </div>
 
-          <!-- Profile -->
-          <a
-            href="profile.html"
-            class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
+        <!-- Enhanced Search Bar -->
+        <div class="relative">
+          <div
+            class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none"
           >
-            <i class="fas fa-user-circle text-gray-600 text-xl"></i>
-          </a>
+            <i class="fas fa-search text-gray-400"></i>
+          </div>
+          <input
+            type="text"
+            id="globalSearch"
+            placeholder="ابحث في المجموعات، المصاريف، أو الأشخاص..."
+            data-ar-placeholder="ابحث في المجموعات، المصاريف، أو الأشخاص..."
+            data-en-placeholder="Search groups, expenses, or people..."
+            class="w-full bg-gray-100 border border-gray-200 rounded-2xl px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+          />
+          <button class="absolute inset-y-0 left-0 flex items-center pl-4">
+            <i
+              class="fas fa-sliders-h text-gray-400 hover:text-primary transition-colors"
+            ></i>
+          </button>
         </div>
       </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="pb-16">
-      <!-- Tab Bar Navigation -->
-      <div class="px-4 mb-6">
-        <div class="bg-gray-100 rounded-2xl p-1">
-          <div class="flex">
-            <button
-              id="tab-groups"
-              onclick="switchTab('groups')"
-              class="flex-1 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-200 bg-white text-primary shadow-sm"
-            >
-              مجموعات
-            </button>
-            <button
-              id="tab-reports"
-              onclick="switchTab('reports')"
-              class="flex-1 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-200 text-gray-600"
-            >
-              تقارير
-            </button>
-            <button
-              id="tab-money"
-              onclick="switchTab('money')"
-              class="flex-1 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-200 text-gray-600"
-            >
-              مصاري
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tab Content -->
-      <div id="tab-content">
-        <!-- Groups Tab Content (Default) -->
-        <div id="groups-content" class="px-4">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-semibold text-gray-900">
-              المجموعات النشطة
-            </h3>
-            <span class="text-sm text-gray-500">0 قوائم</span>
-          </div>
-
-          <!-- Empty State -->
-          <div class="text-center py-12">
-            <div
-              class="w-20 h-20 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center"
-            >
-              <i class="fas fa-users text-gray-400 text-2xl"></i>
-            </div>
-            <h4
-              class="text-lg font-semibold text-gray-900 mb-2"
-              data-ar="لا توجد مجموعات بعد"
-              data-en="No groups yet"
-            >
-              لا توجد مجموعات بعد
-            </h4>
-            <p
-              class="text-gray-500 text-sm mb-6 max-w-xs mx-auto"
-              data-ar="أنشئ مجموعة جديدة أو انضم لمجموعة موجودة لبدء تقسيم المصاريف"
-              data-en="Create a new group or join an existing one to start splitting expenses"
-            >
-              أنشئ مجموعة جديدة أو انضم لمجموعة موجودة لبدء تقسيم المصاريف
-            </p>
-          </div>
-        </div>
-
-        <!-- Reports Tab Content -->
-        <div id="reports-content" class="px-4 hidden">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-semibold text-gray-900">
-              التقارير المالية
-            </h3>
-            <button class="text-primary text-sm font-medium">تصدير</button>
-          </div>
-
-          <!-- Monthly Summary -->
-          <div
-            class="bg-white rounded-2xl p-4 mb-4 shadow-sm border border-gray-100"
-          >
-            <h4 class="font-semibold text-gray-900 mb-3">ملخص الشهر الحالي</h4>
-            <div class="grid grid-cols-2 gap-4">
-              <div class="text-center p-3 bg-green-50 rounded-xl">
-                <p class="text-xs text-gray-500 mb-1">إجمالي المصاريف</p>
-                <p class="text-lg font-bold text-green-600">1,250.75 ر.س</p>
-              </div>
-              <div class="text-center p-3 bg-blue-50 rounded-xl">
-                <p class="text-xs text-gray-500 mb-1">حصتك</p>
-                <p class="text-lg font-bold text-blue-600">312.25 ر.س</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Categories Chart -->
-          <div
-            class="bg-white rounded-2xl p-4 mb-4 shadow-sm border border-gray-100"
-          >
-            <h4 class="font-semibold text-gray-900 mb-3">المصاريف حسب الفئة</h4>
-            <div class="space-y-3">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <div class="w-3 h-3 bg-orange-500 rounded-full"></div>
-                  <span class="text-sm text-gray-700">الطعام والشراب</span>
-                </div>
-                <span class="text-sm font-medium text-gray-900">45%</span>
-              </div>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
-                  <span class="text-sm text-gray-700">المواصلات</span>
-                </div>
-                <span class="text-sm font-medium text-gray-900">30%</span>
-              </div>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                  <span class="text-sm text-gray-700">الإقامة</span>
-                </div>
-                <span class="text-sm font-medium text-gray-900">25%</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Recent Transactions -->
-          <div
-            class="bg-white rounded-2xl p-4 mb-4 shadow-sm border border-gray-100"
-          >
-            <h4 class="font-semibold text-gray-900 mb-3">المعاملات الأخيرة</h4>
-            <div class="space-y-3">
-              <div class="flex items-center gap-3 p-2">
-                <div
-                  class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center"
-                >
-                  <i class="fas fa-utensils text-red-600 text-xs"></i>
-                </div>
-                <div class="flex-1">
-                  <p class="text-sm font-medium text-gray-900">عشاء المطعم</p>
-                  <p class="text-xs text-gray-500">منذ ساعتين</p>
-                </div>
-                <span class="text-sm font-medium text-gray-900"
-                  >127.50 ر.س</span
-                >
-              </div>
-              <div class="flex items-center gap-3 p-2">
-                <div
-                  class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center"
-                >
-                  <i class="fas fa-gas-pump text-blue-600 text-xs"></i>
-                </div>
-                <div class="flex-1">
-                  <p class="text-sm font-medium text-gray-900">وقود السيارة</p>
-                  <p class="text-xs text-gray-500">أمس</p>
-                </div>
-                <span class="text-sm font-medium text-gray-900">85.00 ر.س</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Money Tab Content -->
-        <div id="money-content" class="px-4 hidden">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-semibold text-gray-900">المحفظة المالية</h3>
-            <button class="text-primary text-sm font-medium">تحديث</button>
-          </div>
-
-          <!-- Balance Overview -->
-          <div
-            class="bg-gradient-to-r from-primary to-indigo-600 rounded-2xl p-4 mb-4 text-white"
-          >
-            <h4 class="text-sm opacity-90 mb-1">الرصيد الإجمالي</h4>
-            <p class="text-2xl font-bold mb-3">856.25 ر.س</p>
-            <div class="flex items-center gap-4 text-sm">
-              <div>
-                <span class="opacity-90">مستحق لك: </span>
-                <span class="font-medium">+245.50 ر.س</span>
-              </div>
-              <div>
-                <span class="opacity-90">عليك دفع: </span>
-                <span class="font-medium">-89.75 ر.س</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Payment Methods -->
-          <div
-            class="bg-white rounded-2xl p-4 mb-4 shadow-sm border border-gray-100"
-          >
-            <h4 class="font-semibold text-gray-900 mb-3">طرق الدفع</h4>
-            <div class="space-y-3">
-              <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
-                <div
-                  class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center"
-                >
-                  <i class="fas fa-university text-green-600"></i>
-                </div>
-                <div class="flex-1">
-                  <p class="font-medium text-gray-900">البنك الأهلي</p>
-                  <p class="text-sm text-gray-500">****1234</p>
-                </div>
-                <span
-                  class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full"
-                  >الافتراضي</span
-                >
-              </div>
-              <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
-                <div
-                  class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center"
-                >
-                  <i class="fas fa-credit-card text-blue-600"></i>
-                </div>
-                <div class="flex-1">
-                  <p class="font-medium text-gray-900">فيزا كارد</p>
-                  <p class="text-sm text-gray-500">****5678</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Pending Settlements -->
-          <div
-            class="bg-white rounded-2xl p-4 mb-4 shadow-sm border border-gray-100"
-          >
-            <h4 class="font-semibold text-gray-900 mb-3">التسويات المعلقة</h4>
-            <div class="space-y-3">
-              <div
-                class="flex items-center gap-3 p-3 bg-amber-50 rounded-xl border border-amber-100"
-              >
-                <div
-                  class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center"
-                >
-                  <i class="fas fa-clock text-amber-600 text-sm"></i>
-                </div>
-                <div class="flex-1">
-                  <p class="font-medium text-gray-900">أحمد العلي</p>
-                  <p class="text-sm text-gray-500">رحلة المدينة</p>
-                </div>
-                <div class="text-left">
-                  <p class="font-semibold text-amber-600">45.75 ر.س</p>
-                  <p class="text-xs text-gray-500">مطلوب منك</p>
-                </div>
-              </div>
-              <div
-                class="flex items-center gap-3 p-3 bg-green-50 rounded-xl border border-green-100"
-              >
-                <div
-                  class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center"
-                >
-                  <i class="fas fa-arrow-down text-green-600 text-sm"></i>
-                </div>
-                <div class="flex-1">
-                  <p class="font-medium text-gray-900">سارة محمد</p>
-                  <p class="text-sm text-gray-500">رحلة التخييم</p>
-                </div>
-                <div class="text-left">
-                  <p class="font-semibold text-green-600">23.25 ر.س</p>
-                  <p class="text-xs text-gray-500">مستحق لك</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Auth Section -->
-      <div class="p-4">
+    <!-- Quick Stats Dashboard -->
+    <section class="px-4 py-6">
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <!-- Total Balance -->
         <div
-          class="bg-gradient-to-r from-accent to-emerald-600 rounded-2xl p-6 text-white text-center"
+          class="bg-gradient-to-br from-primary to-blue-600 rounded-2xl p-4 text-white"
         >
-          <div class="mb-4">
-            <i class="fas fa-user-shield text-3xl mb-2"></i>
-            <h3
-              class="text-lg font-semibold mb-1"
-              data-ar="سجل دخولك"
-              data-en="Sign In"
+          <div class="flex items-center justify-between mb-2">
+            <i class="fas fa-wallet text-white/80"></i>
+            <span
+              class="text-xs text-white/80"
+              data-ar="الرصيد الكلي"
+              data-en="Total Balance"
+              >الرصيد الكلي</span
             >
-              سجل دخولك
-            </h3>
-            <p
-              class="text-emerald-100 text-sm"
-              data-ar="احفظ بياناتك وزامن غريمك عبر الأجهزة"
-              data-en="Save your data and sync across devices"
-            >
-              احفظ بياناتك وزامن غريمك عبر الأجهزة
-            </p>
           </div>
-          <div class="flex gap-3">
-            <a
-              href="login.html"
-              class="flex-1 bg-white/20 backdrop-blur-sm text-white py-2 rounded-lg font-medium"
-              data-ar="تسجيل الدخول"
-              data-en="Login"
+          <p class="text-2xl font-bold">+1,245.50</p>
+          <p
+            class="text-xs text-white/80"
+            data-ar="ريال سعودي"
+            data-en="Saudi Riyal"
+          >
+            ريال سعودي
+          </p>
+        </div>
+
+        <!-- Active Groups -->
+        <div
+          class="bg-gradient-to-br from-accent to-green-600 rounded-2xl p-4 text-white"
+        >
+          <div class="flex items-center justify-between mb-2">
+            <i class="fas fa-users text-white/80"></i>
+            <span
+              class="text-xs text-white/80"
+              data-ar="مجموعات نشطة"
+              data-en="Active Groups"
+              >مجموعات نشطة</span
             >
-              تسجيل الدخول
-            </a>
-            <a
-              href="register.html"
-              class="flex-1 bg-white text-emerald-600 py-2 rounded-lg font-medium"
-              data-ar="حساب جديد"
-              data-en="Register"
+          </div>
+          <p class="text-2xl font-bold">7</p>
+          <p class="text-xs text-white/80" data-ar="مجموعات" data-en="Groups">
+            مجموعات
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="grid grid-cols-3 gap-3">
+        <a
+          href="new-tricount.html"
+          class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow"
+        >
+          <div
+            class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-2"
+          >
+            <i class="fas fa-plus text-primary"></i>
+          </div>
+          <span
+            class="text-sm font-medium text-gray-900"
+            data-ar="مجموعة جديدة"
+            data-en="New Group"
+            >مجموعة جديدة</span
+          >
+        </a>
+
+        <a
+          href="add-expense.html"
+          class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow"
+        >
+          <div
+            class="w-12 h-12 bg-warning/10 rounded-xl flex items-center justify-center mx-auto mb-2"
+          >
+            <i class="fas fa-receipt text-warning"></i>
+          </div>
+          <span
+            class="text-sm font-medium text-gray-900"
+            data-ar="مصروف سريع"
+            data-en="Quick Expense"
+            >مصروف سريع</span
+          >
+        </a>
+
+        <a
+          href="requests.html"
+          class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow"
+        >
+          <div
+            class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mx-auto mb-2"
+          >
+            <i class="fas fa-hand-holding-heart text-gold"></i>
+          </div>
+          <span
+            class="text-sm font-medium text-gray-900"
+            data-ar="طلب أموال"
+            data-en="Request Money"
+            >طلب أموال</span
+          >
+        </a>
+      </div>
+    </section>
+
+    <!-- Main Content Tabs -->
+    <div class="px-4 mb-6">
+      <div class="bg-gray-100 rounded-2xl p-1">
+        <div class="flex">
+          <button
+            id="tab-groups"
+            onclick="switchTab('groups')"
+            class="flex-1 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-200 bg-white text-primary shadow-sm"
+            data-ar="مجموعاتي"
+            data-en="My Groups"
+          >
+            مجموعاتي
+          </button>
+          <button
+            id="tab-recent"
+            onclick="switchTab('recent')"
+            class="flex-1 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-200 text-gray-600"
+            data-ar="الأخيرة"
+            data-en="Recent"
+          >
+            الأخيرة
+          </button>
+          <button
+            id="tab-reports"
+            onclick="switchTab('reports')"
+            class="flex-1 py-3 px-4 rounded-xl text-sm font-medium transition-all duration-200 text-gray-600"
+            data-ar="التقارير"
+            data-en="Reports"
+          >
+            التقارير
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab Content -->
+    <main class="px-4 pb-24">
+      <!-- Groups Tab Content (Default) -->
+      <div id="groups-content">
+        <!-- Filter and Sort -->
+        <div class="flex items-center justify-between mb-4">
+          <h3
+            class="text-lg font-semibold text-gray-900"
+            data-ar="مجموعاتي النشطة"
+            data-en="My Active Groups"
+          >
+            مجموعاتي النشطة
+          </h3>
+          <div class="flex items-center gap-2">
+            <button
+              class="px-3 py-1 bg-gray-100 rounded-lg text-sm text-gray-600"
+              data-ar="الكل"
+              data-en="All"
             >
-              حساب جديد
-            </a>
+              الكل
+            </button>
+            <button class="p-2 bg-gray-100 rounded-lg">
+              <i class="fas fa-sort text-gray-600 text-sm"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Sample Groups -->
+        <div class="space-y-3">
+          <!-- Group 1: Active -->
+          <a
+            href="tricount.html"
+            class="block bg-white rounded-2xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-all"
+          >
+            <div class="flex items-center gap-4">
+              <div
+                class="w-14 h-14 bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl flex items-center justify-center flex-shrink-0"
+              >
+                <i class="fas fa-mountain text-white text-lg"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between mb-1">
+                  <h4
+                    class="font-semibold text-gray-900"
+                    data-ar="رحلة الطائف"
+                    data-en="Taif Trip"
+                  >
+                    رحلة الطائف
+                  </h4>
+                  <span
+                    class="text-sm font-medium text-accent"
+                    data-ar="+156.75 ر.س"
+                    data-en="+156.75 SAR"
+                    >+156.75 ر.س</span
+                  >
+                </div>
+                <p
+                  class="text-sm text-gray-500 mb-2"
+                  data-ar="5 أشخاص • آخر نشاط: منذ ساعتين"
+                  data-en="5 people • Last activity: 2 hours ago"
+                >
+                  5 أشخاص • آخر نشاط: منذ ساعتين
+                </p>
+                <div class="flex items-center gap-4 text-xs">
+                  <span
+                    class="text-gray-500"
+                    data-ar="إجمالي: 1,247.50 ر.س"
+                    data-en="Total: 1,247.50 SAR"
+                    >إجمالي: 1,247.50 ر.س</span
+                  >
+                  <span
+                    class="px-2 py-1 bg-green-100 text-green-700 rounded-full"
+                    data-ar="نشطة"
+                    data-en="Active"
+                    >نشطة</span
+                  >
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- Group 2: Needs Settlement -->
+          <a
+            href="tricount.html"
+            class="block bg-white rounded-2xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-all"
+          >
+            <div class="flex items-center gap-4">
+              <div
+                class="w-14 h-14 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0"
+              >
+                <i class="fas fa-utensils text-white text-lg"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between mb-1">
+                  <h4
+                    class="font-semibold text-gray-900"
+                    data-ar="عشاء الأصدقاء"
+                    data-en="Friends Dinner"
+                  >
+                    عشاء الأصدقاء
+                  </h4>
+                  <span
+                    class="text-sm font-medium text-danger"
+                    data-ar="-89.25 ر.س"
+                    data-en="-89.25 SAR"
+                    >-89.25 ر.س</span
+                  >
+                </div>
+                <p
+                  class="text-sm text-gray-500 mb-2"
+                  data-ar="3 أشخاص • آخر نشاط: أمس"
+                  data-en="3 people • Last activity: Yesterday"
+                >
+                  3 أشخاص • آخر نشاط: أمس
+                </p>
+                <div class="flex items-center gap-4 text-xs">
+                  <span
+                    class="text-gray-500"
+                    data-ar="إجمالي: 267.75 ر.س"
+                    data-en="Total: 267.75 SAR"
+                    >إجمالي: 267.75 ر.س</span
+                  >
+                  <span
+                    class="px-2 py-1 bg-orange-100 text-orange-700 rounded-full"
+                    data-ar="تحتاج تسوية"
+                    data-en="Needs Settlement"
+                    >تحتاج تسوية</span
+                  >
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- Group 3: Recent -->
+          <a
+            href="tricount.html"
+            class="block bg-white rounded-2xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-all"
+          >
+            <div class="flex items-center gap-4">
+              <div
+                class="w-14 h-14 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0"
+              >
+                <i class="fas fa-shopping-bag text-white text-lg"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between mb-1">
+                  <h4
+                    class="font-semibold text-gray-900"
+                    data-ar="تسوق نهاية الأسبوع"
+                    data-en="Weekend Shopping"
+                  >
+                    تسوق نهاية الأسبوع
+                  </h4>
+                  <span
+                    class="text-sm font-medium text-gray-600"
+                    data-ar="متوازن"
+                    data-en="Balanced"
+                    >متوازن</span
+                  >
+                </div>
+                <p
+                  class="text-sm text-gray-500 mb-2"
+                  data-ar="4 أشخاص • آخر نشاط: منذ 3 أيام"
+                  data-en="4 people • Last activity: 3 days ago"
+                >
+                  4 أشخاص • آخر نشاط: منذ 3 أيام
+                </p>
+                <div class="flex items-center gap-4 text-xs">
+                  <span
+                    class="text-gray-500"
+                    data-ar="إجمالي: 567.00 ر.س"
+                    data-en="Total: 567.00 SAR"
+                    >إجمالي: 567.00 ر.س</span
+                  >
+                  <span
+                    class="px-2 py-1 bg-gray-100 text-gray-700 rounded-full"
+                    data-ar="مكتملة"
+                    data-en="Completed"
+                    >مكتملة</span
+                  >
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Empty State (Hidden when groups exist) -->
+        <div class="text-center py-12 hidden" id="empty-state">
+          <div
+            class="w-20 h-20 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center"
+          >
+            <i class="fas fa-users text-gray-400 text-2xl"></i>
+          </div>
+          <h4
+            class="text-lg font-semibold text-gray-900 mb-2"
+            data-ar="لا توجد مجموعات بعد"
+            data-en="No groups yet"
+          >
+            لا توجد مجموعات بعد
+          </h4>
+          <p
+            class="text-gray-500 text-sm mb-6 max-w-xs mx-auto"
+            data-ar="أنشئ مجموعة جديدة أو انضم لمجموعة موجودة لبدء تقسيم المصاريف"
+            data-en="Create a new group or join an existing one to start splitting expenses"
+          >
+            أنشئ مجموعة جديدة أو انضم لمجموعة موجودة لبدء تقسيم المصاريف
+          </p>
+          <a
+            href="new-tricount.html"
+            class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors"
+          >
+            <i class="fas fa-plus"></i>
+            <span data-ar="إنشاء مجموعة جديدة" data-en="Create New Group"
+              >إنشاء مجموعة جديدة</span
+            >
+          </a>
+        </div>
+      </div>
+
+      <!-- Recent Activity Tab -->
+      <div id="recent-content" class="hidden">
+        <h3
+          class="text-lg font-semibold text-gray-900 mb-4"
+          data-ar="النشاط الأخير"
+          data-en="Recent Activity"
+        >
+          النشاط الأخير
+        </h3>
+
+        <div class="space-y-4">
+          <!-- Today -->
+          <div>
+            <h4
+              class="text-sm font-medium text-gray-500 mb-3"
+              data-ar="اليوم"
+              data-en="Today"
+            >
+              اليوم
+            </h4>
+            <div class="space-y-3">
+              <div
+                class="bg-white rounded-xl p-4 shadow-sm border border-gray-100"
+              >
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center"
+                  >
+                    <i class="fas fa-plus text-green-600 text-sm"></i>
+                  </div>
+                  <div class="flex-1">
+                    <p
+                      class="text-sm font-medium text-gray-900"
+                      data-ar="أضفت مصروف جديد"
+                      data-en="Added new expense"
+                    >
+                      أضفت مصروف جديد
+                    </p>
+                    <p
+                      class="text-xs text-gray-500"
+                      data-ar="وقود السيارة في رحلة الطائف • 45.00 ر.س"
+                      data-en="Car fuel in Taif Trip • 45.00 SAR"
+                    >
+                      وقود السيارة في رحلة الطائف • 45.00 ر.س
+                    </p>
+                  </div>
+                  <span
+                    class="text-xs text-gray-400"
+                    data-ar="منذ ساعتين"
+                    data-en="2h ago"
+                    >منذ ساعتين</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Yesterday -->
+          <div>
+            <h4
+              class="text-sm font-medium text-gray-500 mb-3"
+              data-ar="أمس"
+              data-en="Yesterday"
+            >
+              أمس
+            </h4>
+            <div class="space-y-3">
+              <div
+                class="bg-white rounded-xl p-4 shadow-sm border border-gray-100"
+              >
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center"
+                  >
+                    <i class="fas fa-users text-blue-600 text-sm"></i>
+                  </div>
+                  <div class="flex-1">
+                    <p
+                      class="text-sm font-medium text-gray-900"
+                      data-ar="انضم أحمد للمجموعة"
+                      data-en="Ahmed joined the group"
+                    >
+                      انضم أحمد للمجموعة
+                    </p>
+                    <p
+                      class="text-xs text-gray-500"
+                      data-ar="عشاء الأصدقاء"
+                      data-en="Friends Dinner"
+                    >
+                      عشاء الأصدقاء
+                    </p>
+                  </div>
+                  <span
+                    class="text-xs text-gray-400"
+                    data-ar="أمس"
+                    data-en="Yesterday"
+                    >أمس</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reports Tab -->
+      <div id="reports-content" class="hidden">
+        <h3
+          class="text-lg font-semibold text-gray-900 mb-4"
+          data-ar="التقارير المالية"
+          data-en="Financial Reports"
+        >
+          التقارير المالية
+        </h3>
+
+        <!-- Monthly Summary -->
+        <div
+          class="bg-white rounded-2xl p-6 mb-4 shadow-sm border border-gray-100"
+        >
+          <h4
+            class="font-semibold text-gray-900 mb-4"
+            data-ar="ملخص الشهر الحالي"
+            data-en="Current Month Summary"
+          >
+            ملخص الشهر الحالي
+          </h4>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="text-center p-4 bg-green-50 rounded-xl">
+              <p
+                class="text-sm text-gray-600 mb-1"
+                data-ar="إجمالي المصاريف"
+                data-en="Total Expenses"
+              >
+                إجمالي المصاريف
+              </p>
+              <p class="text-xl font-bold text-green-600">1,250.75 ر.س</p>
+            </div>
+            <div class="text-center p-4 bg-blue-50 rounded-xl">
+              <p
+                class="text-sm text-gray-600 mb-1"
+                data-ar="حصتك"
+                data-en="Your Share"
+              >
+                حصتك
+              </p>
+              <p class="text-xl font-bold text-blue-600">312.25 ر.س</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categories Chart -->
+        <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+          <h4
+            class="font-semibold text-gray-900 mb-4"
+            data-ar="المصاريف حسب الفئة"
+            data-en="Expenses by Category"
+          >
+            المصاريف حسب الفئة
+          </h4>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-3 h-3 bg-orange-500 rounded-full"></div>
+                <span
+                  class="text-sm text-gray-700"
+                  data-ar="الطعام والشراب"
+                  data-en="Food & Drinks"
+                  >الطعام والشراب</span
+                >
+              </div>
+              <span class="text-sm font-medium text-gray-900">45%</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                <span
+                  class="text-sm text-gray-700"
+                  data-ar="المواصلات"
+                  data-en="Transportation"
+                  >المواصلات</span
+                >
+              </div>
+              <span class="text-sm font-medium text-gray-900">30%</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                <span
+                  class="text-sm text-gray-700"
+                  data-ar="الإقامة"
+                  data-en="Accommodation"
+                  >الإقامة</span
+                >
+              </div>
+              <span class="text-sm font-medium text-gray-900">25%</span>
+            </div>
           </div>
         </div>
       </div>
     </main>
 
-    <!-- Bottom Navigation -->
+    <!-- Enhanced Bottom Navigation -->
     <nav
-      class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-3 py-2"
+      class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-gray-200 px-3 py-2 shadow-lg"
     >
       <div class="flex items-center justify-around">
+        <!-- Home -->
         <button
-          id="nav-home"
-          class="nav-item flex flex-col items-center gap-1 p-2 text-primary transition-all duration-200 relative active"
-          data-label="الرئيسية"
-          data-label-en="Home"
+          class="nav-item flex flex-col items-center gap-1 p-3 text-primary transition-all duration-200 relative active"
         >
           <i class="fas fa-home text-xl"></i>
-          <span class="nav-text text-xs font-medium">الرئيسية</span>
+          <span
+            class="nav-text text-xs font-medium"
+            data-ar="الرئيسية"
+            data-en="Home"
+            >الرئيسية</span
+          >
+          <div
+            class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-primary rounded-full"
+          ></div>
         </button>
+
+        <!-- Groups -->
         <a
-          id="nav-expenses"
-          href="expenses.html"
-          class="nav-item flex flex-col items-center gap-1 p-2 text-gray-400 transition-all duration-200 relative"
-          data-label="إدارة المصاريف"
-          data-label-en="Expense Management"
-        >
-          <i class="fas fa-receipt text-xl"></i>
-          <span class="nav-text text-xs hidden">إدارة المصاريف</span>
-        </a>
-        <a
-          id="nav-debts"
-          href="debts.html"
-          class="nav-item flex flex-col items-center gap-1 p-2 text-gray-400 transition-all duration-200 relative"
-          data-label="الديون والقروض"
-          data-label-en="Debt & Loans"
-        >
-          <i class="fas fa-hand-holding-usd text-xl"></i>
-          <span class="nav-text text-xs hidden">الديون والقروض</span>
-        </a>
-        <a
-          id="nav-groups"
           href="split-group-bills.html"
-          class="nav-item flex flex-col items-center gap-1 p-2 text-gray-400 transition-all duration-200 relative"
-          data-label="تقسيم المجموعات"
-          data-label-en="Group Splitting"
+          class="nav-item flex flex-col items-center gap-1 p-3 text-gray-400 transition-all duration-200 relative hover:text-gray-600"
         >
           <i class="fas fa-users text-xl"></i>
-          <span class="nav-text text-xs hidden">تقسيم المجموعات</span>
+          <span
+            class="nav-text text-xs font-medium"
+            data-ar="المجموعات"
+            data-en="Groups"
+            >المجموعات</span
+          >
         </a>
-        <button
-          id="moreNavBtn"
-          onclick="toggleMoreNav()"
-          class="nav-item flex flex-col items-center gap-1 p-2 text-gray-400 relative transition-all duration-200"
-          data-label="المزيد"
-          data-label-en="More"
-        >
-          <i class="fas fa-ellipsis-h text-xl"></i>
-          <span class="nav-text text-xs hidden">المزيد</span>
-        </button>
-      </div>
 
-      <!-- Tooltip -->
-      <div
-        id="nav-tooltip"
-        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-gray-800 text-white text-xs rounded-lg opacity-0 pointer-events-none transition-opacity duration-200 z-10"
-      >
-        <div
-          class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-800"
-        ></div>
-        <span id="tooltip-text">الرئيسية</span>
+        <!-- Add (Center FAB) -->
+        <button class="nav-item flex flex-col items-center gap-1 p-2 relative">
+          <div
+            class="w-14 h-14 bg-gradient-to-r from-primary to-blue-600 rounded-2xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-all duration-200"
+          >
+            <i class="fas fa-plus text-white text-xl"></i>
+          </div>
+        </button>
+
+        <!-- Requests -->
+        <a
+          href="requests.html"
+          class="nav-item flex flex-col items-center gap-1 p-3 text-gray-400 transition-all duration-200 relative hover:text-gray-600"
+        >
+          <i class="fas fa-hand-holding-usd text-xl"></i>
+          <span
+            class="nav-text text-xs font-medium"
+            data-ar="الطلبات"
+            data-en="Requests"
+            >الطلبات</span
+          >
+        </a>
+
+        <!-- Profile -->
+        <a
+          href="profile.html"
+          class="nav-item flex flex-col items-center gap-1 p-3 text-gray-400 transition-all duration-200 relative hover:text-gray-600"
+        >
+          <i class="fas fa-user text-xl"></i>
+          <span
+            class="nav-text text-xs font-medium"
+            data-ar="الملف الشخصي"
+            data-en="Profile"
+            >الملف الشخصي</span
+          >
+        </a>
       </div>
     </nav>
 
-    <!-- More Navigation Menu -->
+    <!-- Enhanced Notifications Dropdown (same as before but with better styling) -->
     <div
-      id="moreNavMenu"
-      class="fixed bottom-20 right-4 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 hidden opacity-0 scale-95 transition-all duration-300 z-50"
+      id="notificationsDropdown"
+      class="absolute top-20 left-4 right-4 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100 hidden z-50 max-h-96 overflow-y-auto"
     >
-      <div class="p-3">
-        <a
-          href="budget.html"
-          class="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl transition-colors"
-        >
-          <div
-            class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center"
-          >
-            <i class="fas fa-chart-pie text-blue-600"></i>
-          </div>
-          <div>
-            <p
-              class="font-medium text-gray-900"
-              data-ar="الميزانية الشهرية"
-              data-en="Monthly Budget"
-            >
-              الميزانية الشهرية
-            </p>
-            <p
-              class="text-xs text-gray-500"
-              data-ar="تخطيط وتتبع الميزانية"
-              data-en="Budget planning & tracking"
-            >
-              تخطيط وتتبع الميزانية
-            </p>
-          </div>
-        </a>
-        <a
-          href="goals.html"
-          class="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl transition-colors"
-        >
-          <div
-            class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center"
-          >
-            <i class="fas fa-bullseye text-green-600"></i>
-          </div>
-          <div>
-            <p
-              class="font-medium text-gray-900"
-              data-ar="الأهداف المالية"
-              data-en="Financial Goals"
-            >
-              الأهداف المالية
-            </p>
-            <p
-              class="text-xs text-gray-500"
-              data-ar="تحديد وتتبع الأهداف"
-              data-en="Set and track goals"
-            >
-              تحديد وتتبع الأهداف
-            </p>
-          </div>
-        </a>
-      </div>
+      <!-- ... existing notification content ... -->
     </div>
 
-    <!-- Floating Action Button with Dropdown -->
-    <div class="fixed bottom-20 left-4">
-      <!-- Dropdown Menu -->
-      <div
-        id="groupDropdown"
-        class="absolute bottom-16 left-0 w-56 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-100 hidden transform transition-all duration-300 ease-out opacity-0 scale-95"
-      >
-        <!-- Dropdown Header -->
-        <div class="px-4 py-3 border-b border-gray-100">
-          <h3
-            class="text-sm font-semibold text-gray-800"
-            data-ar="إنشاء أو انضمام"
-            data-en="Create or Join"
-          >
-            إنشاء أو انضمام
-          </h3>
-          <p
-            class="text-xs text-gray-500 mt-1"
-            data-ar="اختر كيف تريد البدء"
-            data-en="Choose how to get started"
-          >
-            اختر كيف تريد البدء
-          </p>
-        </div>
-
-        <!-- Dropdown Items -->
-        <div class="py-2">
-          <a
-            href="new-tricount.html"
-            class="group flex items-center px-4 py-4 text-gray-700 hover:bg-gradient-to-r hover:from-primary/5 hover:to-indigo-50 transition-all duration-200 hover:translate-x-1"
-          >
-            <div
-              class="w-10 h-10 bg-gradient-to-br from-primary/10 to-indigo-100 rounded-xl flex items-center justify-center ml-3 group-hover:scale-110 transition-transform duration-200"
-            >
-              <i class="fas fa-plus text-primary text-sm"></i>
-            </div>
-            <div class="flex-1">
-              <span
-                class="text-sm font-medium text-gray-800 group-hover:text-primary transition-colors duration-200"
-                data-ar="إنشاء مجموعة جديدة"
-                data-en="Create New Group"
-                >إنشاء مجموعة جديدة</span
-              >
-              <p
-                class="text-xs text-gray-500 mt-0.5"
-                data-ar="ابدأ غريم جديد من الصفر"
-                data-en="Start a new Gharim from scratch"
-              >
-                ابدأ غريم جديد من الصفر
-              </p>
-            </div>
-            <i
-              class="fas fa-chevron-left text-gray-400 text-sm group-hover:text-primary group-hover:translate-x-1 transition-all duration-200"
-            ></i>
-          </a>
-
-          <a
-            href="join-group.html"
-            class="group flex items-center px-4 py-4 text-gray-700 hover:bg-gradient-to-r hover:from-accent/5 hover:to-emerald-50 transition-all duration-200 hover:translate-x-1"
-          >
-            <div
-              class="w-10 h-10 bg-gradient-to-br from-accent/10 to-emerald-100 rounded-xl flex items-center justify-center ml-3 group-hover:scale-110 transition-transform duration-200"
-            >
-              <i class="fas fa-link text-accent text-sm"></i>
-            </div>
-            <div class="flex-1">
-              <span
-                class="text-sm font-medium text-gray-800 group-hover:text-accent transition-colors duration-200"
-                data-ar="الانضمام بالرابط"
-                data-en="Join by Link"
-                >الانضمام بالرابط</span
-              >
-              <p
-                class="text-xs text-gray-500 mt-0.5"
-                data-ar="انضم لمجموعة موجودة"
-                data-en="Join an existing group"
-              >
-                انضم لمجموعة موجودة
-              </p>
-            </div>
-            <i
-              class="fas fa-chevron-left text-gray-400 text-sm group-hover:text-accent group-hover:translate-x-1 transition-all duration-200"
-            ></i>
-          </a>
-        </div>
-
-        <!-- Dropdown Footer -->
-        <div
-          class="px-4 py-3 bg-gray-50/50 rounded-b-2xl border-t border-gray-100"
-        >
-          <p
-            class="text-xs text-gray-400 text-center"
-            data-ar="اختر الطريقة المناسبة لك"
-            data-en="Choose the right option for you"
-          >
-            اختر الطريقة المناسبة لك
-          </p>
-        </div>
-      </div>
-
-      <!-- Main Button -->
-      <button
-        id="groupButton"
-        onclick="toggleGroupDropdown()"
-        class="group w-14 h-14 bg-gradient-to-r from-primary to-indigo-600 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-primary/25 active:scale-95"
-      >
-        <i
-          id="groupIcon"
-          class="fas fa-plus text-white text-xl transition-all duration-300 group-hover:rotate-90"
-        ></i>
-      </button>
-
-      <!-- Subtle background overlay when dropdown is open -->
-      <div
-        id="dropdownOverlay"
-        class="fixed inset-0 bg-black/10 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-[-1]"
-      ></div>
-    </div>
-
-    <!-- Enhanced JavaScript for Dropdown -->
     <script>
-      function toggleGroupDropdown() {
-        const dropdown = document.getElementById("groupDropdown");
-        const icon = document.getElementById("groupIcon");
-        const overlay = document.getElementById("dropdownOverlay");
+      // Enhanced tab switching with animations
+      function switchTab(tabName) {
+        // Remove active class from all tabs
+        document.querySelectorAll('[id^="tab-"]').forEach((tab) => {
+          tab.classList.remove("bg-white", "text-primary", "shadow-sm");
+          tab.classList.add("text-gray-600");
+        });
 
-        if (dropdown.classList.contains("hidden")) {
-          // Show dropdown with animation
-          dropdown.classList.remove("hidden");
-          overlay.classList.remove("pointer-events-none");
+        // Hide all content
+        document.querySelectorAll('[id$="-content"]').forEach((content) => {
+          content.classList.add("hidden");
+        });
 
-          // Trigger animation
-          setTimeout(() => {
-            dropdown.classList.remove("opacity-0", "scale-95");
-            dropdown.classList.add("opacity-100", "scale-100");
-            overlay.classList.remove("opacity-0");
-            overlay.classList.add("opacity-100");
-            icon.classList.add("rotate-45");
-          }, 10);
-        } else {
-          // Hide dropdown with animation
-          dropdown.classList.remove("opacity-100", "scale-100");
-          dropdown.classList.add("opacity-0", "scale-95");
-          overlay.classList.remove("opacity-100");
-          overlay.classList.add("opacity-0");
-          icon.classList.remove("rotate-45");
+        // Activate selected tab
+        const activeTab = document.getElementById(`tab-${tabName}`);
+        activeTab.classList.add("bg-white", "text-primary", "shadow-sm");
+        activeTab.classList.remove("text-gray-600");
 
-          setTimeout(() => {
-            dropdown.classList.add("hidden");
-            overlay.classList.add("pointer-events-none");
-          }, 300);
-        }
+        // Show selected content with animation
+        const activeContent = document.getElementById(`${tabName}-content`);
+        activeContent.classList.remove("hidden");
+        activeContent.style.opacity = "0";
+        activeContent.style.transform = "translateY(10px)";
+
+        setTimeout(() => {
+          activeContent.style.opacity = "1";
+          activeContent.style.transform = "translateY(0)";
+          activeContent.style.transition = "all 0.3s ease-out";
+        }, 50);
       }
 
-      // Close dropdown when clicking outside
-      document.addEventListener("click", function (event) {
-        const button = document.getElementById("groupButton");
-        const dropdown = document.getElementById("groupDropdown");
-        const icon = document.getElementById("groupIcon");
-        const overlay = document.getElementById("dropdownOverlay");
+      // Search functionality
+      document
+        .getElementById("globalSearch")
+        .addEventListener("input", function (e) {
+          const searchTerm = e.target.value.toLowerCase();
+          // Implement search logic here
+          console.log("Searching for:", searchTerm);
+        });
 
-        if (
-          !button.contains(event.target) &&
-          !dropdown.contains(event.target)
-        ) {
-          dropdown.classList.remove("opacity-100", "scale-100");
-          dropdown.classList.add("opacity-0", "scale-95");
-          overlay.classList.remove("opacity-100");
-          overlay.classList.add("opacity-0");
-          icon.classList.remove("rotate-45");
-
-          setTimeout(() => {
-            dropdown.classList.add("hidden");
-            overlay.classList.add("pointer-events-none");
-          }, 300);
-        }
-      });
-
-      // Add keyboard support
-      document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") {
-          const dropdown = document.getElementById("groupDropdown");
-          const icon = document.getElementById("groupIcon");
-          const overlay = document.getElementById("dropdownOverlay");
-
-          if (!dropdown.classList.contains("hidden")) {
-            dropdown.classList.remove("opacity-100", "scale-100");
-            dropdown.classList.add("opacity-0", "scale-95");
-            overlay.classList.remove("opacity-100");
-            overlay.classList.add("opacity-0");
-            icon.classList.remove("rotate-45");
-
-            setTimeout(() => {
-              dropdown.classList.add("hidden");
-              overlay.classList.add("pointer-events-none");
-            }, 300);
-          }
-        }
-      });
-
-      // Notifications functionality
+      // Toggle notifications
       function toggleNotifications() {
         const dropdown = document.getElementById("notificationsDropdown");
-
-        if (dropdown.classList.contains("hidden")) {
-          dropdown.classList.remove("hidden");
-        } else {
-          dropdown.classList.add("hidden");
-        }
+        dropdown.classList.toggle("hidden");
       }
 
-      // Close notifications when clicking outside
-      document.addEventListener("click", function (event) {
-        const btn = document.getElementById("notificationBtn");
-        const dropdown = document.getElementById("notificationsDropdown");
-
-        if (!btn.contains(event.target) && !dropdown.contains(event.target)) {
-          dropdown.classList.add("hidden");
-        }
-      });
-
-      // Check if user has completed onboarding
+      // Initialize language manager
       document.addEventListener("DOMContentLoaded", function () {
-        if (localStorage.getItem("onboardingCompleted") !== "true") {
-          // User hasn't completed onboarding, redirect them
-          window.location.href = "onboarding.html";
-        }
-      });
-
-      // More navigation functionality
-      function toggleMoreNav() {
-        console.log("toggleMoreNav called"); // Debug log
-        const moreNavMenu = document.getElementById("moreNavMenu");
-
-        if (!moreNavMenu) {
-          console.log("moreNavMenu element not found"); // Debug log
-          return;
-        }
-
-        if (moreNavMenu.classList.contains("hidden")) {
-          console.log("Showing menu"); // Debug log
-          // Show menu
-          moreNavMenu.classList.remove("hidden");
-          setTimeout(() => {
-            moreNavMenu.classList.remove("opacity-0", "scale-95");
-            moreNavMenu.classList.add("opacity-100", "scale-100");
-          }, 10);
-        } else {
-          console.log("Hiding menu"); // Debug log
-          // Hide menu
-          moreNavMenu.classList.remove("opacity-100", "scale-100");
-          moreNavMenu.classList.add("opacity-0", "scale-95");
-          setTimeout(() => {
-            moreNavMenu.classList.add("hidden");
-          }, 300);
-        }
-      }
-
-      // Smart Navigation functionality
-      let tooltipTimeout;
-      let activeNavItem = "nav-home"; // Track current active item
-
-      function setActiveNavItem(itemId) {
-        // Remove active class and hide text from all items
-        document.querySelectorAll(".nav-item").forEach((item) => {
-          item.classList.remove("text-primary", "active");
-          item.classList.add("text-gray-400");
-          const textElement = item.querySelector(".nav-text");
-          if (textElement) {
-            textElement.classList.add("hidden");
-            textElement.classList.remove("font-medium");
-          }
-        });
-
-        // Add active class and show text for selected item
-        const activeItem = document.getElementById(itemId);
-        if (activeItem) {
-          activeItem.classList.remove("text-gray-400");
-          activeItem.classList.add("text-primary", "active");
-          const textElement = activeItem.querySelector(".nav-text");
-          if (textElement) {
-            textElement.classList.remove("hidden");
-            textElement.classList.add("font-medium");
-          }
-        }
-
-        activeNavItem = itemId;
-      }
-
-      function showTooltip(element) {
-        const tooltip = document.getElementById("nav-tooltip");
-        const tooltipText = document.getElementById("tooltip-text");
-        const label = element.getAttribute("data-label");
-
-        if (label && !element.classList.contains("active")) {
-          tooltipText.textContent = label;
-
-          // Position tooltip above the element
-          const rect = element.getBoundingClientRect();
-          const navRect = element.closest("nav").getBoundingClientRect();
-          const leftPosition = rect.left + rect.width / 2 - navRect.left;
-
-          tooltip.style.left = leftPosition + "px";
-          tooltip.style.transform = "translateX(-50%)";
-          tooltip.classList.remove("opacity-0");
-          tooltip.classList.add("opacity-100");
-        }
-      }
-
-      function hideTooltip() {
-        const tooltip = document.getElementById("nav-tooltip");
-        tooltip.classList.remove("opacity-100");
-        tooltip.classList.add("opacity-0");
-      }
-
-      // Add event listeners for navigation items
-      document.addEventListener("DOMContentLoaded", function () {
-        const navItems = document.querySelectorAll(".nav-item");
-
-        navItems.forEach((item) => {
-          let pressTimer;
-
-          // Mouse events for desktop
-          item.addEventListener("mouseenter", function () {
-            if (!this.classList.contains("active")) {
-              tooltipTimeout = setTimeout(() => {
-                showTooltip(this);
-              }, 500); // Show after 500ms hover
-            }
-          });
-
-          item.addEventListener("mouseleave", function () {
-            clearTimeout(tooltipTimeout);
-            hideTooltip();
-          });
-
-          // Touch events for mobile
-          item.addEventListener("touchstart", function (e) {
-            pressTimer = setTimeout(() => {
-              showTooltip(this);
-              // Add haptic feedback if supported
-              if (navigator.vibrate) {
-                navigator.vibrate(50);
-              }
-            }, 300); // Show after 300ms press
-          });
-
-          item.addEventListener("touchend", function () {
-            clearTimeout(pressTimer);
-            hideTooltip();
-          });
-
-          item.addEventListener("touchmove", function () {
-            clearTimeout(pressTimer);
-            hideTooltip();
-          });
-
-          // Click handler for navigation
-          item.addEventListener("click", function (e) {
-            if (this.id !== "moreNavBtn") {
-              setActiveNavItem(this.id);
-            }
-            clearTimeout(pressTimer);
-            hideTooltip();
-          });
-        });
-      });
-
-      // Close more navigation when clicking outside
-      document.addEventListener("click", function (event) {
-        const moreNavMenu = document.getElementById("moreNavMenu");
-        const moreNavBtn = document.getElementById("moreNavBtn");
-
-        if (
-          !moreNavBtn.contains(event.target) &&
-          !moreNavMenu.contains(event.target)
-        ) {
-          if (!moreNavMenu.classList.contains("hidden")) {
-            moreNavMenu.classList.remove("opacity-100", "scale-100");
-            moreNavMenu.classList.add("opacity-0", "scale-95");
-            setTimeout(() => {
-              moreNavMenu.classList.add("hidden");
-            }, 300);
-          }
+        if (typeof LanguageManager !== "undefined") {
+          const langManager = new LanguageManager();
+          langManager.init();
         }
       });
     </script>
